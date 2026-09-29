@@ -1,0 +1,25 @@
+# Segreti e configurazione locale
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+
+# Sorgenti GeoJSON scaricabili (rigenerati da db/territorio/genera_territorio.py)
+db/territorio/*.geojson
+
+# Sistema operativo ed editor
+.DS_Store
+.vscode/
+.idea/
+
+# Dipendenze e build (web app)
+node_modules/
+.next/
+dist/
+build/
+__pycache__/
+*.pyc
+.venv/
+
+# Log
+*.log
