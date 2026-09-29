@@ -29,12 +29,3 @@ duplicata ("secondaria") confluisce in una "principale".
 
 Gli attributi sono quelli delle tabelle in [`db/01_schema.sql`](../../db/01_schema.sql), senza le
 chiavi esterne, che nel modello concettuale sono rappresentate dalle relazioni.
-
-## Rigenerare il disegno
-
-I due file SVG li produce uno script Python, senza librerie esterne. Le posizioni di entità e relazioni
-sono scritte a mano nello script: per spostare un elemento si cambia la coordinata e si rilancia.
-
-```bash
-python3 docs/er/genera_er.py
-```

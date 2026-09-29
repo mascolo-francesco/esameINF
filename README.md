@@ -42,7 +42,7 @@ del documento di analisi.
 .
 ├── README.md                  questa pagina
 ├── docs/                      consegna e analisi dei requisiti
-│   └── er/                    modello Entità-Relazione (SVG, PNG e lo script che lo disegna)
+│   └── er/                    modello Entità-Relazione (SVG e PNG)
 ├── db/                        database MySQL
 │   ├── 01_schema.sql          le 28 tabelle
 │   ├── 02_territorio.sql      9 Municipi e 88 quartieri (NIL) con i confini ufficiali

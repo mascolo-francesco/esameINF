@@ -4,6 +4,9 @@
 !.env.example
 .claude/settings.local.json
 
+# Script locale che disegna il modello ER
+docs/er/genera_er.py
+
 # Sorgenti GeoJSON scaricabili (rigenerati da db/territorio/genera_territorio.py)
 db/territorio/*.geojson
 
