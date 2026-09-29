@@ -2,7 +2,7 @@
 
 Ho costruito il database partendo dalla sezione 7 dell'[analisi dei requisiti](../docs/Analisi_Requisiti_La_Nostra_Citta.pdf).
 Gira su MySQL 8.4, ospitato da Aiven. Nei file SQL ogni commento riporta il codice del requisito che
-implementa (RF, RD, RNF, RIA), così potete controllare la corrispondenza riga per riga.
+implementa (RF, RD, RNF, RIA), così si può controllare la corrispondenza riga per riga.
 
 ## I file
 
@@ -76,8 +76,8 @@ MySQL, e alcune soluzioni cambiano:
 
 Scrivendo lo schema ho trovato alcuni punti incompleti o in contraddizione. Li ho risolti così.
 
-1. **Tre transizioni mancavano nella tabella 4.2**, anche se il testo le prevede. In
-   `transizione_ammessa` le trovate marcate con `[+]`:
+1. **Tre transizioni mancavano nella tabella 4.2**, anche se il testo le prevede. Nella tabella
+   `transizione_ammessa` sono marcate con `[+]`:
    - da Archiviata a Pubblicata, fatta dal moderatore: è la riattivazione descritta nella tabella 4.1
      e nel diagramma;
    - da Rifiutata a In revisione, fatta dal moderatore: è il riesame dei rifiuti dell'IA citato in RIA-06
