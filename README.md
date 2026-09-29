@@ -1,68 +1,82 @@
 # La Nostra Città, Il Nostro Futuro
 
-Progetto d'esame di Informatica — Francesco Mascolo.
+Progetto d'esame di Informatica di Francesco Mascolo.
 
-Piattaforma web per il comitato *Insieme per Milano*. I cittadini segnalano problemi e proposte sul
-territorio, le documentano con foto o video e le sostengono con un voto. Ne nasce una classifica delle
-priorità dei quartieri, che il comitato consegna ai candidati Sindaco.
+Il comitato *Insieme per Milano* vuole raccogliere dai cittadini i problemi dei quartieri prima delle
+elezioni comunali. Con questa piattaforma chi abita a Milano segnala una buca, un lampione spento o un
+parco abbandonato, allega una foto e raccoglie il sostegno degli altri iscritti. Dai voti esce una
+classifica delle priorità, che il comitato consegna a tutti i candidati Sindaco.
 
-## Dove trovare cosa
+## Da dove partire
 
-| Cosa | Dove |
+Se ha poco tempo, le consiglio quest'ordine:
+
+1. [La consegna](docs/progetto-desame.md), per ricordare cosa chiedeva il progetto.
+2. [L'analisi dei requisiti](docs/Analisi_Requisiti_La_Nostra_Citta.pdf), il materiale 1.
+3. [Lo schema del database](db/01_schema.sql), il materiale 2: tabelle, chiavi e vincoli, con i
+   commenti che rimandano ai requisiti.
+4. [Le note sul database](db/README.md), dove spiego le scelte fatte e dove mi sono discostato
+   dall'analisi.
+
+Poi, se vuole entrare nel dettaglio:
+
+| Cosa | File |
 |---|---|
-| Testo della consegna | [`docs/progetto-desame.md`](docs/progetto-desame.md) |
-| Analisi dei requisiti (materiale 1) | [`docs/Analisi_Requisiti_La_Nostra_Citta.pdf`](docs/Analisi_Requisiti_La_Nostra_Citta.pdf) |
-| Schema logico relazionale: tabelle, chiavi, vincoli (materiale 2) | [`db/01_schema.sql`](db/01_schema.sql) |
-| Scelte di progetto e differenze rispetto all'analisi | [`db/README.md`](db/README.md) |
-| Dati di configurazione: ruoli, stati, transizioni, categorie | [`db/03_seed.sql`](db/03_seed.sql) |
-| Vincoli di integrità e ciclo di vita (trigger, procedure) | [`db/04_logica.sql`](db/04_logica.sql) |
-| Viste: mappa, classifica, moderazione, dashboard | [`db/05_viste.sql`](db/05_viste.sql) |
-| Query usate dalla web app, divise per caso d'uso | [`db/query_applicazione.sql`](db/query_applicazione.sql) |
-| Test dei vincoli | [`db/test/test_vincoli.sql`](db/test/test_vincoli.sql) |
-| Codice della web app | *in sviluppo* |
+| Ruoli, stati, transizioni, categorie di partenza | [`db/03_seed.sql`](db/03_seed.sql) |
+| Trigger e procedure che fanno rispettare i vincoli | [`db/04_logica.sql`](db/04_logica.sql) |
+| Viste per mappa, classifica, moderazione e statistiche | [`db/05_viste.sql`](db/05_viste.sql) |
+| Le query che userà la web app, divise per caso d'uso | [`db/query_applicazione.sql`](db/query_applicazione.sql) |
+| I test dei vincoli | [`db/test/test_vincoli.sql`](db/test/test_vincoli.sql) |
+| Codice della web app | in sviluppo |
 
-## Struttura del repository
+Nel codice SQL ogni commento cita il requisito che implementa. RF indica i requisiti funzionali, RD i
+vincoli sui dati, RNF i non funzionali e RIA quelli sull'intelligenza artificiale, con la numerazione
+del documento di analisi.
+
+## Com'è organizzato il repository
 
 ```
 .
 ├── README.md                  questa pagina
 ├── docs/                      consegna e analisi dei requisiti
 ├── db/                        database MySQL
-│   ├── 01_schema.sql          28 tabelle
+│   ├── 01_schema.sql          le 28 tabelle
 │   ├── 02_territorio.sql      9 Municipi e 88 quartieri (NIL) con i confini ufficiali
 │   ├── 03_seed.sql            dati di configurazione
 │   ├── 04_logica.sql          funzioni, procedure e trigger
 │   ├── 05_viste.sql           viste per l'applicazione
-│   ├── 06_eventi.sql          job notturno di manutenzione
+│   ├── 06_eventi.sql          manutenzione notturna automatica
 │   ├── query_applicazione.sql query della web app
-│   ├── territorio/            script che genera 02_territorio.sql dagli open data del Comune
-│   ├── test/                  test dei vincoli (in transazione, con rollback finale)
-│   └── esegui.sh              esegue file SQL sul database
-└── .env.example               formato della connessione al database (il file .env reale non è pubblicato)
+│   ├── territorio/            script che genera i confini dagli open data del Comune
+│   ├── test/                  test dei vincoli
+│   └── esegui.sh              lancia file SQL sul database
+└── .env.example               formato della connessione al database
 ```
 
-Ogni commento nel codice SQL cita il requisito che implementa: RF = funzionale, RD = vincolo sui dati,
-RNF = non funzionale, RIA = moduli di intelligenza artificiale. Il riferimento è sempre il documento di analisi.
+Il file `.env` con la password del database resta sul mio computer e non è nel repository.
 
-## Stato del progetto
+## A che punto sono
 
 | Fase | Stato |
 |---|---|
 | Analisi dei requisiti | completata |
-| Database (schema, vincoli, query) | completato e testato |
-| Web app (fase 1: registrazione, segnalazioni, voti, classifica, mappa, moderazione manuale) | da sviluppare |
-| Moduli di intelligenza artificiale | fasi successive: il database è già predisposto |
+| Database: schema, vincoli, query | completato e testato |
+| Web app, prima versione: registrazione, segnalazioni, voti, classifica, mappa, moderazione manuale | da sviluppare |
+| Moduli di intelligenza artificiale | rimandati alle fasi successive; il database è già pronto a ospitarli |
 
 ## Tecnologie
 
-- **Database:** MySQL 8.4 su Aiven (piano gratuito, data center UE), con dati geografici (SRID 4326).
-- **Dati territoriali:** open data del Comune di Milano (CC BY 4.0).
+Il database gira su MySQL 8.4, ospitato da Aiven sul piano gratuito in un data center europeo. Per
+mappa e quartieri uso le coordinate geografiche di MySQL (SRID 4326) e i confini pubblicati dal Comune
+di Milano come open data (licenza CC BY 4.0).
 
 ## Ricreare il database
 
-Serve il client `mysql` e un file `.env` con `DATABASE_URL` (vedi `.env.example`).
+Servono il client `mysql` e un file `.env` compilato come `.env.example`. Poi:
 
 ```bash
 db/esegui.sh db/01_schema.sql db/02_territorio.sql db/03_seed.sql db/04_logica.sql db/05_viste.sql db/06_eventi.sql
 db/test/esegui_test.sh
 ```
+
+I test girano dentro una transazione che alla fine viene annullata, quindi non lasciano dati.
