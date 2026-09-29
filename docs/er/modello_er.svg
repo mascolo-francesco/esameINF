@@ -1,0 +1,961 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4700" height="3350" viewBox="0 0 4700 3350" font-family="Helvetica, Arial, sans-serif">
+<rect width="4700" height="3350" fill="#fff"/>
+<polyline points="2200.0,440.0 2200.0,325.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2200.0,150.0 2200.0,265.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1160.0,1420.0 1245.2,927.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1250.0,590.0 1250.0,870.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1270.0,1420.0 1687.0,663.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2111.8,500.0 1735.7,627.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3140.0,1420.0 2713.7,664.3" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2288.2,500.0 2660.1,626.4" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1360.0,1420.0 1686.0,883.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2105.0,860.0 1760.0,860.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2295.0,860.0 2640.0,860.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3080.0,1420.0 2715.2,882.4" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1450.0,1420.0 2167.4,1094.8" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3015.0,1420.0 2233.9,1094.1" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1470.0,1455.0 2157.9,1308.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3000.0,1455.0 2243.2,1308.4" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1470.0,1500.0 2140.0,1500.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3000.0,1500.0 2260.0,1500.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1470.0,1535.0 1679.7,1740.1" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2100.0,1760.0 1760.0,1760.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2300.0,1760.0 2631.5,1760.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3000.0,1545.0 2726.0,1741.4" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1470.0,1570.0 1688.2,2015.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1990.0,2095.0 1743.5,2048.2" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1430.0,1580.0 1689.3,2175.4" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1990.0,2125.0 1739.5,2189.8" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2410.0,2110.0 2631.5,2110.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3070.0,1580.0 2716.0,2087.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2200.0,1790.0 2200.0,1905.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2200.0,2080.0 2200.0,1965.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2200.0,2140.0 2200.0,2280.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2200.0,2450.0 2200.0,2340.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1385.0,1580.0 1691.1,2454.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2085.0,2480.0 1760.0,2480.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2315.0,2480.0 2640.0,2480.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3020.0,1580.0 2709.1,2454.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3200.0,1420.0 3200.0,930.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3200.0,450.0 3200.0,870.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3310.0,1420.0 3634.5,923.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3915.0,600.0 3669.4,878.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3380.0,1420.0 3676.0,1198.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3875.0,1162.5 3750.0,1175.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3910.0,1120.0 3910.0,900.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3960.0,610.0 3915.3,842.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="4090.0,1120.0 4090.0,900.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="4040.0,610.0 4084.7,842.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3960.0,550.0 3864.0,393.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3920.0,190.0 3859.8,344.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="4040.0,550.0 4136.0,393.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="4080.0,190.0 4140.2,344.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="4125.0,1150.0 4480.0,1150.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1080.0,1420.0 1080.0,1100.0 560.0,1100.0 560.0,40.0 4540.0,40.0 4540.0,1120.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3260.0,1580.0 3378.7,1835.7" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3325.0,1580.0 3383.8,1833.1" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3385.0,1580.0 3832.8,2177.1" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="4159.1,2370.0 3881.2,2217.2" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3210.0,1580.0 3296.4,2271.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3590.0,2870.0 3312.5,2324.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3697.7,2870.0 3971.2,2698.1" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="4201.9,2470.0 4020.7,2658.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2300.0,1780.0 2560.0,1780.0 2560.0,2270.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3550.0,2890.0 2560.0,2890.0 2560.0,2330.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2315.0,2500.0 2914.8,2764.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3550.0,2920.0 2996.5,2790.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2490.0,3020.0 3031.3,2420.7" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="3140.0,1580.0 3053.1,2371.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2185.0,3050.0 1964.2,3050.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1545.0,3050.0 1835.8,3050.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1340.0,1580.0 1633.4,2773.3" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2230.0,3020.0 1674.4,2812.8" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1205.0,1580.0 1162.7,2031.1" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1220.0,2510.0 1163.8,2088.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1250.0,1580.0 1307.1,2141.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1300.8,2510.0 1309.2,2199.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1295.0,1580.0 1424.8,2262.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1380.0,2510.0 1423.9,2316.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1045.0,1580.0 772.9,2076.5" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="490.0,2100.0 700.0,2100.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1085.0,1580.0 769.2,2454.6" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="490.0,2480.0 700.0,2480.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1125.0,1580.0 767.8,2773.9" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="510.0,2800.0 700.0,2800.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="1165.0,1580.0 766.8,3143.4" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="490.0,3170.0 700.0,3170.0" fill="none" stroke="#111" stroke-width="1.6"/>
+<polyline points="2300.0,98.0 2364.0,96.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2370.0" cy="96.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="2381.0" y="101.0" font-size="14" text-anchor="start" font-weight="bold" fill="#111">id</text>
+<polyline points="2300.0,120.0 2364.0,120.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2370.0" cy="120.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2381.0" y="125.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">nome</text>
+<polyline points="2300.0,142.0 2364.0,143.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2370.0" cy="144.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2381.0" y="149.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">confine</text>
+<polyline points="2300.0,448.0 2364.1,435.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2370.0" cy="434.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="2381.0" y="439.0" font-size="14" text-anchor="start" font-weight="bold" fill="#111">id</text>
+<polyline points="2300.0,462.7 2364.0,458.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2370.0" cy="458.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2381.0" y="463.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">nome</text>
+<polyline points="2300.0,477.3 2364.0,481.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2370.0" cy="482.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2381.0" y="487.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">confine</text>
+<polyline points="2300.0,492.0 2364.1,504.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2370.0" cy="506.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2381.0" y="511.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">attivo</text>
+<polyline points="1165.0,538.0 1100.6,514.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1095.0" cy="512.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="1084.0" y="517.0" font-size="14" text-anchor="end" font-weight="bold" fill="#111">id</text>
+<polyline points="1165.0,549.0 1100.9,537.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1095.0" cy="536.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1084.0" y="541.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">codice</text>
+<polyline points="1165.0,560.0 1101.0,560.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1095.0" cy="560.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1084.0" y="565.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">nome</text>
+<polyline points="1165.0,571.0 1100.9,582.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1095.0" cy="584.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1084.0" y="589.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">descrizione</text>
+<polyline points="1165.0,582.0 1100.6,605.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1095.0" cy="608.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1084.0" y="613.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">livello</text>
+<polyline points="1030.0,1428.0 883.7,1242.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1237.5" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1242.5" font-size="14" text-anchor="end" font-weight="bold" fill="#111">id</text>
+<polyline points="1030.0,1433.8 883.9,1263.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1258.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1263.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">nome</text>
+<polyline points="1030.0,1439.5 884.1,1283.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1279.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1284.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">cognome</text>
+<polyline points="1030.0,1445.3 884.3,1304.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1300.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1305.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">email</text>
+<polyline points="1030.0,1451.0 884.5,1325.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1321.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1326.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">password_hash</text>
+<polyline points="1030.0,1456.8 884.8,1346.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1342.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1347.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">data_nascita</text>
+<polyline points="1030.0,1462.6 885.0,1366.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1363.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1368.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">telefono</text>
+<polyline points="1030.0,1468.3 885.2,1387.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1384.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1389.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">telefono_verificato_il</text>
+<polyline points="1030.0,1474.1 885.5,1408.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1405.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1410.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">nome_visualizzato</text>
+<polyline points="1030.0,1479.8 885.7,1428.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1426.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1431.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">mostra_nome_reale</text>
+<polyline points="1030.0,1485.6 885.8,1449.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1447.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1452.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">foto_profilo</text>
+<polyline points="1030.0,1491.4 885.9,1469.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1468.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1473.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">stato_account</text>
+<polyline points="1030.0,1497.1 886.0,1489.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1489.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1494.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">email_verificata_il</text>
+<polyline points="1030.0,1502.9 886.0,1510.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1510.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1515.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">consenso_privacy_il</text>
+<polyline points="1030.0,1508.6 885.9,1530.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1531.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1536.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">consenso_notifiche</text>
+<polyline points="1030.0,1514.4 885.8,1551.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1552.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1557.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">consenso_addestramento_ia</text>
+<polyline points="1030.0,1520.2 885.7,1571.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1573.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1578.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">notifiche_email</text>
+<polyline points="1030.0,1525.9 885.5,1592.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1594.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1599.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">notifiche_inapp</text>
+<polyline points="1030.0,1531.7 885.2,1612.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1615.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1620.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">totp_attivo</text>
+<polyline points="1030.0,1537.4 885.0,1633.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1636.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1641.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">totp_segreto</text>
+<polyline points="1030.0,1543.2 884.8,1653.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1657.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1662.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">tentativi_falliti</text>
+<polyline points="1030.0,1549.0 884.5,1674.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1678.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1683.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">bloccato_fino_a</text>
+<polyline points="1030.0,1554.7 884.3,1695.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1699.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1704.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">data_registrazione</text>
+<polyline points="1030.0,1560.5 884.1,1716.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1720.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1725.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">ultimo_accesso</text>
+<polyline points="1030.0,1566.2 883.9,1736.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1741.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1746.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">cancellazione_richiesta_il</text>
+<polyline points="1030.0,1572.0 883.7,1757.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="880.0" cy="1762.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="869.0" y="1767.5" font-size="14" text-anchor="end" font-weight="normal" fill="#111">anonimizzato_il</text>
+<polyline points="2113.0,830.0 2011.4,777.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2006.0" cy="775.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="2006.0" y="763.0" font-size="14" text-anchor="middle" font-weight="bold" fill="#111">id</text>
+<polyline points="2113.0,830.0 2069.9,779.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2066.0" cy="775.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2066.0" y="763.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">tipo</text>
+<polyline points="2126.0,830.0 2126.0,781.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2126.0" cy="775.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2126.0" y="763.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">testo</text>
+<polyline points="2186.0,830.0 2186.0,781.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2186.0" cy="775.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2186.0" y="763.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">letta</text>
+<polyline points="2246.0,830.0 2246.0,781.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2246.0" cy="775.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2246.0" y="763.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data</text>
+<polyline points="2287.0,830.0 2345.5,778.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2350.0" cy="775.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2350.0" y="763.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">email_inviata_il</text>
+<polyline points="2108.0,1730.0 2052.6,1679.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2048.2" cy="1675.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="2048.2" y="1663.0" font-size="14" text-anchor="middle" font-weight="bold" fill="#111">id</text>
+<polyline points="2108.2,1730.0 2108.2,1681.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2108.2" cy="1675.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2108.2" y="1663.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">testo</text>
+<polyline points="2168.2,1730.0 2168.2,1681.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2168.2" cy="1675.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2168.2" y="1663.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">stato</text>
+<polyline points="2228.2,1730.0 2228.2,1681.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2228.2" cy="1675.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2228.2" y="1663.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data</text>
+<polyline points="2292.0,1730.0 2317.3,1680.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2320.0" cy="1675.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2320.0" y="1663.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data_modifica</text>
+<polyline points="2021.1,2140.0 2021.1,2239.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2021.1" cy="2245.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="2021.1" y="2267.0" font-size="14" text-anchor="middle" font-weight="bold" fill="#111">id</text>
+<polyline points="2084.5,2140.0 2084.5,2239.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2084.5" cy="2245.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2084.5" y="2267.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">motivo</text>
+<polyline points="2147.9,2140.0 2147.9,2239.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2147.9" cy="2245.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2147.9" y="2267.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">nota</text>
+<polyline points="2235.9,2140.0 2235.9,2239.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2235.9" cy="2245.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2235.9" y="2267.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data</text>
+<polyline points="2295.9,2140.0 2295.9,2239.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2295.9" cy="2245.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2295.9" y="2267.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">esito</text>
+<polyline points="2375.5,2140.0 2375.5,2239.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2375.5" cy="2245.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2375.5" y="2267.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data_esito</text>
+<polyline points="2110.0,2510.0 2110.0,2559.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2110.0" cy="2565.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="2110.0" y="2587.0" font-size="14" text-anchor="middle" font-weight="bold" fill="#111">id</text>
+<polyline points="2170.0,2510.0 2170.0,2559.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2170.0" cy="2565.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2170.0" y="2587.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">testo</text>
+<polyline points="2230.0,2510.0 2230.0,2559.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2230.0" cy="2565.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2230.0" y="2587.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">stato</text>
+<polyline points="2290.0,2510.0 2290.0,2559.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2290.0" cy="2565.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2290.0" y="2587.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data</text>
+<polyline points="3400.0,1428.0 3544.4,1373.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1371.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1376.0" font-size="14" text-anchor="start" font-weight="bold" fill="#111">id</text>
+<polyline points="3400.0,1436.0 3544.2,1393.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1392.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1397.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">codice_pubblico</text>
+<polyline points="3400.0,1444.0 3544.1,1414.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1413.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1418.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">titolo</text>
+<polyline points="3400.0,1452.0 3544.0,1434.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1434.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1439.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">descrizione</text>
+<polyline points="3400.0,1460.0 3544.0,1455.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1455.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1460.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">tipo</text>
+<polyline points="3400.0,1468.0 3544.0,1475.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1476.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1481.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">latitudine</text>
+<polyline points="3400.0,1476.0 3544.1,1496.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1497.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1502.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">longitudine</text>
+<polyline points="3400.0,1484.0 3544.1,1516.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1518.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1523.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">posizione</text>
+<polyline points="3400.0,1492.0 3544.3,1537.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1539.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1544.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">indirizzo</text>
+<polyline points="3400.0,1500.0 3544.4,1557.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1560.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1565.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">fonte_posizione</text>
+<polyline points="3400.0,1508.0 3544.6,1578.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1581.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1586.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data_stato_corrente</text>
+<polyline points="3400.0,1516.0 3544.8,1599.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1602.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1607.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data_creazione</text>
+<polyline points="3400.0,1524.0 3545.0,1619.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1623.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1628.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data_invio</text>
+<polyline points="3400.0,1532.0 3545.2,1640.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1644.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1649.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data_pubblicazione</text>
+<polyline points="3400.0,1540.0 3545.4,1661.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1665.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1670.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data_modifica</text>
+<polyline points="3400.0,1548.0 3545.6,1681.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1686.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1691.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">num_sostegni</text>
+<polyline points="3400.0,1556.0 3545.8,1702.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1707.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1712.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">num_commentatori</text>
+<polyline points="3400.0,1564.0 3546.0,1723.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1728.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1733.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">punteggio_priorita</text>
+<polyline points="3400.0,1572.0 3546.1,1744.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3550.0" cy="1749.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3561.0" y="1754.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">foto_datata</text>
+<polyline points="3100.0,398.0 3035.3,362.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3030.0" cy="360.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="3019.0" y="365.0" font-size="14" text-anchor="end" font-weight="bold" fill="#111">id</text>
+<polyline points="3100.0,406.8 3035.7,385.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3030.0" cy="384.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3019.0" y="389.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">nome</text>
+<polyline points="3100.0,415.6 3036.0,408.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3030.0" cy="408.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3019.0" y="413.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">descrizione</text>
+<polyline points="3100.0,424.4 3036.0,431.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3030.0" cy="432.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3019.0" y="437.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">colore_mappa</text>
+<polyline points="3100.0,433.2 3035.7,454.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3030.0" cy="456.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3019.0" y="461.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">attiva</text>
+<polyline points="3100.0,442.0 3035.3,477.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3030.0" cy="480.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3019.0" y="485.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">ordine</text>
+<polyline points="4085.0,558.0 4169.9,506.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="503.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="508.0" font-size="14" text-anchor="start" font-weight="bold" fill="#111">codice</text>
+<polyline points="4085.0,564.3 4169.5,527.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="525.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="530.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">nome</text>
+<polyline points="4085.0,570.6 4169.2,548.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="547.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="552.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">descrizione</text>
+<polyline points="4085.0,576.9 4169.0,569.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="569.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="574.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">ordine</text>
+<polyline points="4085.0,583.1 4169.0,590.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="591.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="596.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">finale</text>
+<polyline points="4085.0,589.4 4169.2,611.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="613.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="618.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">pubblico</text>
+<polyline points="4085.0,595.7 4169.5,632.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="635.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="640.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">votabile</text>
+<polyline points="4085.0,602.0 4169.9,653.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4175.0" cy="657.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4186.0" y="662.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">in_classifica</text>
+<polyline points="4145.0,138.0 4209.0,136.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4215.0" cy="136.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="4226.0" y="141.0" font-size="14" text-anchor="start" font-weight="bold" fill="#111">attore</text>
+<polyline points="4145.0,160.0 4209.0,160.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4215.0" cy="160.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4226.0" y="165.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">motivazione_obbligatoria</text>
+<polyline points="4145.0,182.0 4209.0,183.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4215.0" cy="184.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4226.0" y="189.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">condizione</text>
+<polyline points="4125.0,1128.0 4189.1,1115.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4195.0" cy="1114.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="4206.0" y="1119.0" font-size="14" text-anchor="start" font-weight="bold" fill="#111">id</text>
+<polyline points="4125.0,1142.7 4189.0,1138.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4195.0" cy="1138.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4206.0" y="1143.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data_ora</text>
+<polyline points="4125.0,1157.3 4189.0,1161.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4195.0" cy="1162.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4206.0" y="1167.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">attore</text>
+<polyline points="4125.0,1172.0 4189.1,1184.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4195.0" cy="1186.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4206.0" y="1191.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">motivazione</text>
+<polyline points="4350.0,2378.0 4466.4,2225.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2220.5" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2225.5" font-size="14" text-anchor="start" font-weight="bold" fill="#111">id</text>
+<polyline points="4350.0,2382.4 4466.1,2246.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2241.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2246.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">tipo</text>
+<polyline points="4350.0,2386.8 4465.8,2266.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2262.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2267.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">mime_type</text>
+<polyline points="4350.0,2391.3 4465.5,2287.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2283.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2288.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">dimensione_byte</text>
+<polyline points="4350.0,2395.7 4465.2,2308.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2304.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2309.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">durata_sec</text>
+<polyline points="4350.0,2400.1 4464.9,2328.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2325.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2330.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">larghezza</text>
+<polyline points="4350.0,2404.5 4464.6,2349.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2346.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2351.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">altezza</text>
+<polyline points="4350.0,2408.9 4464.3,2369.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2367.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2372.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">percorso_originale</text>
+<polyline points="4350.0,2413.4 4464.1,2389.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2388.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2393.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">percorso_pubblico</text>
+<polyline points="4350.0,2417.8 4464.0,2409.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2409.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2414.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">percorso_miniatura</text>
+<polyline points="4350.0,2422.2 4464.0,2430.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2430.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2435.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">stato_elaborazione</text>
+<polyline points="4350.0,2426.6 4464.1,2450.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2451.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2456.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">hash_sha256</text>
+<polyline points="4350.0,2431.1 4464.3,2470.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2472.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2477.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">hash_percettivo</text>
+<polyline points="4350.0,2435.5 4464.6,2490.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2493.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2498.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">exif_latitudine</text>
+<polyline points="4350.0,2439.9 4464.9,2511.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2514.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2519.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">exif_longitudine</text>
+<polyline points="4350.0,2444.3 4465.2,2531.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2535.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2540.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">exif_altitudine</text>
+<polyline points="4350.0,2448.7 4465.5,2552.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2556.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2561.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">exif_data_scatto</text>
+<polyline points="4350.0,2453.2 4465.8,2573.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2577.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2582.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">exif_dispositivo</text>
+<polyline points="4350.0,2457.6 4466.1,2593.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2598.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2603.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">ordine</text>
+<polyline points="4350.0,2462.0 4466.4,2614.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="4470.0" cy="2619.5" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="4481.0" y="2624.5" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data_caricamento</text>
+<polyline points="3558.0,2930.0 3516.5,2980.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3512.7" cy="2985.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="3512.7" y="3007.0" font-size="14" text-anchor="middle" font-weight="bold" fill="#111">id</text>
+<polyline points="3576.0,2930.0 3576.0,2979.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3576.0" cy="2985.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3576.0" y="3007.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">modulo</text>
+<polyline points="3683.4,2930.0 3683.4,2979.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3683.4" cy="2985.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3683.4" y="3007.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">versione_modello</text>
+<polyline points="3742.0,2930.0 3783.5,2980.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3787.3" cy="2985.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3787.3" y="3007.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">esito</text>
+<polyline points="3750.0,2878.0 3814.1,2865.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3820.0" cy="2864.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3831.0" y="2869.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">punteggio</text>
+<polyline points="3750.0,2892.7 3814.0,2888.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3820.0" cy="2888.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3831.0" y="2893.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">dettagli</text>
+<polyline points="3750.0,2907.3 3814.0,2911.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3820.0" cy="2912.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3831.0" y="2917.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">durata_ms</text>
+<polyline points="3750.0,2922.0 3814.1,2934.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3820.0" cy="2936.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3831.0" y="2941.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data</text>
+<polyline points="2193.0,3080.0 2077.5,3132.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2072.0" cy="3135.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="2072.0" y="3157.0" font-size="14" text-anchor="middle" font-weight="bold" fill="#111">id</text>
+<polyline points="2193.0,3080.0 2139.7,3130.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2135.4" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2135.4" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">titolo</text>
+<polyline points="2210.2,3080.0 2210.2,3129.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2210.2" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2210.2" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">versione</text>
+<polyline points="2281.7,3080.0 2281.7,3129.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2281.7" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2281.7" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">stato</text>
+<polyline points="2369.4,3080.0 2369.4,3129.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2369.4" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2369.4" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">introduzione</text>
+<polyline points="2493.0,3080.0 2493.0,3129.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2493.0" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2493.0" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data_creazione</text>
+<polyline points="2507.0,3080.0 2603.1,3132.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2608.4" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2608.4" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data_invio</text>
+<polyline points="1363.0,3080.0 1248.2,3132.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1242.8" cy="3135.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="1242.8" y="3157.0" font-size="14" text-anchor="middle" font-weight="bold" fill="#111">id</text>
+<polyline points="1363.0,3080.0 1307.2,3131.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1302.8" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1302.8" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">nome</text>
+<polyline points="1370.2,3080.0 1370.2,3129.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1370.2" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1370.2" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">cognome</text>
+<polyline points="1481.6,3080.0 1481.6,3129.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1481.6" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1481.6" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">lista_coalizione</text>
+<polyline points="1537.0,3080.0 1616.4,3131.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1621.4" cy="3135.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1621.4" y="3157.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">email_contatto</text>
+<polyline points="1185.0,2518.0 1148.7,2472.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1145.0" cy="2468.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="1134.0" y="2473.0" font-size="14" text-anchor="end" font-weight="bold" fill="#111">id</text>
+<polyline points="1185.0,2525.3 1149.6,2495.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1145.0" cy="2492.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1134.0" y="2497.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">tipo</text>
+<polyline points="1185.0,2532.7 1150.5,2518.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1145.0" cy="2516.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1134.0" y="2521.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">motivazione</text>
+<polyline points="1185.0,2540.0 1151.0,2540.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1145.0" cy="2540.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1134.0" y="2545.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">data_inizio</text>
+<polyline points="1185.0,2547.3 1150.5,2561.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1145.0" cy="2564.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1134.0" y="2569.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">data_fine</text>
+<polyline points="1185.0,2554.7 1149.6,2584.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1145.0" cy="2588.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1134.0" y="2593.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">revocato_il</text>
+<polyline points="1185.0,2562.0 1148.7,2607.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1145.0" cy="2612.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1134.0" y="2617.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">motivazione_revoca</text>
+<polyline points="290.0,2078.0 224.1,2008.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2004.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2009.0" font-size="14" text-anchor="end" font-weight="bold" fill="#111">id</text>
+<polyline points="290.0,2083.5 224.7,2031.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2028.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2033.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">tipo</text>
+<polyline points="290.0,2089.0 225.3,2054.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2052.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2057.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">token_hash</text>
+<polyline points="290.0,2094.5 225.8,2077.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2076.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2081.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">creato_il</text>
+<polyline points="290.0,2100.0 226.0,2100.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2100.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2105.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">scade_il</text>
+<polyline points="290.0,2105.5 225.8,2122.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2124.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2129.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">usato_il</text>
+<polyline points="290.0,2111.0 225.3,2145.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2148.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2153.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">revocato_il</text>
+<polyline points="290.0,2116.5 224.7,2168.3" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2172.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2177.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">indirizzo_ip</text>
+<polyline points="290.0,2122.0 224.1,2191.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2196.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2201.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">user_agent</text>
+<polyline points="290.0,2458.0 225.6,2434.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2432.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2437.0" font-size="14" text-anchor="end" font-weight="bold" fill="#111">id</text>
+<polyline points="290.0,2469.0 225.9,2457.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2456.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2461.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">email_tentata</text>
+<polyline points="290.0,2480.0 226.0,2480.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2480.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2485.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">indirizzo_ip</text>
+<polyline points="290.0,2491.0 225.9,2502.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2504.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2509.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">esito</text>
+<polyline points="290.0,2502.0 225.6,2525.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="2528.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="2533.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">data_ora</text>
+<polyline points="270.0,2778.0 204.9,2731.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="200.0" cy="2728.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="189.0" y="2733.0" font-size="14" text-anchor="end" font-weight="bold" fill="#111">chiave</text>
+<polyline points="270.0,2785.3 205.4,2754.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="200.0" cy="2752.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="189.0" y="2757.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">valore</text>
+<polyline points="270.0,2792.7 205.8,2777.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="200.0" cy="2776.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="189.0" y="2781.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">valore_min</text>
+<polyline points="270.0,2800.0 206.0,2800.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="200.0" cy="2800.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="189.0" y="2805.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">valore_max</text>
+<polyline points="270.0,2807.3 205.8,2822.6" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="200.0" cy="2824.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="189.0" y="2829.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">unita</text>
+<polyline points="270.0,2814.7 205.4,2845.4" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="200.0" cy="2848.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="189.0" y="2853.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">descrizione</text>
+<polyline points="270.0,2822.0 204.9,2868.5" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="200.0" cy="2872.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="189.0" y="2877.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">data_modifica</text>
+<polyline points="290.0,3148.0 224.5,3090.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3086.0" r="6" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3091.0" font-size="14" text-anchor="end" font-weight="bold" fill="#111">id</text>
+<polyline points="290.0,3154.3 225.1,3113.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3110.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3115.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">azione</text>
+<polyline points="290.0,3160.6 225.6,3136.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3134.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3139.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">tipo_oggetto</text>
+<polyline points="290.0,3166.9 226.0,3158.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3158.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3163.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">id_oggetto</text>
+<polyline points="290.0,3173.1 226.0,3181.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3182.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3187.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">valori_prima</text>
+<polyline points="290.0,3179.4 225.6,3203.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3206.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3211.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">valori_dopo</text>
+<polyline points="290.0,3185.7 225.1,3226.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3230.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3235.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">indirizzo_ip</text>
+<polyline points="290.0,3192.0 224.5,3250.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="220.0" cy="3254.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="209.0" y="3259.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">data_ora</text>
+<polyline points="2180.3,1279.8 2116.6,1219.1" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2112.3" cy="1215.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2112.3" y="1203.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data</text>
+<polyline points="2192.0,1274.0 2174.2,1220.7" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2172.3" cy="1215.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2172.3" y="1203.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">peso</text>
+<polyline points="2215.0,1277.5 2256.5,1219.9" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2260.0" cy="1215.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2260.0" y="1203.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">indirizzo_ip</text>
+<polyline points="2200.0,1470.0 2200.0,1421.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2200.0" cy="1415.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2200.0" y="1403.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data</text>
+<polyline points="3235.1,883.6 3341.3,865.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3347.2" cy="864.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3358.2" y="869.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">origine</text>
+<polyline points="3255.1,891.4 3341.2,888.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3347.2" cy="888.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3358.2" y="893.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">confidenza_ia</text>
+<polyline points="3255.1,908.6 3341.2,911.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3347.2" cy="912.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3358.2" y="917.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">confermata</text>
+<polyline points="3235.1,916.4 3341.3,935.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="3347.2" cy="936.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="3358.2" y="941.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">data</text>
+<polyline points="3007.1,2391.4 2926.0,2388.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2920.0" cy="2388.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2909.0" y="2393.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">posizione</text>
+<polyline points="3007.1,2408.6 2926.0,2411.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="2920.0" cy="2412.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="2909.0" y="2417.0" font-size="14" text-anchor="end" font-weight="normal" fill="#111">nota_comitato</text>
+<polyline points="1884.4,3027.3 1841.8,2969.8" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1838.2" cy="2965.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1838.2" y="2953.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">data_invio</text>
+<polyline points="1913.1,3026.1 1946.5,2970.2" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1949.6" cy="2965.0" r="6" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="1949.6" y="2953.0" font-size="14" text-anchor="middle" font-weight="normal" fill="#111">email_inviata</text>
+<polygon points="2200,265 2268.5,295 2200,325 2131.5,295" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2200.0" y="300.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">APPARTIENE</text>
+<polygon points="1250,870 1310.0,900 1250,930 1190.0,900" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1250.0" y="905.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">HA</text>
+<polygon points="1700,610 1760.0,640 1700,670 1640.0,640" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1700.0" y="645.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">RISIEDE</text>
+<polygon points="2700,610 2772.85,640 2700,670 2627.15,640" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2700.0" y="645.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">LOCALIZZATA</text>
+<polygon points="1700,830 1760.0,860 1700,890 1640.0,860" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1700.0" y="865.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">RICEVE</text>
+<polygon points="2700,830 2760.0,860 2700,890 2640.0,860" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2700.0" y="865.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">RIFERITA</text>
+<polygon points="2200,1050 2264.15,1080 2200,1110 2135.85,1080" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2200.0" y="1085.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">INSERISCE</text>
+<polygon points="2200,1270 2260.0,1300 2200,1330 2140.0,1300" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2200.0" y="1305.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">SOSTIENE</text>
+<polygon points="2200,1470 2260.0,1500 2200,1530 2140.0,1500" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2200.0" y="1505.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">SEGUE</text>
+<polygon points="1700,1730 1760.0,1760 1700,1790 1640.0,1760" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1700.0" y="1765.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">SCRIVE</text>
+<polygon points="2700,1730 2768.5,1760 2700,1790 2631.5,1760" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2700.0" y="1765.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">RIFERITO_A</text>
+<polygon points="1700,2010 1760.0,2040 1700,2070 1640.0,2040" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1700.0" y="2045.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">SEGNALA</text>
+<polygon points="1700,2170 1760.0,2200 1700,2230 1640.0,2200" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1700.0" y="2205.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">VALUTA</text>
+<polygon points="2700,2080 2768.5,2110 2700,2140 2631.5,2110" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2700.0" y="2115.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">RIGUARDA_S</text>
+<polygon points="2200,1905 2268.5,1935 2200,1965 2131.5,1935" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2200.0" y="1940.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">RIGUARDA_C</text>
+<polygon points="2200,2280 2268.5,2310 2200,2340 2131.5,2310" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2200.0" y="2315.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">RIGUARDA_A</text>
+<polygon points="1700,2450 1760.0,2480 1700,2510 1640.0,2480" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1700.0" y="2485.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">PUBBLICA</text>
+<polygon points="2700,2450 2760.0,2480 2700,2510 2640.0,2480" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2700.0" y="2485.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">AGGIORNA</text>
+<polygon points="3200,870 3277.2,900 3200,930 3122.8,900" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3200.0" y="905.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">CLASSIFICATA</text>
+<polygon points="3650,870 3722.85,900 3650,930 3577.15,900" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3650.0" y="905.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">SI_TROVA_IN</text>
+<polygon points="3700,1150 3760.0,1180 3700,1210 3640.0,1180" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3700.0" y="1185.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">EVOLVE</text>
+<polygon points="3910,840 3970.0,870 3910,900 3850.0,870" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3910.0" y="875.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">DA</text>
+<polygon points="4090,840 4150.0,870 4090,900 4030.0,870" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="4090.0" y="875.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">A</text>
+<polygon points="3850,340 3910.0,370 3850,400 3790.0,370" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3850.0" y="375.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">PARTENZA</text>
+<polygon points="4150,340 4210.0,370 4150,400 4090.0,370" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="4150.0" y="375.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">ARRIVO</text>
+<polygon points="4540,1120 4600.0,1150 4540,1180 4480.0,1150" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="4540.0" y="1155.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">ESEGUE</text>
+<polygon points="3390,1830 3450.0,1860 3390,1890 3330.0,1860" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3390.0" y="1865.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">UNITA_A</text>
+<polygon points="3850,2170 3922.85,2200 3850,2230 3777.15,2200" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3850.0" y="2205.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">DOCUMENTATA</text>
+<polygon points="3300,2270 3368.5,2300 3300,2330 3231.5,2300" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3300.0" y="2305.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">ANALIZZA_S</text>
+<polygon points="4000,2650 4072.85,2680 4000,2710 3927.15,2680" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="4000.0" y="2685.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">ANALIZZA_AL</text>
+<polygon points="2560,2270 2628.5,2300 2560,2330 2491.5,2300" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2560.0" y="2305.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">ANALIZZA_C</text>
+<polygon points="2950,2750 3022.85,2780 2950,2810 2877.15,2780" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="2950.0" y="2785.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">ANALIZZA_AG</text>
+<polygon points="3050,2370 3110.0,2400 3050,2430 2990.0,2400" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="3050.0" y="2405.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">INCLUDE</text>
+<polygon points="1900,3020 1964.15,3050 1900,3080 1835.85,3050" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1900.0" y="3055.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">INVIATO_A</text>
+<polygon points="1640,2770 1700.0,2800 1640,2830 1580.0,2800" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1640.0" y="2805.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">REDIGE</text>
+<polygon points="1160,2030 1237.2,2060 1160,2090 1082.8,2060" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1160.0" y="2065.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">DESTINATARIO</text>
+<polygon points="1310,2140 1370.0,2170 1310,2200 1250.0,2170" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1310.0" y="2175.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">EMETTE</text>
+<polygon points="1430,2260 1490.0,2290 1430,2320 1370.0,2290" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="1430.0" y="2295.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">REVOCA</text>
+<polygon points="760,2070 820.0,2100 760,2130 700.0,2100" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="760.0" y="2105.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">POSSIEDE</text>
+<polygon points="760,2450 820.0,2480 760,2510 700.0,2480" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="760.0" y="2485.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">TENTA</text>
+<polygon points="760,2770 820.0,2800 760,2830 700.0,2800" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="760.0" y="2805.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">MODIFICA</text>
+<polygon points="760,3140 820.0,3170 760,3200 700.0,3170" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="760.0" y="3175.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#111">REGISTRA</text>
+<rect x="2100.0" y="90.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="2200.0" y="127.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">MUNICIPIO</text>
+<rect x="2100.0" y="440.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="2200.0" y="477.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">QUARTIERE</text>
+<rect x="1165.0" y="530.0" width="170.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="1250.0" y="567.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">RUOLO</text>
+<rect x="1030.0" y="1420.0" width="440.0" height="160.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="1250.0" y="1507.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">UTENTE</text>
+<rect x="2105.0" y="830.0" width="190.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="2200.0" y="867.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">NOTIFICA</text>
+<rect x="2100.0" y="1730.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="2200.0" y="1767.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">COMMENTO</text>
+<rect x="1990.0" y="2080.0" width="420.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="2200.0" y="2117.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">SEGNALAZIONE_ABUSO</text>
+<rect x="2085.0" y="2450.0" width="230.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="2200.0" y="2487.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">AGGIORNAMENTO</text>
+<rect x="3000.0" y="1420.0" width="400.0" height="160.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="3200.0" y="1507.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">SEGNALAZIONE</text>
+<rect x="3100.0" y="390.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="3200.0" y="427.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">CATEGORIA</text>
+<rect x="3915.0" y="550.0" width="170.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="4000.0" y="587.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">STATO</text>
+<rect x="3855.0" y="130.0" width="290.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="4000.0" y="167.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">TRANSIZIONE_AMMESSA</text>
+<rect x="3875.0" y="1120.0" width="250.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="4000.0" y="1157.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">STORICO_STATO</text>
+<rect x="4150.0" y="2370.0" width="200.0" height="100.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="4250.0" y="2427.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">ALLEGATO</text>
+<rect x="3550.0" y="2870.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="3650.0" y="2907.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">ANALISI_IA</text>
+<rect x="2185.0" y="3020.0" width="330.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="2350.0" y="3057.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">DOCUMENTO_PROGRAMMATICO</text>
+<rect x="1355.0" y="3020.0" width="190.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="1450.0" y="3057.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">CANDIDATO</text>
+<rect x="1185.0" y="2510.0" width="230.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="1300.0" y="2547.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">PROVVEDIMENTO</text>
+<rect x="290.0" y="2070.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="390.0" y="2107.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">TOKEN_UTENTE</text>
+<rect x="290.0" y="2450.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="390.0" y="2487.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">ACCESSO_LOG</text>
+<rect x="270.0" y="2770.0" width="240.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="390.0" y="2807.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">PARAMETRO_SISTEMA</text>
+<rect x="290.0" y="3140.0" width="200.0" height="60.0" fill="#fff" stroke="#111" stroke-width="2.2"/>
+<text x="390.0" y="3177.0" font-size="19" text-anchor="middle" font-weight="bold" fill="#111">AUDIT_LOG</text>
+<rect x="2213.0" y="401.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2216.0" y="415.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="2154.9" y="171.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2184.0" y="185.0" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">1:N</text>
+<rect x="1181.3" y="1364.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1184.3" y="1378.5" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="1204.9" y="611.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1234.0" y="625.0" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1305.2" y="1374.9" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1308.2" y="1388.9" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="2062.2" y="485.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2078.2" y="499.5" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3128.3" y="1363.1" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3131.3" y="1377.1" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="2295.4" y="515.8" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2311.5" y="529.8" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1396.6" y="1376.6" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1399.6" y="1390.6" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2058.9" y="835.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2075.0" y="849.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="2308.9" y="867.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2325.0" y="881.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="3064.4" y="1364.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3067.4" y="1378.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1486.1" y="1404.9" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1502.1" y="1418.9" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2962.7" y="1378.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2978.7" y="1392.5" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="1506.2" y="1451.3" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1522.2" y="1465.3" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2941.8" y="1421.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2957.9" y="1435.5" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1504.0" y="1507.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1520.0" y="1521.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2937.9" y="1475.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2954.0" y="1489.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1465.5" y="1572.4" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1494.6" y="1586.4" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2053.9" y="1735.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2070.0" y="1749.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="2313.9" y="1767.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2330.0" y="1781.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="2937.2" y="1549.8" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2953.3" y="1563.8" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1448.5" y="1612.9" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1477.6" y="1626.9" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1947.5" y="2064.7" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1963.5" y="2078.7" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="1406.2" y="1623.2" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1435.3" y="1637.2" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1940.9" y="2108.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1956.9" y="2122.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="2423.9" y="2117.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2440.0" y="2131.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="3001.4" y="1599.6" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3030.5" y="1613.6" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2154.9" y="1811.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2184.0" y="1825.0" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2213.0" y="2041.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2216.0" y="2055.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="2154.9" y="2161.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2184.0" y="2175.0" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="2213.0" y="2411.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2216.0" y="2425.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1357.3" y="1623.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1386.4" y="1637.5" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2039.0" y="2455.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2055.0" y="2469.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="2328.9" y="2487.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2345.0" y="2501.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="2960.4" y="1609.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2989.5" y="1623.0" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3213.0" y="1365.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3216.0" y="1379.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:N</text>
+<rect x="3154.9" y="471.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3184.0" y="485.0" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3345.6" y="1381.3" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3348.6" y="1395.3" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="3854.0" y="602.9" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3883.1" y="616.9" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3410.3" y="1396.2" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3426.4" y="1410.2" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3827.5" y="1140.6" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3843.6" y="1154.6" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="3923.0" y="1081.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3926.0" y="1095.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="3909.5" y="627.4" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3938.6" y="641.4" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="4103.0" y="1081.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="4106.0" y="1095.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="4000.9" y="633.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="4030.0" y="647.5" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3955.0" y="507.1" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3958.0" y="521.1" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3865.1" y="203.2" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3894.2" y="217.2" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="4066.3" y="523.7" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="4069.3" y="537.7" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="4046.9" y="214.8" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="4076.0" y="228.8" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="4138.9" y="1157.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="4155.0" y="1171.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="1093.0" y="1361.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1096.0" y="1375.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3235.8" y="1619.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3264.9" y="1633.5" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3348.0" y="1612.2" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3351.0" y="1626.2" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="3422.4" y="1598.2" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3425.4" y="1612.2" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:5</text>
+<rect x="4124.5" y="2332.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="4140.5" y="2346.5" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="3170.7" y="1618.6" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3199.8" y="1632.6" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3587.7" y="2827.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3590.7" y="2841.0" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="3715.6" y="2858.6" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3731.6" y="2872.6" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="4140.5" y="2471.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="4169.6" y="2485.5" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2313.9" y="1787.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2330.0" y="1801.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3503.9" y="2865.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3520.0" y="2879.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="2319.9" y="2517.7" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2336.0" y="2531.7" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3508.4" y="2888.6" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3524.4" y="2902.6" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="2519.0" y="2999.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2522.0" y="3013.5" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="3090.0" y="1615.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="3119.1" y="1629.0" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2138.9" y="3025.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2155.0" y="3039.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1559.0" y="3057.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1575.0" y="3071.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1307.3" y="1623.4" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1336.4" y="1637.4" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="2191.4" y="2985.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="2207.5" y="2999.5" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="1155.3" y="1619.3" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1184.4" y="1633.3" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1228.9" y="2469.1" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1231.9" y="2483.1" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="1210.0" y="1622.4" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1239.1" y="1636.4" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1314.6" y="2471.4" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1317.6" y="2485.4" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="1259.5" y="1623.1" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1288.6" y="1637.1" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="1399.3" y="2475.3" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1402.3" y="2489.3" font-size="15" text-anchor="start" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="977.8" y="1607.2" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1006.9" y="1621.2" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="503.9" y="2107.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="520.0" y="2121.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">1:1</text>
+<rect x="1023.9" y="1612.6" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1053.0" y="1626.6" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="503.9" y="2487.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="520.0" y="2501.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="1066.2" y="1614.3" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1095.3" y="1628.3" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="524.0" y="2807.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="540.0" y="2821.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<rect x="1108.1" y="1615.5" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="1137.2" y="1629.5" font-size="15" text-anchor="end" font-weight="bold" fill="#9b1d5a">0:N</text>
+<rect x="503.9" y="3177.0" width="32.1" height="18" fill="#fff" opacity="0.85"/>
+<text x="520.0" y="3191.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:1</text>
+<text x="3349.9" y="1799.4" font-size="15" text-anchor="end" font-weight="normal" fill="#555" font-style="italic">principale</text>
+<text x="3386.7" y="1794.2" font-size="15" text-anchor="start" font-weight="normal" fill="#555" font-style="italic">secondaria</text>
+<text x="60.0" y="70.0" font-size="34" text-anchor="start" font-weight="bold" fill="#111">Modello Entità-Relazione</text>
+<text x="60.0" y="104.0" font-size="20" text-anchor="start" font-weight="normal" fill="#111">La Nostra Città, Il Nostro Futuro</text>
+<rect x="60" y="150" width="430" height="250" fill="#fff" stroke="#999" stroke-width="1"/>
+<rect x="80" y="170" width="60" height="28" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="160.0" y="190.0" font-size="16" text-anchor="start" font-weight="normal" fill="#111">Entità</text>
+<polygon points="110,214 140,230 110,246 80,230" fill="#fff" stroke="#111" stroke-width="2"/>
+<text x="160.0" y="235.0" font-size="16" text-anchor="start" font-weight="normal" fill="#111">Relazione</text>
+<circle cx="110" cy="275" r="7" fill="#111" stroke="#111" stroke-width="1.6"/>
+<text x="160.0" y="280.0" font-size="16" text-anchor="start" font-weight="normal" fill="#111">Identificatore</text>
+<circle cx="110" cy="320" r="7" fill="#fff" stroke="#111" stroke-width="1.6"/>
+<text x="160.0" y="325.0" font-size="16" text-anchor="start" font-weight="normal" fill="#111">Attributo</text>
+<text x="110.0" y="370.0" font-size="15" text-anchor="middle" font-weight="bold" fill="#9b1d5a">0:N</text>
+<text x="160.0" y="370.0" font-size="16" text-anchor="start" font-weight="normal" fill="#111">min:max = cardinalità dell'entità vicina</text>
+<text x="60.0" y="435.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">TRANSIZIONE_AMMESSA è identificata da stato di partenza,</text>
+<text x="60.0" y="455.0" font-size="14" text-anchor="start" font-weight="normal" fill="#111">stato di arrivo e attore (identificatore esterno).</text>
+</svg>

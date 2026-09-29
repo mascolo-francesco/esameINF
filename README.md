@@ -13,9 +13,11 @@ Se ha poco tempo, le consiglio quest'ordine:
 
 1. [La consegna](docs/progetto-desame.md), per ricordare cosa chiedeva il progetto.
 2. [L'analisi dei requisiti](docs/Analisi_Requisiti_La_Nostra_Citta.pdf), il materiale 1.
-3. [Lo schema del database](db/01_schema.sql), il materiale 2: tabelle, chiavi e vincoli, con i
-   commenti che rimandano ai requisiti.
-4. [Le note sul database](db/README.md), dove spiego le scelte fatte e dove mi sono discostato
+3. [Il modello Entità-Relazione](docs/er/modello_er.svg), la prima parte del materiale 2. C'è anche
+   in [PNG](docs/er/modello_er.png), più comodo da aprire sul telefono.
+4. [Lo schema del database](db/01_schema.sql), la seconda parte del materiale 2: tabelle, chiavi e
+   vincoli, con i commenti che rimandano ai requisiti.
+5. [Le note sul database](db/README.md), dove spiego le scelte fatte e dove mi sono discostato
    dall'analisi.
 
 Poi, se vuole entrare nel dettaglio:
@@ -39,6 +41,7 @@ del documento di analisi.
 .
 ├── README.md                  questa pagina
 ├── docs/                      consegna e analisi dei requisiti
+│   └── er/                    modello Entità-Relazione (SVG, PNG e lo script che lo disegna)
 ├── db/                        database MySQL
 │   ├── 01_schema.sql          le 28 tabelle
 │   ├── 02_territorio.sql      9 Municipi e 88 quartieri (NIL) con i confini ufficiali
@@ -60,6 +63,7 @@ Il file `.env` con la password del database resta sul mio computer e non è nel 
 | Fase | Stato |
 |---|---|
 | Analisi dei requisiti | completata |
+| Modello Entità-Relazione | completato |
 | Database: schema, vincoli, query | completato e testato |
 | Web app, prima versione: registrazione, segnalazioni, voti, classifica, mappa, moderazione manuale | da sviluppare |
 | Moduli di intelligenza artificiale | rimandati alle fasi successive; il database è già pronto a ospitarli |

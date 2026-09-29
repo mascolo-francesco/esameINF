@@ -16,6 +16,7 @@ implementa (RF, RD, RNF, RIA), così si può controllare la corrispondenza riga 
 | `06_eventi.sql` | La manutenzione notturna automatica |
 | `query_applicazione.sql` | Le 75 query della web app, raggruppate per caso d'uso |
 | `territorio/genera_territorio.py` | Scarica i confini dal portale open data del Comune e scrive `02_territorio.sql` |
+| `../docs/er/` | Il modello Entità-Relazione da cui deriva lo schema |
 | `test/test_vincoli.sql` | I test: violano di proposito i vincoli e controllano che il database li blocchi |
 | `esegui.sh` | Lancia un file SQL o una query: `db/esegui.sh -e "SELECT ..."` |
 
