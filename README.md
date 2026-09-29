@@ -13,8 +13,9 @@ Se ha poco tempo, le consiglio quest'ordine:
 
 1. [La consegna](docs/progetto-desame.md), per ricordare cosa chiedeva il progetto.
 2. [L'analisi dei requisiti](docs/Analisi_Requisiti_La_Nostra_Citta.pdf), il materiale 1.
-3. [Il modello Entità-Relazione](docs/er/modello_er.svg), la prima parte del materiale 2. C'è anche
-   in [PNG](docs/er/modello_er.png), più comodo da aprire sul telefono.
+3. [Il modello Entità-Relazione](docs/er/README.md), la prima parte del materiale 2. C'è una
+   [versione essenziale](docs/er/modello_er_ridotto.svg) con le entità principali e una
+   [versione completa](docs/er/modello_er.svg) con tutto il database.
 4. [Lo schema del database](db/01_schema.sql), la seconda parte del materiale 2: tabelle, chiavi e
    vincoli, con i commenti che rimandano ai requisiti.
 5. [Le note sul database](db/README.md), dove spiego le scelte fatte e dove mi sono discostato
