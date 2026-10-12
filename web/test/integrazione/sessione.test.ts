@@ -1,10 +1,10 @@
 import { existsSync } from "node:fs";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-// Test sul database vero (Aiven): servono .env.local e i dati di npm run seed.
+// Test sul database vero (Aiven): servono DATABASE_URL (in .env.local o nell'ambiente) e i dati di npm run seed.
 // Scrive solo righe di token_utente, che il job notturno cancella dopo la scadenza.
-const conDb = existsSync(".env.local");
-if (conDb) process.loadEnvFile(".env.local");
+if (existsSync(".env.local")) process.loadEnvFile(".env.local");
+const conDb = Boolean(process.env.DATABASE_URL);
 
 describe.skipIf(!conDb)("refresh token (RNF-03)", async () => {
   const { db, pool } = await import("@/lib/server/db");

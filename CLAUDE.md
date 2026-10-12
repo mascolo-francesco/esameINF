@@ -71,3 +71,28 @@ Tutto in `db/` (vedi `db/README.md`): schema, territorio, seed, logica, viste, e
 - `not authenticated`: rifai `avn user login <email> --token`.
 - Connessione rifiutata / timeout: controlla lo stato con `avn service get ... --format '{state}'`; se non è `RUNNING`, usa `--power-on` e `avn service wait`.
 - `mysql: command not found`: manca il PATH del client (vedi setup).
+
+## Sessioni cloud (Claude Code sul web)
+
+Nel cloud il repo viene clonato da GitHub: `.env` e `web/.env.local` non ci sono. Le variabili stanno nell'ambiente cloud (selettore su claude.ai/code), mai nel repo. Non scrivere qui l'host del database né le password, nemmeno se il repo è privato.
+
+Variabili dell'ambiente, con i valori copiati dai file locali:
+- `DATABASE_URL`: quella di `web/.env.local`, utente `lnc_app` con permessi ridotti. Non metterci `avnadmin`: lo schema si cambia solo in locale.
+- `JWT_SEGRETO` e `TOTP_CHIAVE`: uguali a quelli di `web/.env.local`.
+
+Accesso di rete: **Custom**, con in *Allowed domains* l'host del database (quello di `DATABASE_URL`, senza utente, porta e percorso) e la casella *Also include default list of common package managers*.
+
+Script di setup, da incollare nel campo *Setup script*:
+```bash
+#!/bin/bash
+# Lo script può partire da qualsiasi cartella: cerca web/ nel repo clonato
+WEB=$(dirname "$(find /root /home /workspace /workspaces -maxdepth 5 -path '*/web/package.json' -not -path '*/node_modules/*' 2>/dev/null | head -1)")
+apt-get update -qq && apt-get install -y -qq default-mysql-client || true
+cd "$WEB" && npm ci --no-audit --no-fund || true
+```
+
+Alla prima sessione controlla che il database sia raggiungibile (sostituisci `HOST` e `PORTA`):
+```bash
+timeout 5 bash -c '</dev/tcp/HOST/PORTA' && echo raggiungibile || echo non raggiungibile
+```
+Se non è raggiungibile, le query e i test d'integrazione si fanno in locale; in cloud restano codice, test unitari e typecheck. `npm run seed` scrive nel database condiviso: in cloud solo su richiesta esplicita.
