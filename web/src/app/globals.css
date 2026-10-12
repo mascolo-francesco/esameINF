@@ -127,6 +127,12 @@
   html {
     @apply font-sans;
   }
+  /* Una griglia senza colonne dichiarate non scende sotto la larghezza del testo più lungo
+     (per esempio un titolo troncato) e su un telefono da 360 px allarga la pagina.
+     :where() ha specificità zero, quindi le classi grid-cols-* continuano a vincere. */
+  :where([class~="grid"]) {
+    grid-template-columns: minmax(0, 1fr);
+  }
   /* RNF-25: il focus da tastiera resta sempre visibile */
   :focus-visible {
     outline: 2px solid var(--ring);

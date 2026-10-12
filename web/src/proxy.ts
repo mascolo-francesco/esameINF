@@ -47,5 +47,5 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   // niente proxy per file statici, immagini delle segnalazioni e risorse di Next
-  matcher: ["/((?!_next/static|_next/image|api/allegati|favicon.ico|icone/|manifest.webmanifest|sw.js).*)"],
+  matcher: ["/((?!_next/static|_next/image|api/allegati|icon.png|apple-icon.png|icone/|maplibre/|manifest.webmanifest|sw.js|offline.html).*)"],
 };

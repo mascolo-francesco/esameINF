@@ -22,14 +22,14 @@ export default async function Home({ searchParams }: PageProps<"/">) {
   ]);
 
   return (
-    <div className="grid gap-12 pb-12">
+    <div className="grid grid-cols-1 gap-12 pb-12">
       {account === "eliminato" && (
         <p role="status" className="mx-auto mt-6 w-full max-w-6xl px-4 text-sm">
           Il tuo account è stato chiuso. I dati personali saranno cancellati entro 7 giorni.
         </p>
       )}
       <section className="border-b bg-gradient-to-b from-secondary/60 to-background">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-12 sm:py-16">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 px-4 py-12 sm:py-16">
           <p className="text-sm font-medium text-primary">Elezioni comunali di Milano</p>
           <h1 className="max-w-3xl text-3xl font-semibold tracking-tight text-balance sm:text-5xl">
             La città che vuoi, raccontata da chi ci vive.
@@ -65,7 +65,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-6xl gap-4 px-4 sm:grid-cols-3" aria-label="Come funziona">
+      <section className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-4 sm:grid-cols-3" aria-label="Come funziona">
         {(
           [
             [Camera, "1. Segnala", "Una foto, il punto sulla mappa e due righe di descrizione. Un moderatore la controlla e la pubblica."],
@@ -81,14 +81,14 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         ))}
       </section>
 
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 lg:grid-cols-2">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-4 lg:grid-cols-2">
         {(
           [
             ["Più sostenute", sostenute.voci, "/classifica"],
             ["Di tendenza", tendenza.voci, "/classifica?ordine=tendenza"],
           ] as const
         ).map(([titolo, voci, link]) => (
-          <section key={titolo} className="grid content-start gap-4" aria-labelledby={`h-${link}`}>
+          <section key={titolo} className="grid min-w-0 content-start gap-4" aria-labelledby={`h-${link}`}>
             <div className="flex items-baseline justify-between">
               <h2 id={`h-${link}`} className="text-xl font-semibold">
                 {titolo}

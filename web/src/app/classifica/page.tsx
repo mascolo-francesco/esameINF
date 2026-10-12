@@ -26,7 +26,7 @@ const schemaFiltri = z.object({
   pagina: z.coerce.number().int().min(1).max(500).catch(1),
 });
 
-const classeSelect = "h-9 rounded-lg border border-input bg-background px-2 text-sm";
+const classeSelect = "h-9 w-full min-w-0 rounded-lg border border-input bg-background px-2 text-sm";
 
 export default async function PaginaClassifica({ searchParams }: PageProps<"/classifica">) {
   const p = schemaFiltri.parse(await searchParams);
@@ -57,7 +57,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
 
   return (
     <Pagina titolo="Classifica" descrizione="Le segnalazioni pubblicate, ordinate per sostegno dei cittadini.">
-      <div className="grid gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <nav aria-label="Ordinamento" className="flex gap-1 rounded-lg bg-muted p-1 sm:w-fit">
           {(
             [
@@ -84,7 +84,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
           </p>
         )}
 
-        <form method="get" action="/classifica" className="grid gap-3 rounded-lg border p-4 sm:grid-cols-3 lg:grid-cols-6" aria-label="Filtri">
+        <form method="get" action="/classifica" className="grid grid-cols-1 gap-3 rounded-lg border p-4 sm:grid-cols-3 lg:grid-cols-6" aria-label="Filtri">
           <FiltriAutomatici />
           {p.ordine !== "sostenute" && <input type="hidden" name="ordine" value={p.ordine} />}
           <label className="grid gap-1 text-xs font-medium">
