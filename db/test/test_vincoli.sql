@@ -61,6 +61,16 @@ CALL sp_cambia_stato(@S1, 'RICEVUTA', 'autore', @A, NULL, NULL);
 INSERT INTO allegato (id_segnalazione, tipo, mime_type, dimensione_byte, percorso_originale, hash_sha256, ordine,
                       exif_latitudine, exif_longitudine, exif_data_scatto)
 VALUES (@S1, 'foto', 'image/jpeg', 2000000, 'privato/s1/1.jpg', SHA2('foto1', 256), 1, 45.4641, 9.1918, NOW() - INTERVAL 1 DAY);
+SET @AL1 = LAST_INSERT_ID();
+INSERT INTO file_allegato (id_allegato, variante, mime_type, dimensione, dati)
+VALUES (@AL1, 'originale', 'image/jpeg', 4, x'FFD8FFE0'), (@AL1, 'miniatura', 'image/webp', 4, x'52494646');
+SELECT 'OK file_allegato: due varianti salvate' AS test, COUNT(*) AS varianti FROM file_allegato WHERE id_allegato = @AL1;
+SELECT 'ATTESO ERRORE file_allegato variante duplicata' AS test;
+INSERT INTO file_allegato (id_allegato, variante, mime_type, dimensione, dati) VALUES (@AL1, 'originale', 'image/jpeg', 1, x'00');
+SELECT 'ATTESO ERRORE file_allegato formato non ammesso' AS test;
+INSERT INTO file_allegato (id_allegato, variante, mime_type, dimensione, dati) VALUES (@AL1, 'pubblica', 'image/gif', 1, x'00');
+SELECT 'ATTESO ERRORE file_allegato dimensione diversa dai dati' AS test;
+INSERT INTO file_allegato (id_allegato, variante, mime_type, dimensione, dati) VALUES (@AL1, 'pubblica', 'image/jpeg', 99, x'00');
 SELECT 'ATTESO ERRORE RF-21 video oltre 60 secondi' AS test;
 INSERT INTO allegato (id_segnalazione, tipo, mime_type, dimensione_byte, durata_sec, percorso_originale, hash_sha256, ordine)
 VALUES (@S1, 'video', 'video/mp4', 1000000, 75, 'privato/s1/2.mp4', SHA2('video', 256), 2);

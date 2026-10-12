@@ -14,6 +14,7 @@ implementa (RF, RD, RNF, RIA), così si può controllare la corrispondenza riga 
 | `04_logica.sql` | 6 funzioni, 8 procedure e 53 trigger per i vincoli e il ciclo di vita |
 | `05_viste.sql` | 16 viste: segnalazioni pubbliche, classifica, cronologia, coda di moderazione, statistiche |
 | `06_eventi.sql` | La manutenzione notturna automatica |
+| `07_file_allegato.sql` | Il contenuto delle foto: originale, copia pubblica senza EXIF e miniatura, salvate nel database |
 | `08_utente_app.sql` | I permessi dell'utente `lnc_app` con cui si collega la web app: solo dati ed esecuzione di procedure, niente modifiche allo schema |
 | `query_applicazione.sql` | Le 75 query della web app, raggruppate per caso d'uso |
 | `territorio/genera_territorio.py` | Scarica i confini dal portale open data del Comune e scrive `02_territorio.sql` |
@@ -24,7 +25,7 @@ implementa (RF, RD, RNF, RIA), così si può controllare la corrispondenza riga 
 Per installare tutto su un database vuoto si eseguono i file nell'ordine dei numeri:
 
 ```bash
-db/esegui.sh db/01_schema.sql db/02_territorio.sql db/03_seed.sql db/04_logica.sql db/05_viste.sql db/06_eventi.sql
+db/esegui.sh db/01_schema.sql db/02_territorio.sql db/03_seed.sql db/04_logica.sql db/05_viste.sql db/06_eventi.sql db/07_file_allegato.sql
 db/test/esegui_test.sh
 ```
 
@@ -50,6 +51,9 @@ i permessi da amministratore che Aiven assegna di default.
 - Senza moduli di intelligenza artificiale il sistema funziona lo stesso. All'invio il backend decide
   se pubblicare la segnalazione o mandarla a un moderatore, l'utente sceglie le categorie a mano e la
   tabella `analisi_ia` resta vuota.
+- Le foto stanno nella tabella `file_allegato`, in tre varianti. Per una demo scolastica mi è sembrato
+  più semplice di uno storage esterno: tutto il progetto vive in un solo database. Nelle colonne
+  `percorso_*` di `allegato` salvo la route dell'app che restituisce la variante.
 
 ## La manutenzione notturna
 
