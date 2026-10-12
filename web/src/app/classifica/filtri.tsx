@@ -12,6 +12,9 @@ export function FiltriAutomatici() {
     const form = ancora.current?.closest("form");
     if (!form) return;
     form.querySelector<HTMLElement>(".js-nascondi")?.classList.add("sr-only");
+    // da tablet in su c'è spazio: il pannello dei filtri parte aperto
+    const pannello = form.closest("details");
+    if (pannello && window.matchMedia("(min-width: 640px)").matches) pannello.open = true;
     const invia = (e: Event) => {
       const t = e.target as HTMLSelectElement;
       // cambiando Municipio il quartiere scelto potrebbe non appartenervi più

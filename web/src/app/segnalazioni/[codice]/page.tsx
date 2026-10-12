@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CalendarDays, CircleCheck, MapPin, User } from "lucide-react";
+import { CalendarBlankIcon, ChatCircleIcon, CheckCircleIcon, InfoIcon, MapPinIcon, UserIcon } from "@phosphor-icons/react/ssr";
 import { utenteCorrente } from "@/lib/server/auth/sessione";
 import { aggiornamenti, commenti, cronologia, dettaglioSegnalazione, relazioneUtente } from "@/lib/server/consultazione";
 import { formattaData, formattaDataOra, formattaNumero } from "@/lib/formato";
 import { BadgeCategoria, BadgeStato } from "@/components/stato";
 import { MappaPunto } from "@/components/mappa/mappa-punto";
+import { StatoVuoto } from "@/components/stato-vuoto";
 import { Galleria } from "./galleria";
 import { AzioniSostegno, Condividi, FormAggiornamento, FormCommento, FormIntegrazione, PulsanteRitira, SegnalaAbuso } from "./interazioni";
 
@@ -42,21 +43,24 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
   const puoRitirare = autore && ["RICEVUTA", "DA_INTEGRARE", "PUBBLICATA"].includes(s.statoCodice);
 
   return (
-    <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-8">
+    <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 pt-8 pb-12 sm:pt-10">
       {inviata && (
-        <p role="status" className="flex items-start gap-2 rounded-lg border border-primary/30 bg-primary/5 p-4 text-sm">
-          <CircleCheck className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+        <p role="status" className="flex items-start gap-3 rounded-xl border border-primary/30 bg-secondary p-4 text-sm text-secondary-foreground">
+          <CheckCircleIcon weight="fill" className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
           Segnalazione inviata con il codice {s.codice}. Un moderatore la controllerà a breve: riceverai una notifica
           quando sarà pubblicata.
         </p>
       )}
       {s.statoCodice === "UNITA" && s.codicePrincipale && (
-        <p role="status" className="rounded-lg border bg-muted p-4 text-sm">
+        <p role="status" className="flex items-start gap-3 rounded-xl border bg-sunken p-4 text-sm">
+          <InfoIcon weight="fill" className="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden />
+          <span>
           Questa segnalazione è stata unita a{" "}
           <Link href={`/segnalazioni/${s.codicePrincipale}`} className="font-medium text-primary underline-offset-4 hover:underline">
             {s.codicePrincipale}
           </Link>
           , che descrive lo stesso problema. I sostegni sono stati spostati lì.
+          </span>
         </p>
       )}
 
@@ -65,22 +69,24 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
           <header className="grid gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <BadgeStato codice={s.statoCodice} nome={s.stato} />
-              <span className="text-xs text-muted-foreground">{s.tipo === "proposta" ? "Proposta" : "Problema"} · {s.codice}</span>
+              <span className="text-sm text-muted-foreground">
+                {s.tipo === "proposta" ? "Proposta" : "Problema"} · <span className="font-mono text-xs">{s.codice}</span>
+              </span>
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">{s.titolo}</h1>
+            <h1 className="text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">{s.titolo}</h1>
             <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
               <li className="flex items-center gap-1.5">
-                <MapPin className="size-4" aria-hidden />
+                <MapPinIcon className="size-4 shrink-0" aria-hidden />
                 {s.indirizzo ? `${s.indirizzo}, ` : ""}
                 {s.quartiere} · {s.municipio}
               </li>
               <li className="flex items-center gap-1.5">
-                <User className="size-4" aria-hidden />
+                <UserIcon className="size-4 shrink-0" aria-hidden />
                 {s.autore}
               </li>
               {(s.dataPubblicazione ?? s.dataInvio) && (
                 <li className="flex items-center gap-1.5">
-                  <CalendarDays className="size-4" aria-hidden />
+                  <CalendarBlankIcon className="size-4 shrink-0" aria-hidden />
                   {formattaData((s.dataPubblicazione ?? s.dataInvio)!)}
                 </li>
               )}
@@ -95,10 +101,10 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
           </header>
 
           <Galleria foto={s.foto} titolo={s.titolo} />
-          <p className="leading-relaxed whitespace-pre-line">{s.descrizione}</p>
+          <p className="max-w-prose text-lg leading-relaxed whitespace-pre-line">{s.descrizione}</p>
 
           {autore && s.statoCodice === "DA_INTEGRARE" && (
-            <section className="grid gap-3 rounded-lg border border-orange-300 bg-orange-50 p-4" aria-labelledby="integra">
+            <section className="grid gap-3 rounded-xl border border-orange-300 bg-orange-50 p-5" aria-labelledby="integra">
               <h2 id="integra" className="font-semibold text-orange-950">
                 Il comitato ti chiede di integrare la segnalazione
               </h2>
@@ -109,12 +115,12 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
 
           {listaAggiornamenti.length > 0 && (
             <section className="grid gap-3" aria-labelledby="aggiornamenti">
-              <h2 id="aggiornamenti" className="text-lg font-semibold">
+              <h2 id="aggiornamenti" className="text-xl font-semibold tracking-tight">
                 Aggiornamenti dell&apos;autore
               </h2>
               <ul className="grid gap-3">
                 {listaAggiornamenti.map((a) => (
-                  <li key={a.id} className="rounded-lg border-l-4 border-primary bg-muted/50 p-3 text-sm">
+                  <li key={a.id} className="rounded-xl border-l-4 border-primary bg-secondary/50 p-4 text-sm">
                     <p className="whitespace-pre-line">{a.testo}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{formattaDataOra(a.data)}</p>
                   </li>
@@ -126,10 +132,14 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
 
           {s.pubblico && (
             <section className="grid gap-4" aria-labelledby="commenti">
-              <h2 id="commenti" className="text-lg font-semibold">
-                Commenti ({listaCommenti.length})
+              <h2 id="commenti" className="text-xl font-semibold tracking-tight">
+                Commenti <span className="text-muted-foreground tabular-nums">({listaCommenti.length})</span>
               </h2>
-              {listaCommenti.length === 0 && <p className="text-sm text-muted-foreground">Ancora nessun commento.</p>}
+              {listaCommenti.length === 0 && (
+                <StatoVuoto icona={<ChatCircleIcon weight="duotone" />} titolo="Ancora nessun commento" className="py-8">
+                  Hai visto anche tu il problema o hai un&apos;idea? Scrivilo qui sotto.
+                </StatoVuoto>
+              )}
               <ul className="grid gap-4">
                 {listaCommenti.map((c) => (
                   <li key={c.id} className="grid gap-1 border-b pb-4 last:border-0">
@@ -160,12 +170,14 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
         </article>
 
         <aside className="grid content-start gap-6">
-          <div className="grid gap-3 rounded-lg border p-4">
-            <p className="flex items-baseline gap-2">
-              <span className="text-3xl font-semibold tabular-nums">{s.sostegni}</span>
-              <span className="text-muted-foreground">{s.sostegni === 1 ? "sostegno" : "sostegni"}</span>
-            </p>
-            {s.pubblico && <p className="text-xs text-muted-foreground">Punteggio di priorità {formattaNumero(s.punteggio, 2)}</p>}
+          <div className="grid gap-4 rounded-2xl border bg-card p-5 shadow-raised">
+            <div className="grid gap-1">
+              <p className="flex items-baseline gap-2">
+                <span className="text-4xl font-semibold tracking-tight tabular-nums">{s.sostegni}</span>
+                <span className="text-muted-foreground">{s.sostegni === 1 ? "sostegno" : "sostegni"}</span>
+              </p>
+              {s.pubblico && <p className="text-sm text-muted-foreground">Punteggio di priorità {formattaNumero(s.punteggio, 2)}</p>}
+            </div>
             <AzioniSostegno
               codice={s.codice}
               accesso={Boolean(u)}
@@ -175,20 +187,27 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
               segue={rel.segue}
             />
             {s.pubblico && <Condividi titolo={s.titolo} />}
-            {u && !autore && s.pubblico && <SegnalaAbuso codice={s.codice} oggetto="segnalazione" idOggetto={s.id} />}
-            {puoRitirare && <PulsanteRitira codice={s.codice} />}
+            {((u && !autore && s.pubblico) || puoRitirare) && (
+              <div className="grid gap-1 border-t pt-3">
+                {u && !autore && s.pubblico && <SegnalaAbuso codice={s.codice} oggetto="segnalazione" idOggetto={s.id} />}
+                {puoRitirare && <PulsanteRitira codice={s.codice} />}
+              </div>
+            )}
           </div>
 
           <MappaPunto lat={s.lat} lon={s.lon} colore={colore} className="h-56" />
 
           <section aria-labelledby="cronologia" className="grid gap-3">
-            <h2 id="cronologia" className="font-semibold">
+            <h2 id="cronologia" className="text-lg font-semibold tracking-tight">
               Cronologia
             </h2>
-            <ol className="grid gap-3 border-l pl-4">
-              {passi.map((p) => (
+            <ol className="ml-1.5 grid gap-4 border-l-2 pl-5">
+              {passi.map((p, i) => (
                 <li key={p.id} className="relative text-sm">
-                  <span className="absolute top-1.5 -left-[1.3rem] size-2 rounded-full bg-primary" aria-hidden />
+                  <span
+                    className={`absolute top-1 -left-[1.69rem] size-3 rounded-full ring-4 ring-background ${i === passi.length - 1 ? "bg-primary" : "bg-border"}`}
+                    aria-hidden
+                  />
                   <p className="font-medium">{p.a}</p>
                   <p className="text-xs text-muted-foreground">
                     {formattaDataOra(p.data)} · {ATTORI[p.attore] ?? p.attore}

@@ -73,7 +73,7 @@ export default async function UtentiModerazione({ searchParams }: PageProps<"/mo
             Nome visualizzato o email
           </label>
           <Input id="q" name="q" defaultValue={cerca} placeholder="Nome visualizzato o email" />
-          <Button type="submit" variant="outline" className="h-9">
+          <Button type="submit" variant="outline">
             Cerca
           </Button>
         </form>

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { ClockIcon, HourglassIcon, UserCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/ssr";
 import { db } from "@/lib/server/db";
 import { LIVELLO, richiediUtente } from "@/lib/server/auth/sessione";
 import { formattaNumero } from "@/lib/formato";
@@ -16,8 +18,8 @@ interface Barra {
 function TabellaBarre({ titolo, colonna, righe }: { titolo: string; colonna: string; righe: Barra[] }) {
   const max = Math.max(1, ...righe.map((r) => r.valore));
   return (
-    <section className="grid content-start gap-3 rounded-lg border bg-card p-4">
-      <h2 className="font-semibold">{titolo}</h2>
+    <section className="grid content-start gap-4 rounded-xl border bg-card p-5 shadow-card">
+      <h2 className="text-lg font-semibold tracking-tight">{titolo}</h2>
       <table className="w-full text-sm">
         <thead className="sr-only">
           <tr>
@@ -67,20 +69,30 @@ export default async function Dashboard() {
     ),
   ]);
 
-  const tile: [string, string][] = [
-    ["Utenti registrati", formattaNumero(utenti?.registrati ?? 0)],
-    ["Attivi negli ultimi 30 giorni", formattaNumero(utenti?.attivi_ultimi_30_giorni ?? 0)],
-    ["In attesa di moderazione", formattaNumero(moderazione?.in_attesa ?? 0)],
-    ["Tempo medio di revisione", moderazione?.ore_medie != null ? `${formattaNumero(moderazione.ore_medie, 1)} h` : "—"],
+  const tile: [string, string, ReactNode][] = [
+    ["Utenti registrati", formattaNumero(utenti?.registrati ?? 0), <UsersThreeIcon key="r" weight="duotone" />],
+    ["Attivi negli ultimi 30 giorni", formattaNumero(utenti?.attivi_ultimi_30_giorni ?? 0), <UserCheckIcon key="a" weight="duotone" />],
+    ["In attesa di moderazione", formattaNumero(moderazione?.in_attesa ?? 0), <HourglassIcon key="m" weight="duotone" />],
+    [
+      "Tempo medio di revisione",
+      moderazione?.ore_medie != null ? `${formattaNumero(moderazione.ore_medie, 1)} h` : "—",
+      <ClockIcon key="t" weight="duotone" />,
+    ],
   ];
 
   return (
     <div className="grid gap-6">
       <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {tile.map(([t, v]) => (
-          <div key={t} className="grid gap-1 rounded-lg border bg-card p-4">
-            <dt className="text-xs text-muted-foreground">{t}</dt>
-            <dd className="text-2xl font-semibold tabular-nums">{v}</dd>
+        {tile.map(([t, v, icona]) => (
+          <div key={t} className="grid content-start gap-2 rounded-xl border bg-card p-4 shadow-card">
+            <dt className="order-last text-sm text-muted-foreground">{t}</dt>
+            {/* in un <dl> stanno solo dt e dd: l'icona va dentro il dd */}
+            <dd className="grid gap-2">
+              <span className="grid size-9 place-items-center rounded-lg bg-secondary text-primary [&_svg]:size-5" aria-hidden>
+                {icona}
+              </span>
+              <span className="text-3xl font-semibold tracking-tight tabular-nums">{v}</span>
+            </dd>
           </div>
         ))}
       </dl>

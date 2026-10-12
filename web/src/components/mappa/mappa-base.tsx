@@ -56,5 +56,5 @@ export function MappaBase({ className, etichetta, opzioni, onPronta }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div ref={contenitore} role="region" aria-label={etichetta} className={cn("h-80 w-full overflow-hidden rounded-lg border", className)} />;
+  return <div ref={contenitore} role="region" aria-label={etichetta} className={cn("h-80 w-full overflow-hidden rounded-xl border shadow-card", className)} />;
 }

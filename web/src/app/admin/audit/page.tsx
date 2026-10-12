@@ -36,7 +36,8 @@ export default async function Audit({ searchParams }: PageProps<"/admin/audit">)
   const altre = righe.length > PER_PAGINA;
   return (
     <div className="grid gap-4">
-      <div className="overflow-x-auto rounded-lg border">
+      {/* sui telefoni la tabella scorre: con tabIndex si può scorrere anche da tastiera */}
+      <div className="overflow-x-auto rounded-xl border bg-card shadow-card" tabIndex={0} role="region" aria-label="Registro di audit">
         <table className="w-full text-sm">
           <thead className="bg-muted/50 text-left text-xs text-muted-foreground">
             <tr>

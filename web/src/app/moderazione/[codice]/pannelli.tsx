@@ -3,12 +3,22 @@
 import { useRef, useState, useTransition } from "react";
 import { Marker, type Map as MappaLibre } from "maplibre-gl";
 import { toast } from "sonner";
+import { ArrowCounterClockwiseIcon, ChatCircleDotsIcon, CheckCircleIcon, ClipboardTextIcon, XCircleIcon, type Icon } from "@phosphor-icons/react";
 import { chiudiAbusiSegnalazione, correggiCategorie, correggiPosizione, decidi, sanziona, unisci } from "../azioni";
 import { Campo, CampoSelect, CampoTesto, MessaggioEsito, PulsanteInvio, useFormAzione } from "@/components/form";
 import { MappaBase } from "@/components/mappa/mappa-base";
 import { Button } from "@/components/ui/button";
 
 type Decisione = "pubblica" | "integra" | "rifiuta" | "presa" | "riesame" | "riattiva";
+
+const ICONE: Record<Decisione, Icon> = {
+  pubblica: CheckCircleIcon,
+  integra: ChatCircleDotsIcon,
+  rifiuta: XCircleIcon,
+  presa: ClipboardTextIcon,
+  riesame: ArrowCounterClockwiseIcon,
+  riattiva: ArrowCounterClockwiseIcon,
+};
 
 // quali decisioni offrire in ogni stato (tabella 4.2 e transizioni ammesse)
 const PER_STATO: Record<string, { d: Decisione; testo: string; motivazione: boolean; variante?: "destructive" | "outline" }[]> = {
@@ -49,19 +59,21 @@ export function PannelloDecisioni({
       <MessaggioEsito esito={esito?.ok ? null : esito} />
       {opzioni.length === 0 && <p className="text-sm text-muted-foreground">In questo stato non ci sono decisioni da prendere.</p>}
       {stato === "IN_REVISIONE" && senzaCategorie && (
-        <p className="text-xs text-amber-800">Prima di pubblicare conferma almeno una categoria qui sotto.</p>
+        <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">Prima di pubblicare conferma almeno una categoria qui sotto.</p>
       )}
       {!corrente &&
         opzioni.map((o) =>
           o.motivazione ? (
-            <Button key={o.d} variant={o.variante ?? "default"} className="h-9" onClick={() => setScelta(o.d)}>
+            <Button key={o.d} variant={o.variante ?? "default"} className="justify-start" onClick={() => setScelta(o.d)}>
+              <DecisioneIcona d={o.d} />
               {o.testo}…
             </Button>
           ) : (
             <form key={o.d} onSubmit={onSubmit}>
               <input type="hidden" name="codice" value={codice} />
               <input type="hidden" name="decisione" value={o.d} />
-              <PulsanteInvio inAttesa={inAttesa} variant={o.variante ?? "default"} className="w-full">
+              <PulsanteInvio inAttesa={inAttesa} variant={o.variante ?? "default"} className="w-full justify-start">
+                {!inAttesa && <DecisioneIcona d={o.d} />}
                 {o.testo}
               </PulsanteInvio>
             </form>
@@ -83,7 +95,7 @@ export function PannelloDecisioni({
             <PulsanteInvio inAttesa={inAttesa} variant={corrente.variante === "destructive" ? "destructive" : "default"}>
               {corrente.testo}
             </PulsanteInvio>
-            <Button type="button" variant="ghost" className="h-9" onClick={() => setScelta(null)}>
+            <Button type="button" variant="ghost" onClick={() => setScelta(null)}>
               Annulla
             </Button>
           </div>
@@ -119,6 +131,11 @@ export function PannelloDecisioni({
   );
 }
 
+function DecisioneIcona({ d }: { d: Decisione }) {
+  const Icona = ICONE[d];
+  return <Icona weight={d === "pubblica" ? "fill" : "regular"} aria-hidden />;
+}
+
 export function FormCategorie({
   codice,
   categorie,
@@ -136,8 +153,8 @@ export function FormCategorie({
       <fieldset className="grid gap-1.5">
         <legend className="sr-only">Categorie confermate</legend>
         {categorie.map((k) => (
-          <label key={k.id} className="flex items-center gap-2 text-sm">
-            <input type="checkbox" name="categorie" value={k.id} defaultChecked={scelte.includes(k.id)} className="size-4 accent-primary" />
+          <label key={k.id} className="-mx-2 flex min-h-9 cursor-pointer items-center gap-2.5 rounded-lg px-2 text-sm hover:bg-muted">
+            <input type="checkbox" name="categorie" value={k.id} defaultChecked={scelte.includes(k.id)} className="size-[18px] accent-primary" />
             <span className="size-2.5 rounded-full" style={{ background: k.colore }} aria-hidden />
             {k.nome}
           </label>
@@ -198,7 +215,7 @@ export function FormSanzione({ idUtente, nome }: { idUtente: number; nome: strin
         <PulsanteInvio inAttesa={inAttesa} variant="destructive">
           Conferma
         </PulsanteInvio>
-        <Button type="button" variant="ghost" className="h-9" onClick={() => setAperto(false)}>
+        <Button type="button" variant="ghost" onClick={() => setAperto(false)}>
           Annulla
         </Button>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeftIcon } from "@phosphor-icons/react/ssr";
 import { db } from "@/lib/server/db";
 import { LIVELLO, richiediUtente } from "@/lib/server/auth/sessione";
 import { cronologia, dettaglioSegnalazione } from "@/lib/server/consultazione";
@@ -56,8 +57,9 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
 
   return (
     <div className="grid gap-6">
-      <Link href="/moderazione" className="text-sm text-primary underline-offset-4 hover:underline">
-        ← Torna alla coda
+      <Link href="/moderazione" className="flex w-fit items-center gap-1.5 text-sm font-medium text-primary underline-offset-4 hover:underline">
+        <ArrowLeftIcon className="size-4" aria-hidden />
+        Torna alla coda
       </Link>
       <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">
         <div className="grid min-w-0 content-start gap-6">
@@ -72,7 +74,7 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
                 </Link>
               )}
             </div>
-            <h2 className="text-xl font-semibold text-balance">{s.titolo}</h2>
+            <h2 className="text-2xl leading-tight font-semibold tracking-tight">{s.titolo}</h2>
             <p className="text-sm text-muted-foreground">
               {s.indirizzo ? `${s.indirizzo} · ` : ""}
               {s.quartiere} · {s.municipio}
@@ -85,7 +87,7 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
               )}
             </div>
           </header>
-          <p className="leading-relaxed whitespace-pre-line">{s.descrizione}</p>
+          <p className="max-w-prose leading-relaxed whitespace-pre-line">{s.descrizione}</p>
 
           <section className="grid gap-3" aria-labelledby="foto">
             <h3 id="foto" className="font-semibold">
@@ -93,10 +95,10 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
             </h3>
             <ul className="grid gap-3 sm:grid-cols-2">
               {foto.map((f, i) => (
-                <li key={f.id} className="grid gap-2 rounded-lg border p-2 text-xs">
+                <li key={f.id} className="grid gap-2 rounded-xl border bg-card p-2 text-xs shadow-card">
                   <a href={f.percorso_originale} target="_blank" rel="noopener">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={f.percorso_miniatura} alt={`Foto ${i + 1}`} className="aspect-[4/3] w-full rounded object-cover" />
+                    <img src={f.percorso_miniatura} alt={`Foto ${i + 1}`} className="aspect-[4/3] w-full rounded-lg object-cover" />
                   </a>
                   <dl className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5">
                     <dt className="text-muted-foreground">Scatto</dt>
@@ -134,7 +136,7 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
             </h3>
             <ol className="grid gap-2 text-sm">
               {passi.map((p) => (
-                <li key={p.id} className="rounded-md bg-muted/50 px-3 py-2">
+                <li key={p.id} className="rounded-lg bg-sunken px-3 py-2 ring-1 ring-border">
                   <span className="font-medium">
                     {p.da} → {p.a}
                   </span>{" "}
@@ -149,9 +151,9 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
         </div>
 
         <aside className="grid content-start gap-4">
-          <Card>
+          <Card className="shadow-raised ring-primary/30">
             <CardHeader>
-              <CardTitle>Decisione</CardTitle>
+              <CardTitle className="text-lg font-semibold">Decisione</CardTitle>
             </CardHeader>
             <CardContent>
               <PannelloDecisioni codice={s.codice} stato={s.statoCodice} abusiAperti={abusiAperti} senzaCategorie={s.categorie.length === 0} />

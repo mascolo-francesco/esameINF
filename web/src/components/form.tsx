@@ -1,10 +1,11 @@
 "use client";
 
 import { startTransition, useActionState, useId, type ComponentProps, type FormEvent, type ReactNode } from "react";
-import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
+import { CheckCircleIcon, SpinnerGapIcon, WarningCircleIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { NativeSelect } from "@/components/ui/native-select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
@@ -64,9 +65,6 @@ export function CampoTesto({ nome, etichetta, esito, aiuto, className, ...area }
   );
 }
 
-export const classeSelect =
-  "h-9 w-full rounded-lg border border-input bg-background px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive";
-
 export function CampoSelect({
   nome,
   etichetta,
@@ -75,13 +73,13 @@ export function CampoSelect({
   className,
   children,
   ...select
-}: CampoProps & ComponentProps<"select">) {
+}: CampoProps & Omit<ComponentProps<"select">, "size">) {
   return (
     <Contenitore nome={nome} etichetta={etichetta} esito={esito} aiuto={aiuto} className={className}>
       {(attr) => (
-        <select name={nome} className={classeSelect} {...attr} {...select}>
+        <NativeSelect name={nome} {...attr} {...select}>
           {children}
-        </select>
+        </NativeSelect>
       )}
     </Contenitore>
   );
@@ -102,17 +100,17 @@ export function Casella({
           id={id}
           type="checkbox"
           name={nome}
-          className="mt-0.5 size-4 shrink-0 accent-primary"
+          className="mt-0.5 size-5 shrink-0 accent-primary"
           aria-invalid={errore ? true : undefined}
           aria-describedby={errore ? `${id}-errore` : undefined}
           {...input}
         />
-        <label htmlFor={id} className="text-sm leading-snug">
+        <label htmlFor={id} className="text-sm leading-snug [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4">
           {children}
         </label>
       </div>
       {errore && (
-        <p id={`${id}-errore`} className="pl-6 text-sm text-destructive">
+        <p id={`${id}-errore`} className="pl-7 text-sm text-destructive">
           {errore}
         </p>
       )}
@@ -125,14 +123,14 @@ export function MessaggioEsito({ esito }: { esito: EsitoForm }) {
   if (!esito.ok && esito.errore)
     return (
       <p role="alert" className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
-        <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
+        <WarningCircleIcon weight="fill" className="mt-0.5 size-4 shrink-0" aria-hidden />
         {esito.errore}
       </p>
     );
   if (esito.ok && esito.messaggio)
     return (
       <p role="status" className="flex items-start gap-2 rounded-lg border border-primary/30 bg-primary/5 p-3 text-sm text-primary">
-        <CircleCheck className="mt-0.5 size-4 shrink-0" aria-hidden />
+        <CheckCircleIcon weight="fill" className="mt-0.5 size-4 shrink-0" aria-hidden />
         {esito.messaggio}
       </p>
     );
@@ -167,8 +165,8 @@ export function PulsanteInvio({
   ...props
 }: ComponentProps<typeof Button> & { inAttesa?: boolean }) {
   return (
-    <Button type="submit" disabled={pending} aria-busy={pending} className={cn("h-9", className)} {...props}>
-      {pending && <LoaderCircle className="size-4 animate-spin" aria-hidden />}
+    <Button type="submit" disabled={pending} aria-busy={pending} className={className} {...props}>
+      {pending && <SpinnerGapIcon className="size-4 animate-spin" aria-hidden />}
       {children}
     </Button>
   );

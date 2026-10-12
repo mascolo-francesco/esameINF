@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { Marker, type Map as MappaLibre } from "maplibre-gl";
-import { Camera, Crosshair, ImagePlus, LoaderCircle, MapPin, Trash2, TriangleAlert } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon, CameraIcon, CameraPlusIcon, CheckIcon, CrosshairIcon, ImageIcon, MapPinIcon, PaperPlaneTiltIcon, SpinnerGapIcon, TrashIcon, WarningIcon } from "@phosphor-icons/react";
 import { cercaSimili, infoPosizione, inviaNuovaSegnalazione, type InfoPosizione, type Simile } from "./azioni";
 import { preparaFoto, type FotoPronta } from "@/lib/foto-client";
 import { MappaBase } from "@/components/mappa/mappa-base";
@@ -122,17 +122,30 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
     <div className="grid gap-6">
       <ol className="grid grid-cols-4 gap-2" aria-label="Avanzamento">
         {PASSI.map((p, i) => (
-          <li key={p} aria-current={i === passo ? "step" : undefined} className="grid gap-1.5">
-            <span className={cn("h-1.5 rounded-full", i <= passo ? "bg-primary" : "bg-muted")} />
-            <span className={cn("text-xs", i === passo ? "font-semibold" : "text-muted-foreground")}>
-              {i + 1}. {p}
+          <li key={p} aria-current={i === passo ? "step" : undefined} className="grid gap-2">
+            <span className={cn("h-1.5 rounded-full transition-colors duration-300", i <= passo ? "bg-primary" : "bg-border")} aria-hidden />
+            <span className={cn("flex items-center gap-1.5 text-sm", i === passo ? "font-semibold" : "text-muted-foreground")}>
+              <span
+                className={cn(
+                  "grid size-5 shrink-0 place-items-center rounded-full text-[11px] font-semibold tabular-nums",
+                  i < passo ? "bg-primary text-primary-foreground" : i === passo ? "bg-foreground text-background" : "bg-muted",
+                )}
+                aria-hidden
+              >
+                {i < passo ? <CheckIcon weight="bold" className="size-3" /> : i + 1}
+              </span>
+              {/* sui telefoni si legge solo il nome del passo corrente: gli altri restano per i lettori di schermo */}
+              <span className={cn(i !== passo && "max-sm:sr-only")}>
+                <span className="sr-only">{i < passo ? "Completato: " : ""}</span>
+                {p}
+              </span>
             </span>
           </li>
         ))}
       </ol>
 
       <section aria-labelledby="titolo-passo" className="grid gap-4">
-        <h2 id="titolo-passo" ref={titoloPasso} tabIndex={-1} className="text-lg font-semibold outline-none">
+        <h2 id="titolo-passo" ref={titoloPasso} tabIndex={-1} className="text-xl font-semibold tracking-tight outline-none">
           Passo {passo + 1} di 4 · {PASSI[passo]}
         </h2>
 
@@ -161,12 +174,10 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
                 ).map(([v, t, d]) => (
                   <label
                     key={v}
-                    className={cn(
-                      "flex min-w-44 flex-1 cursor-pointer flex-col rounded-lg border p-3 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50",
-                    )}
+                    className="flex min-w-44 flex-1 cursor-pointer flex-col gap-0.5 rounded-xl border bg-card p-4 text-sm shadow-card transition-[border-color,background-color] has-[:checked]:border-primary has-[:checked]:bg-secondary has-[:checked]:ring-1 has-[:checked]:ring-primary has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
                   >
                     <input type="radio" name="tipo" value={v} checked={tipo === v} onChange={() => setTipo(v)} className="sr-only" />
-                    <span className="font-medium">{t}</span>
+                    <span className="font-semibold">{t}</span>
                     <span className="text-muted-foreground">{d}</span>
                   </label>
                 ))}
@@ -206,7 +217,7 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
                     <label
                       key={k.id}
                       title={k.descrizione}
-                      className="flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1.5 text-sm has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
+                      className="flex min-h-10 cursor-pointer items-center gap-2 rounded-full border bg-card px-3.5 py-2 text-sm shadow-card transition-[border-color,background-color] has-[:checked]:border-primary has-[:checked]:bg-secondary has-[:checked]:font-medium has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
                     >
                       <input
                         type="checkbox"
@@ -241,17 +252,20 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
 
       <MessaggioEsito esito={errore ? { ok: false, errore } : null} />
 
-      <div className="flex flex-wrap justify-between gap-2 border-t pt-4">
-        <Button variant="outline" className="h-9" onClick={() => vaiA(passo - 1)} disabled={passo === 0 || inCorso}>
+      {/* sui telefoni i pulsanti restano attaccati sopra la barra in basso, sempre a portata di pollice */}
+      <div className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] z-10 -mx-4 flex justify-between gap-2 border-t bg-background/95 px-4 py-3 backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-4 sm:pb-0 sm:backdrop-blur-none">
+        <Button variant="outline" size="lg" onClick={() => vaiA(passo - 1)} disabled={passo === 0 || inCorso}>
+          <ArrowLeftIcon aria-hidden />
           Indietro
         </Button>
         {passo < 3 ? (
-          <Button className="h-9" onClick={avanti}>
+          <Button size="lg" onClick={avanti}>
             Avanti
+            <ArrowRightIcon aria-hidden />
           </Button>
         ) : (
-          <Button className="h-9" onClick={invia} disabled={inCorso} aria-busy={inCorso}>
-            {inCorso && <LoaderCircle className="size-4 animate-spin" aria-hidden />}
+          <Button size="lg" onClick={invia} disabled={inCorso} aria-busy={inCorso}>
+            {inCorso ? <SpinnerGapIcon className="animate-spin" aria-hidden /> : <PaperPlaneTiltIcon aria-hidden />}
             Invia la segnalazione
           </Button>
         )}
@@ -300,32 +314,32 @@ function PassoFoto({
       </p>
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Foto scelte">
         {foto.map((f, i) => (
-          <li key={f.id} className="relative overflow-hidden rounded-lg border">
+          <li key={f.id} className="relative overflow-hidden rounded-xl border shadow-card">
             {/* eslint-disable-next-line @next/next/no-img-element -- anteprima locale (blob:) */}
             <img src={f.anteprima} alt={`Foto ${i + 1}`} className="aspect-[4/3] w-full object-cover" />
             {f.exif.lat !== null && (
-              <span className="absolute bottom-1 left-1 flex items-center gap-1 rounded bg-black/60 px-1.5 py-0.5 text-xs text-white">
-                <MapPin className="size-3" aria-hidden /> GPS
+              <span className="absolute bottom-1.5 left-1.5 flex items-center gap-1 rounded-md bg-black/70 px-1.5 py-0.5 text-xs font-medium text-white">
+                <MapPinIcon weight="fill" className="size-3" aria-hidden /> GPS
               </span>
             )}
             <Button
               size="icon-sm"
               variant="secondary"
-              className="absolute top-1 right-1"
+              className="absolute top-1.5 right-1.5 shadow-card"
               aria-label={`Rimuovi la foto ${i + 1}`}
               onClick={() => {
                 URL.revokeObjectURL(f.anteprima);
                 setFoto(foto.filter((x) => x.id !== f.id));
               }}
             >
-              <Trash2 className="size-4" aria-hidden />
+              <TrashIcon aria-hidden />
             </Button>
           </li>
         ))}
         {foto.length < MAX_FOTO && (
           <li>
-            <label className="flex aspect-[4/3] cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed text-sm text-muted-foreground hover:bg-muted has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50">
-              {inCorso ? <LoaderCircle className="size-6 animate-spin" aria-hidden /> : <ImagePlus className="size-6" aria-hidden />}
+            <label className="flex aspect-[4/3] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-input bg-sunken/60 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary hover:text-secondary-foreground has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50">
+              {inCorso ? <SpinnerGapIcon className="size-7 animate-spin" aria-hidden /> : <CameraPlusIcon weight="duotone" className="size-7" aria-hidden />}
               {inCorso ? "Preparo le foto…" : "Aggiungi foto"}
               <input
                 ref={input}
@@ -341,7 +355,7 @@ function PassoFoto({
         )}
       </ul>
       <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        <Camera className="size-3.5" aria-hidden /> Dal telefono puoi anche scattare la foto direttamente.
+        <CameraIcon className="size-4" aria-hidden /> Dal telefono puoi anche scattare la foto direttamente.
       </p>
     </div>
   );
@@ -405,24 +419,23 @@ function PassoPosizione({
         {exif && (
           <Button
             variant="outline"
-            className="h-9"
             onClick={() => {
               const p = { lat: Number(exif.lat.toFixed(6)), lon: Number(exif.lon.toFixed(6)), fonte: "exif" as const };
               setPosizione(p);
               mappa.current?.flyTo({ center: [p.lon, p.lat], zoom: 17 });
             }}
           >
-            <MapPin className="size-4" aria-hidden /> Usa la posizione della foto
+            <ImageIcon aria-hidden /> Usa la posizione della foto
           </Button>
         )}
-        <Button variant="outline" className="h-9" onClick={usaGps} disabled={cercoGps}>
-          {cercoGps ? <LoaderCircle className="size-4 animate-spin" aria-hidden /> : <Crosshair className="size-4" aria-hidden />}
+        <Button variant="outline" onClick={usaGps} disabled={cercoGps}>
+          {cercoGps ? <SpinnerGapIcon className="animate-spin" aria-hidden /> : <CrosshairIcon aria-hidden />}
           Usa la mia posizione
         </Button>
       </div>
       <MappaBase
         etichetta="Mappa per scegliere la posizione"
-        className="h-96"
+        className="h-80 sm:h-96"
         opzioni={posizione ? { center: [posizione.lon, posizione.lat], zoom: 16 } : undefined}
         onPronta={(m) => {
           mappa.current = m;
@@ -440,7 +453,7 @@ function PassoPosizione({
         {posizione && info === null && "Controllo il quartiere…"}
         {posizione && info === "fuori" && (
           <span className="flex items-center gap-1.5 text-destructive">
-            <TriangleAlert className="size-4" aria-hidden /> Il punto è fuori dal Comune di Milano.
+            <WarningIcon weight="fill" className="size-4" aria-hidden /> Il punto è fuori dal Comune di Milano.
           </span>
         )}
         {posizione && info && info !== "fuori" && (
@@ -475,9 +488,9 @@ function Riepilogo({
   return (
     <div className="grid gap-5">
       {simili && simili.length > 0 && (
-        <div className="grid gap-3 rounded-lg border border-amber-300 bg-amber-50 p-4 text-amber-950">
-          <p className="flex items-center gap-2 font-medium">
-            <TriangleAlert className="size-4" aria-hidden /> Qualcuno potrebbe averlo già segnalato
+        <div className="grid gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-950">
+          <p className="flex items-center gap-2 font-semibold">
+            <WarningIcon weight="fill" className="size-5 text-amber-600" aria-hidden /> Qualcuno potrebbe averlo già segnalato
           </p>
           <p className="text-sm">
             Ci sono segnalazioni simili nelle vicinanze. Se è lo stesso problema, sostenere quella esistente conta di più che
@@ -503,7 +516,7 @@ function Riepilogo({
           </ul>
         </div>
       )}
-      <dl className="grid gap-3 text-sm sm:grid-cols-[10rem_1fr]">
+      <dl className="grid gap-x-6 gap-y-3 rounded-xl border bg-card p-5 text-sm shadow-card sm:grid-cols-[10rem_1fr]">
         <dt className="text-muted-foreground">Tipo</dt>
         <dd>{tipo === "proposta" ? "Proposta" : "Problema"}</dd>
         <dt className="text-muted-foreground">Titolo</dt>

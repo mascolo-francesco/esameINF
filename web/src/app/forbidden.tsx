@@ -1,12 +1,23 @@
 import Link from "next/link";
+import { LockSimpleIcon } from "@phosphor-icons/react/ssr";
 import { Pagina } from "@/components/pagina";
+import { StatoVuoto } from "@/components/stato-vuoto";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Vietato() {
   return (
-    <Pagina titolo="Pagina riservata" descrizione="Questa sezione è riservata ai membri del comitato." stretta>
-      <Link href="/" className="text-sm font-medium text-primary underline-offset-4 hover:underline">
-        Torna alla home
-      </Link>
+    <Pagina className="max-w-xl">
+      <StatoVuoto
+        icona={<LockSimpleIcon weight="duotone" />}
+        titolo="Pagina riservata"
+        azione={
+          <Link href="/" className={buttonVariants()}>
+            Torna alla home
+          </Link>
+        }
+      >
+        Questa sezione è riservata ai membri del comitato.
+      </StatoVuoto>
     </Pagina>
   );
 }

@@ -18,8 +18,10 @@ export default async function PaginaRegistrati({ searchParams }: PageProps<"/reg
       descrizione="Nome e cognome restano privati: in pubblico compare il nome visualizzato che scegli."
       className="max-w-xl"
     >
-      <FormRegistrazione da={destinazione} quartieri={await elencoQuartieri()} />
-      <p className="mt-6 text-sm text-muted-foreground">
+      <div className="rounded-2xl border bg-card p-6 shadow-card">
+        <FormRegistrazione da={destinazione} quartieri={await elencoQuartieri()} />
+      </div>
+      <p className="mt-6 text-center text-sm text-muted-foreground">
         Hai già un account?{" "}
         <Link href="/accedi" className="font-medium text-primary underline-offset-4 hover:underline">
           Accedi

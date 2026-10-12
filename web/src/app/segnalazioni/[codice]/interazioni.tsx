@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Bell, BellOff, Flag, Heart, HeartOff, Link2, LoaderCircle } from "lucide-react";
+import { BellRingingIcon, BellSlashIcon, FlagIcon, HeartBreakIcon, HeartIcon, ShareNetworkIcon, SpinnerGapIcon, TrashIcon } from "@phosphor-icons/react";
 import {
   aggiungiAggiornamento,
   commenta,
@@ -50,7 +50,8 @@ export function AzioniSostegno({
   const { inCorso, esegui } = useAzioneRapida();
   if (!accesso)
     return votabile ? (
-      <Link href={`/accedi?da=/segnalazioni/${codice}`} className={cn(buttonVariants(), "h-9 w-full")}>
+      <Link href={`/accedi?da=/segnalazioni/${codice}`} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
+        <HeartIcon weight="bold" aria-hidden />
         Accedi per sostenerla
       </Link>
     ) : null;
@@ -58,25 +59,26 @@ export function AzioniSostegno({
     <div className="grid gap-2">
       {votabile && !autore && (
         <Button
-          className="h-9 w-full"
+          size="lg"
+          className="w-full"
           variant={sostiene ? "outline" : "default"}
           disabled={inCorso}
           aria-pressed={sostiene}
           onClick={() => esegui(() => (sostiene ? ritiraSostegno(codice) : sostieni(codice)))}
         >
           {inCorso ? (
-            <LoaderCircle className="size-4 animate-spin" aria-hidden />
+            <SpinnerGapIcon className="animate-spin" aria-hidden />
           ) : sostiene ? (
-            <HeartOff className="size-4" aria-hidden />
+            <HeartBreakIcon aria-hidden />
           ) : (
-            <Heart className="size-4" aria-hidden />
+            <HeartIcon weight="fill" aria-hidden />
           )}
           {sostiene ? "Ritira il sostegno" : "Sostieni"}
         </Button>
       )}
-      {autore && votabile && <p className="text-xs text-muted-foreground">Non puoi sostenere una tua segnalazione.</p>}
-      <Button variant="ghost" className="h-9 w-full" disabled={inCorso} onClick={() => esegui(() => seguiSegnalazione(codice, !segue))}>
-        {segue ? <BellOff className="size-4" aria-hidden /> : <Bell className="size-4" aria-hidden />}
+      {autore && votabile && <p className="text-sm text-muted-foreground">Non puoi sostenere una tua segnalazione.</p>}
+      <Button variant="outline" className="w-full" disabled={inCorso} aria-pressed={segue} onClick={() => esegui(() => seguiSegnalazione(codice, !segue))}>
+        {segue ? <BellSlashIcon aria-hidden /> : <BellRingingIcon aria-hidden />}
         {segue ? "Smetti di seguire" : "Segui gli aggiornamenti"}
       </Button>
     </div>
@@ -87,7 +89,7 @@ export function Condividi({ titolo }: { titolo: string }) {
   return (
     <Button
       variant="ghost"
-      className="h-9 w-full"
+      className="w-full"
       onClick={async () => {
         const url = window.location.href.split("?")[0];
         if (typeof navigator.share === "function") {
@@ -98,7 +100,7 @@ export function Condividi({ titolo }: { titolo: string }) {
         }
       }}
     >
-      <Link2 className="size-4" aria-hidden />
+      <ShareNetworkIcon aria-hidden />
       Condividi
     </Button>
   );
@@ -135,10 +137,14 @@ export function SegnalaAbuso({
   return (
     <Dialog open={aperto} onOpenChange={setAperto}>
       <DialogTrigger
-        className={piccolo ? "rounded p-1 hover:bg-muted" : cn(buttonVariants({ variant: "ghost" }), "h-9 w-full text-muted-foreground")}
+        className={
+          piccolo
+            ? "grid size-8 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            : cn(buttonVariants({ variant: "ghost", size: "sm" }), "w-full justify-start text-muted-foreground")
+        }
         aria-label={piccolo ? "Segnala questo commento ai moderatori" : undefined}
       >
-        <Flag className={piccolo ? "size-3.5" : "size-4"} aria-hidden />
+        <FlagIcon className="size-4" aria-hidden />
         {!piccolo && "Segnala un abuso"}
       </DialogTrigger>
       <DialogContent>
@@ -226,14 +232,17 @@ export function PulsanteRitira({ codice }: { codice: string }) {
   const { inCorso, esegui } = useAzioneRapida();
   return (
     <Dialog>
-      <DialogTrigger className={cn(buttonVariants({ variant: "ghost" }), "h-9 w-full text-destructive")}>Ritira la segnalazione</DialogTrigger>
+      <DialogTrigger className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "w-full justify-start text-destructive hover:text-destructive")}>
+        <TrashIcon aria-hidden />
+        Ritira la segnalazione
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Ritirare la segnalazione?</DialogTitle>
           <DialogDescription>Non sarà più visibile né votabile. L&apos;operazione non si può annullare.</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="destructive" className="h-9" disabled={inCorso} onClick={() => esegui(() => ritiraSegnalazione(codice))}>
+          <Button variant="destructive" disabled={inCorso} onClick={() => esegui(() => ritiraSegnalazione(codice))}>
             Sì, ritirala
           </Button>
         </DialogFooter>

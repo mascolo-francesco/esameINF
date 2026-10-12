@@ -39,6 +39,11 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-sunken: var(--sunken);
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -49,30 +54,39 @@
 }
 
 :root {
-  --background: oklch(0.985 0.004 95);
-  --foreground: oklch(0.2 0.02 250);
+  /* Carta calda e inchiostro blu-grigio: un solo neutro (caldo) e un solo accento (verde). */
+  --background: oklch(0.984 0.005 85);
+  --foreground: oklch(0.21 0.02 250);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.21 0.02 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.21 0.02 250);
   --primary: oklch(0.44 0.09 165);
   --primary-foreground: oklch(0.99 0.01 165);
-  --secondary: oklch(0.95 0.02 165);
+  --secondary: oklch(0.95 0.025 165);
   --secondary-foreground: oklch(0.3 0.06 165);
-  --muted: oklch(0.955 0.006 95);
-  --muted-foreground: oklch(0.47 0.02 250);
-  --accent: oklch(0.95 0.02 165);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.01 95);
-  --input: oklch(0.87 0.01 95);
-  --ring: oklch(0.55 0.1 165);
+  --muted: oklch(0.955 0.006 85);
+  --muted-foreground: oklch(0.46 0.02 250);
+  --accent: oklch(0.95 0.025 165);
+  --accent-foreground: oklch(0.21 0.02 250);
+  --destructive: oklch(0.53 0.2 27);
+  --border: oklch(0.9 0.008 85);
+  --input: oklch(0.64 0.012 85); /* bordo dei campi: almeno 3:1 sullo sfondo (WCAG 1.4.11) */
+  --ring: oklch(0.5 0.1 165);
+  /* superficie "incassata" per raggruppare pannelli e filtri */
+  --sunken: oklch(0.965 0.006 85);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0.75rem;
+  /* ombre tinte con il colore dell'inchiostro, non nere */
+  --shadow-card: 0 1px 2px oklch(0.21 0.02 250 / 0.05), 0 1px 1px oklch(0.21 0.02 250 / 0.03);
+  --shadow-raised: 0 1px 2px oklch(0.21 0.02 250 / 0.06), 0 8px 24px -8px oklch(0.21 0.02 250 / 0.14);
+  /* movimento: uscite rapide, mai ease-in */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -137,5 +151,38 @@
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* i numeri in colonna non ballano */
+  .tabular-nums,
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Chi chiede meno movimento vede solo dissolvenze: niente zoom, scivolamenti o pressioni. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    --tw-enter-scale: 1 !important;
+    --tw-exit-scale: 1 !important;
+    --tw-enter-translate-x: 0 !important;
+    --tw-enter-translate-y: 0 !important;
+    --tw-exit-translate-x: 0 !important;
+    --tw-exit-translate-y: 0 !important;
+    scroll-behavior: auto !important;
+  }
+  [data-slot="button"]:active,
+  .premibile:active {
+    scale: none !important;
   }
 }

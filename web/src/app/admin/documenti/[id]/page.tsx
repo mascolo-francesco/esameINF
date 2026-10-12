@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Download } from "lucide-react";
+import { DownloadSimpleIcon } from "@phosphor-icons/react/ssr";
 import { db } from "@/lib/server/db";
 import { LIVELLO, richiediUtente } from "@/lib/server/auth/sessione";
 import { formattaDataOra, nomeQuartiere } from "@/lib/formato";
@@ -67,7 +67,7 @@ export default async function Documento({ params }: PageProps<"/admin/documenti/
         <div className="flex flex-wrap gap-2">
           {incluse.length > 0 && (
             <a href={`/api/documenti/${d.id}/csv`} className={buttonVariants({ variant: "outline" })}>
-              <Download className="size-4" aria-hidden /> Esporta CSV
+              <DownloadSimpleIcon className="size-4" aria-hidden /> Esporta CSV
             </a>
           )}
           {d.stato === "bozza" && (

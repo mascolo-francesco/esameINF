@@ -15,7 +15,9 @@ export default async function PaginaVerifica({ searchParams }: PageProps<"/acced
       descrizione="Apri l'app di autenticazione sul telefono e inserisci il codice di 6 cifre."
       stretta
     >
-      <FormVerifica da={typeof da === "string" ? da : "/"} />
+      <div className="rounded-2xl border bg-card p-6 shadow-card">
+        <FormVerifica da={typeof da === "string" ? da : "/"} />
+      </div>
     </Pagina>
   );
 }

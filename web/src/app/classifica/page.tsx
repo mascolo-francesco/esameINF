@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { z } from "zod";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CaretDownIcon,
+  FunnelSimpleIcon,
+  HeartIcon,
+  MagnifyingGlassIcon,
+  TrendUpIcon,
+  XIcon,
+} from "@phosphor-icons/react/ssr";
 import { classifica, PER_PAGINA, type FiltriClassifica } from "@/lib/server/consultazione";
 import { elencoCategorie, elencoMunicipi, elencoQuartieri } from "@/lib/server/catalogo";
 import { Pagina } from "@/components/pagina";
 import { SchedaSegnalazione } from "@/components/scheda-segnalazione";
+import { StatoVuoto } from "@/components/stato-vuoto";
+import { NativeSelect } from "@/components/ui/native-select";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { FiltriAutomatici } from "./filtri";
@@ -25,8 +37,6 @@ const schemaFiltri = z.object({
   giorni: z.coerce.number().int().refine((n) => [7, 30, 90].includes(n)).catch(0),
   pagina: z.coerce.number().int().min(1).max(500).catch(1),
 });
-
-const classeSelect = "h-9 w-full min-w-0 rounded-lg border border-input bg-background px-2 text-sm";
 
 export default async function PaginaClassifica({ searchParams }: PageProps<"/classifica">) {
   const p = schemaFiltri.parse(await searchParams);
@@ -55,111 +65,117 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
     return s ? `/classifica?${s}` : "/classifica";
   };
 
+  // filtri attivi, con il link che li toglie uno alla volta
+  const nomeDi = <T extends { id: number; nome: string }>(lista: T[], id: number) => lista.find((x) => x.id === id)?.nome ?? "";
+  const attivi = [
+    p.categoria && { chiave: "categoria", testo: nomeDi(categorie, p.categoria) },
+    p.municipio && { chiave: "municipio", testo: nomeDi(municipi, p.municipio) },
+    p.quartiere && { chiave: "quartiere", testo: nomeDi(quartieri, p.quartiere) },
+    p.tipo && { chiave: "tipo", testo: p.tipo === "problema" ? "Problemi" : "Proposte" },
+    p.stato && { chiave: "stato", testo: STATI[p.stato] },
+    p.giorni && { chiave: "giorni", testo: `Ultimi ${p.giorni} giorni` },
+  ].filter((f): f is { chiave: string; testo: string } => Boolean(f));
+
   return (
     <Pagina titolo="Classifica" descrizione="Le segnalazioni pubblicate, ordinate per sostegno dei cittadini.">
-      <div className="grid grid-cols-1 gap-6">
-        <nav aria-label="Ordinamento" className="flex gap-1 rounded-lg bg-muted p-1 sm:w-fit">
-          {(
-            [
-              ["sostenute", "Più sostenute"],
-              ["tendenza", "Di tendenza"],
-            ] as const
-          ).map(([v, t]) => (
-            <Link
-              key={v}
-              href={url({ ordine: v, pagina: 1 })}
-              aria-current={p.ordine === v ? "page" : undefined}
-              className={cn(
-                "flex-1 rounded-md px-3 py-1.5 text-center text-sm font-medium whitespace-nowrap",
-                p.ordine === v ? "bg-background shadow-sm" : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {t}
-            </Link>
-          ))}
-        </nav>
-        {p.ordine === "tendenza" && (
-          <p className="-mt-3 text-sm text-muted-foreground">
-            &quot;Di tendenza&quot; premia le segnalazioni recenti: il punteggio si riduce man mano che passano i giorni dalla pubblicazione.
-          </p>
-        )}
+      <div className="grid grid-cols-1 gap-5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <nav aria-label="Ordinamento" className="grid w-full grid-cols-2 gap-1 rounded-xl bg-sunken p-1 ring-1 ring-border sm:w-fit">
+            {(
+              [
+                ["sostenute", "Più sostenute", <HeartIcon key="s" aria-hidden />],
+                ["tendenza", "Di tendenza", <TrendUpIcon key="t" aria-hidden />],
+              ] as const
+            ).map(([v, t, icona]) => (
+              <Link
+                key={v}
+                href={url({ ordine: v, pagina: 1 })}
+                aria-current={p.ordine === v ? "page" : undefined}
+                className={cn(
+                  "flex h-9 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium whitespace-nowrap transition-[color,background-color,box-shadow] [&_svg]:size-4",
+                  p.ordine === v ? "bg-card text-foreground shadow-card ring-1 ring-border" : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {icona}
+                {t}
+              </Link>
+            ))}
+          </nav>
+          {p.ordine === "tendenza" && (
+            <p className="max-w-md text-sm text-muted-foreground">
+              Premia le segnalazioni recenti: il punteggio cala man mano che passano i giorni dalla pubblicazione.
+            </p>
+          )}
+        </div>
 
-        <form method="get" action="/classifica" className="grid grid-cols-1 gap-3 rounded-lg border p-4 sm:grid-cols-3 lg:grid-cols-6" aria-label="Filtri">
-          <FiltriAutomatici />
-          {p.ordine !== "sostenute" && <input type="hidden" name="ordine" value={p.ordine} />}
-          <label className="grid gap-1 text-xs font-medium">
-            Categoria
-            <select name="categoria" defaultValue={p.categoria || ""} className={classeSelect}>
-              <option value="">Tutte</option>
-              {categorie.map((k) => (
-                <option key={k.id} value={k.id}>
-                  {k.nome}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="grid gap-1 text-xs font-medium">
-            Municipio
-            <select name="municipio" defaultValue={p.municipio || ""} className={classeSelect}>
-              <option value="">Tutti</option>
-              {municipi.map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.nome}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="grid gap-1 text-xs font-medium">
-            Quartiere
-            <select name="quartiere" defaultValue={p.quartiere || ""} className={classeSelect}>
-              <option value="">Tutti</option>
-              {quartieri
-                .filter((q) => !p.municipio || q.idMunicipio === p.municipio)
-                .map((q) => (
-                  <option key={q.id} value={q.id}>
-                    {q.nome}
-                  </option>
-                ))}
-            </select>
-          </label>
-          <label className="grid gap-1 text-xs font-medium">
-            Tipo
-            <select name="tipo" defaultValue={p.tipo} className={classeSelect}>
-              <option value="">Tutti</option>
-              <option value="problema">Problemi</option>
-              <option value="proposta">Proposte</option>
-            </select>
-          </label>
-          <label className="grid gap-1 text-xs font-medium">
-            Stato
-            <select name="stato" defaultValue={p.stato} className={classeSelect}>
-              <option value="">Tutti</option>
-              <option value="PUBBLICATA">Pubblicata</option>
-              <option value="PRESA_IN_CARICO">Presa in carico</option>
-              <option value="INVIATA_CANDIDATI">Inviata ai candidati</option>
-            </select>
-          </label>
-          <label className="grid gap-1 text-xs font-medium">
-            Periodo
-            <select name="giorni" defaultValue={p.giorni || ""} className={classeSelect}>
-              <option value="">Sempre</option>
-              <option value="7">Ultimi 7 giorni</option>
-              <option value="30">Ultimi 30 giorni</option>
-              <option value="90">Ultimi 90 giorni</option>
-            </select>
-          </label>
-          <div className="flex gap-2 sm:col-span-3 lg:col-span-6">
-            <button type="submit" className={cn(buttonVariants({ size: "sm" }), "js-nascondi")}>
-              Applica i filtri
-            </button>
-            <Link href={p.ordine === "tendenza" ? "/classifica?ordine=tendenza" : "/classifica"} className={buttonVariants({ variant: "ghost", size: "sm" })}>
-              Azzera
+        <details className="group rounded-xl bg-sunken ring-1 ring-border" open={attivi.length > 0}>
+          <summary className="flex h-12 cursor-pointer list-none items-center gap-2 rounded-xl px-4 text-sm font-medium select-none [&::-webkit-details-marker]:hidden">
+            <FunnelSimpleIcon className="size-4 text-muted-foreground" aria-hidden />
+            Filtri
+            {attivi.length > 0 && (
+              <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground tabular-nums">
+                {attivi.length}
+                <span className="sr-only"> attivi</span>
+              </span>
+            )}
+            <CaretDownIcon className="ml-auto size-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" aria-hidden />
+          </summary>
+          <form method="get" action="/classifica" className="grid grid-cols-2 gap-3 px-4 pb-4 sm:grid-cols-3 lg:grid-cols-6" aria-label="Filtri">
+            <FiltriAutomatici />
+            {p.ordine !== "sostenute" && <input type="hidden" name="ordine" value={p.ordine} />}
+            <Filtro etichetta="Categoria" name="categoria" valore={p.categoria || ""} vuoto="Tutte" opzioni={categorie.map((k) => [k.id, k.nome])} />
+            <Filtro etichetta="Municipio" name="municipio" valore={p.municipio || ""} vuoto="Tutti" opzioni={municipi.map((m) => [m.id, m.nome])} />
+            <Filtro
+              etichetta="Quartiere"
+              name="quartiere"
+              valore={p.quartiere || ""}
+              vuoto="Tutti"
+              opzioni={quartieri.filter((q) => !p.municipio || q.idMunicipio === p.municipio).map((q) => [q.id, q.nome])}
+            />
+            <Filtro etichetta="Tipo" name="tipo" valore={p.tipo} vuoto="Tutti" opzioni={[["problema", "Problemi"], ["proposta", "Proposte"]]} />
+            <Filtro etichetta="Stato" name="stato" valore={p.stato} vuoto="Tutti" opzioni={Object.entries(STATI)} />
+            <Filtro
+              etichetta="Periodo"
+              name="giorni"
+              valore={p.giorni || ""}
+              vuoto="Sempre"
+              opzioni={[7, 30, 90].map((g) => [g, `Ultimi ${g} giorni`])}
+            />
+            <div className="col-span-full">
+              <button type="submit" className={cn(buttonVariants({ size: "sm" }), "js-nascondi")}>
+                Applica i filtri
+              </button>
+            </div>
+          </form>
+        </details>
+
+        {attivi.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2" aria-label="Filtri attivi" role="group">
+            {attivi.map((f) => (
+              <Link
+                key={f.chiave}
+                href={url({ [f.chiave]: "", pagina: 1 })}
+                className="inline-flex h-8 items-center gap-1.5 rounded-full border bg-card pr-2 pl-3 text-sm shadow-card transition-colors hover:border-destructive/40 hover:text-destructive"
+              >
+                {f.testo}
+                <XIcon className="size-3.5" aria-hidden />
+                <span className="sr-only">: togli il filtro</span>
+              </Link>
+            ))}
+            <Link
+              href={p.ordine === "tendenza" ? "/classifica?ordine=tendenza" : "/classifica"}
+              className="px-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Azzera tutto
             </Link>
           </div>
-        </form>
+        )}
 
+        <h2 className="sr-only">Risultati</h2>
         {voci.length === 0 ? (
-          <p className="rounded-lg border border-dashed p-8 text-center text-muted-foreground">Nessuna segnalazione con questi filtri.</p>
+          <StatoVuoto icona={<MagnifyingGlassIcon weight="duotone" />} titolo="Nessuna segnalazione con questi filtri">
+            Prova a togliere un filtro o a scegliere un periodo più lungo.
+          </StatoVuoto>
         ) : (
           <ol className="grid gap-3">
             {voci.map((v, i) => (
@@ -171,22 +187,57 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
         )}
 
         {(p.pagina > 1 || altre) && (
-          <nav aria-label="Pagine" className="flex justify-between">
+          <nav aria-label="Pagine" className="flex items-center justify-between gap-3">
             {p.pagina > 1 ? (
               <Link href={url({ pagina: p.pagina - 1 })} className={buttonVariants({ variant: "outline" })}>
-                ← Precedenti
+                <ArrowLeftIcon aria-hidden />
+                Precedenti
               </Link>
             ) : (
               <span />
             )}
-            {altre && (
+            <span className="text-sm text-muted-foreground tabular-nums">Pagina {p.pagina}</span>
+            {altre ? (
               <Link href={url({ pagina: p.pagina + 1 })} className={buttonVariants({ variant: "outline" })}>
-                Successive →
+                Successive
+                <ArrowRightIcon aria-hidden />
               </Link>
+            ) : (
+              <span />
             )}
           </nav>
         )}
       </div>
     </Pagina>
+  );
+}
+
+const STATI = { PUBBLICATA: "Pubblicata", PRESA_IN_CARICO: "Presa in carico", INVIATA_CANDIDATI: "Inviata ai candidati" } as Record<string, string>;
+
+function Filtro({
+  etichetta,
+  name,
+  valore,
+  vuoto,
+  opzioni,
+}: {
+  etichetta: string;
+  name: string;
+  valore: string | number;
+  vuoto: string;
+  opzioni: (readonly [string | number, string])[];
+}) {
+  return (
+    <label className="grid min-w-0 gap-1.5 text-sm font-medium">
+      {etichetta}
+      <NativeSelect name={name} defaultValue={valore} size="sm">
+        <option value="">{vuoto}</option>
+        {opzioni.map(([v, t]) => (
+          <option key={v} value={v}>
+            {t}
+          </option>
+        ))}
+      </NativeSelect>
+    </label>
   );
 }
