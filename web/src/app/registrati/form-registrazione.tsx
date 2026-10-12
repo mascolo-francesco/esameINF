@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { registrati } from "@/app/azioni/sessione";
 import { Campo, CampoSelect, Casella, MessaggioEsito, PulsanteInvio, useFormAzione } from "@/components/form";
 
@@ -52,10 +53,15 @@ export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { 
           </option>
         ))}
       </CampoSelect>
-      <fieldset className="grid gap-3 rounded-lg border p-4">
+      <fieldset className="grid gap-3 rounded-xl bg-sunken p-4 ring-1 ring-border">
         <legend className="px-1 text-sm font-medium">Consensi</legend>
         <Casella nome="privacy" esito={esito} required>
-          Ho letto l&apos;informativa privacy e accetto il trattamento dei dati per usare il servizio (obbligatorio).
+          Ho letto l&apos;
+          <Link href="/privacy" target="_blank">
+            informativa privacy
+            <span className="sr-only"> (si apre in una nuova scheda)</span>
+          </Link>{" "}
+          e accetto il trattamento dei dati per usare il servizio (obbligatorio).
         </Casella>
         <Casella nome="consensoNotifiche">Voglio ricevere notifiche sulle segnalazioni che seguo.</Casella>
         <Casella nome="consensoIa">
