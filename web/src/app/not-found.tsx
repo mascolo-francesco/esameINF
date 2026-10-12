@@ -10,6 +10,7 @@ export default function NonTrovata() {
       <StatoVuoto
         icona={<MapPinSimpleIcon weight="duotone" />}
         titolo="Pagina non trovata"
+        principale
         azione={
           <div className="flex flex-wrap justify-center gap-2">
             <Link href="/" className={buttonVariants()}>

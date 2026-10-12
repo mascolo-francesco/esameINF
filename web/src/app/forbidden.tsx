@@ -10,6 +10,7 @@ export default function Vietato() {
       <StatoVuoto
         icona={<LockSimpleIcon weight="duotone" />}
         titolo="Pagina riservata"
+        principale
         azione={
           <Link href="/" className={buttonVariants()}>
             Torna alla home

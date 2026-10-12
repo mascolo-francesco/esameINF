@@ -34,7 +34,7 @@ verifica() { # nome, atteso, ottenuto
 
 # --- consultazione pubblica
 vai /
-verifica "home: cinque voci per ciascuna classifica" true "$(js '() => document.querySelectorAll("section ol li").length === 10')"
+verifica "home: cinque voci per ciascuna classifica" true "$(js '() => document.querySelectorAll("[aria-labelledby=h-sostenute] ol li, [aria-labelledby=h-tendenza] ol li").length === 10')"
 verifica "mappa: marker in GeoJSON" true "$(js 'async () => (await (await fetch("/api/mappa?bbox=9.04,45.38,9.28,45.54")).json()).features.length > 0')"
 verifica "mappa: bbox mancante rifiutata" 400 "$(js 'async () => (await fetch("/api/mappa")).status')"
 vai "/classifica?municipio=2"

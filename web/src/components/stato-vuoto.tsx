@@ -7,12 +7,15 @@ export function StatoVuoto({
   titolo,
   children,
   azione,
+  principale,
   className,
 }: {
   icona: ReactNode;
   titolo: string;
   children?: ReactNode;
   azione?: ReactNode;
+  /** true quando il riquadro è tutta la pagina (404, 403): il titolo diventa l'h1 */
+  principale?: boolean;
   className?: string;
 }) {
   return (
@@ -21,7 +24,7 @@ export function StatoVuoto({
         {icona}
       </span>
       <div className="grid max-w-sm gap-1">
-        <p className="font-semibold">{titolo}</p>
+        {principale ? <h1 className="text-2xl font-semibold tracking-tight">{titolo}</h1> : <p className="font-semibold">{titolo}</p>}
         {children && <p className="text-sm text-muted-foreground">{children}</p>}
       </div>
       {azione}
