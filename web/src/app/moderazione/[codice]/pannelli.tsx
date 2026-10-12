@@ -46,7 +46,7 @@ export function PannelloDecisioni({
   const [scelta, setScelta] = useState<Decisione | null>(null);
   const { esito, onSubmit, inAttesa } = useFormAzione(decidi, (r) => {
     if (r.ok) {
-      toast.success(r.messaggio ?? "Fatto");
+      toast.success(r.messaggio ?? "Operazione completata.");
       setScelta(null);
     }
   });
@@ -116,7 +116,7 @@ export function PannelloDecisioni({
                 onClick={() =>
                   avvia(async () => {
                     const r = await chiudiAbusiSegnalazione(codice, e);
-                    if (r.ok) toast.success(r.messaggio ?? "Fatto");
+                    if (r.ok) toast.success(r.messaggio ?? "Operazione completata.");
                     else toast.error(r.errore);
                   })
                 }
@@ -145,7 +145,7 @@ export function FormCategorie({
   categorie: { id: number; nome: string; colore: string }[];
   scelte: number[];
 }) {
-  const { esito, onSubmit, inAttesa } = useFormAzione(correggiCategorie, (r) => r.ok && toast.success(r.messaggio ?? "Fatto"));
+  const { esito, onSubmit, inAttesa } = useFormAzione(correggiCategorie, (r) => r.ok && toast.success(r.messaggio ?? "Operazione completata."));
   return (
     <form onSubmit={onSubmit} className="grid gap-3" noValidate>
       <input type="hidden" name="codice" value={codice} />
@@ -168,7 +168,7 @@ export function FormCategorie({
 }
 
 export function FormUnisci({ codice }: { codice: string }) {
-  const { esito, onSubmit, inAttesa } = useFormAzione(unisci, (r) => r.ok && toast.success(r.messaggio ?? "Fatto"));
+  const { esito, onSubmit, inAttesa } = useFormAzione(unisci, (r) => r.ok && toast.success(r.messaggio ?? "Operazione completata."));
   return (
     <form onSubmit={onSubmit} className="grid gap-3" noValidate>
       <input type="hidden" name="codice" value={codice} />
@@ -191,7 +191,7 @@ export function FormSanzione({ idUtente, nome }: { idUtente: number; nome: strin
   const [aperto, setAperto] = useState(false);
   const { esito, onSubmit, inAttesa } = useFormAzione(sanziona, (r) => {
     if (r.ok) {
-      toast.success(r.messaggio ?? "Fatto");
+      toast.success(r.messaggio ?? "Operazione completata.");
       setAperto(false);
     }
   });
@@ -253,7 +253,7 @@ export function CorreggiPosizione({ codice, lat, lon, modificabile }: { codice: 
                   avvia(async () => {
                     const r = await correggiPosizione(codice, nuova.lat, nuova.lon);
                     if (r.ok) {
-                      toast.success(r.messaggio ?? "Fatto");
+                      toast.success(r.messaggio ?? "Operazione completata.");
                       setNuova(null);
                     } else toast.error(r.errore);
                   })

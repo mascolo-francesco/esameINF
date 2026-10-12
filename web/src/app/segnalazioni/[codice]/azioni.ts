@@ -41,7 +41,7 @@ export async function sostieni(codice: string): Promise<Esito> {
       throw e;
     }
     aggiorna(codice);
-  }, "Grazie per il tuo sostegno!");
+  }, "Sostegno registrato. Grazie per la partecipazione.");
 }
 
 export async function ritiraSostegno(codice: string): Promise<Esito> {
@@ -82,7 +82,7 @@ const schemaAbuso = z.object({
   oggetto: z.enum(["segnalazione", "commento", "aggiornamento"]),
   idOggetto: z.coerce.number().int().positive(),
   motivo: z.enum(["offensivo", "odio_discriminazione", "spam", "falso", "fuori_tema", "dati_personali", "altro"], {
-    error: "Scegli un motivo",
+    error: "Scegli un motivo.",
   }),
   nota: z
     .string()
@@ -113,7 +113,7 @@ export async function segnalaAbuso(_: Esito | null, fd: FormData): Promise<Esito
       throw e;
     }
     aggiorna(codice);
-  }, "Grazie, la segnalazione arriverà ai moderatori.");
+  }, "Segnalazione inviata ai moderatori.");
 }
 
 // RF-19: dopo la pubblicazione l'autore può solo aggiungere aggiornamenti

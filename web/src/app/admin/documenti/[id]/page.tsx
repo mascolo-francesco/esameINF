@@ -74,7 +74,7 @@ export default async function Documento({ params }: PageProps<"/admin/documenti/
             <PulsanteAzione
               variant="outline"
               azione={rendiDefinitivo.bind(null, d.id)}
-              conferma="Dopo questo passo il contenuto del documento non si potrà più cambiare. Continuare?"
+              conferma="Dopo questo passaggio il documento non sarà più modificabile. Vuoi continuare?"
             >
               Rendi definitivo
             </PulsanteAzione>
@@ -82,7 +82,7 @@ export default async function Documento({ params }: PageProps<"/admin/documenti/
           {d.stato === "definitivo" && (
             <PulsanteAzione
               azione={inviaDocumento.bind(null, d.id)}
-              conferma={`Il documento verrà registrato come inviato a tutti i ${candidatiAttivi?.n ?? 0} candidati attivi. Continuare?`}
+              conferma={`Il documento risulterà inviato a tutti i ${candidatiAttivi?.n ?? 0} candidati attivi. Vuoi continuare?`}
             >
               Invia ai candidati
             </PulsanteAzione>
@@ -95,7 +95,7 @@ export default async function Documento({ params }: PageProps<"/admin/documenti/
         <h3 id="incluse" className="font-semibold">
           Segnalazioni incluse ({incluse.length})
         </h3>
-        {incluse.length === 0 && <p className="text-sm text-muted-foreground">Ancora nessuna.</p>}
+        {incluse.length === 0 && <p className="text-sm text-muted-foreground">Nessuna segnalazione inclusa.</p>}
         <ol className="grid gap-2">
           {incluse.map((s) => (
             <li key={s.id} className="flex flex-wrap items-start gap-3 rounded-lg border p-3 text-sm">
@@ -150,7 +150,7 @@ export default async function Documento({ params }: PageProps<"/admin/documenti/
           <h3 id="invii" className="font-semibold">
             Invii registrati
           </h3>
-          <p className="text-xs text-muted-foreground">Nella demo non parte nessuna email: qui resta la traccia di a chi è stato inviato.</p>
+          <p className="text-xs text-muted-foreground">Nella versione dimostrativa non viene inviata alcuna email: l&apos;elenco registra i destinatari.</p>
           <ul className="grid gap-1 text-sm">
             {invii.map((i) => (
               <li key={i.email_inviata}>

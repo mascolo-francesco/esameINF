@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 
 const avvisa = (r: EsitoForm) => {
-  if (r?.ok) toast.success(r.messaggio ?? "Fatto");
+  if (r?.ok) toast.success(r.messaggio ?? "Operazione completata.");
 };
 
 export function FormRuolo({ idUtente, idRuolo }: { idUtente: number; idRuolo: number }) {
@@ -67,7 +67,7 @@ export function FormCategoria({ categoria }: { categoria?: Categoria }) {
         Attiva (si può scegliere nelle nuove segnalazioni)
       </Casella>
       <PulsanteInvio inAttesa={inAttesa} className="justify-self-start sm:col-span-2">
-        {categoria ? "Salva" : "Crea la categoria"}
+        {categoria ? "Salva le modifiche" : "Crea la categoria"}
       </PulsanteInvio>
     </form>
   );

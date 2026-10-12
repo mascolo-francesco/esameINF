@@ -22,7 +22,7 @@ describe("traduciErroreDb (RNF-27)", () => {
   it("toglie il codice del requisito dai messaggi dei trigger", () => {
     const e = traduciErroreDb({ sqlState: "45000", sqlMessage: "RD-06: l'autore non può sostenere la propria segnalazione" });
     expect(e).toBeInstanceOf(ErroreApp);
-    expect((e as ErroreApp).message).toBe("L'autore non può sostenere la propria segnalazione");
+    expect((e as ErroreApp).message).toBe("L'autore non può sostenere la propria segnalazione.");
     expect((e as ErroreApp).codice).toBe("RD-06");
   });
 

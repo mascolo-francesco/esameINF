@@ -37,7 +37,7 @@ export default async function Documenti() {
             Documenti
           </h2>
           {documenti.length === 0 ? (
-            <p className="text-sm text-muted-foreground">Nessun documento ancora.</p>
+            <p className="text-sm text-muted-foreground">Nessun documento creato.</p>
           ) : (
             <ul className="divide-y rounded-lg border">
               {documenti.map((d) => (

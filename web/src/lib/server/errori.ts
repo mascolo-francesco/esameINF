@@ -26,8 +26,10 @@ export function traduciErroreDb(e: unknown): unknown {
   const m = e as ErroreMysql;
   if (m?.sqlState === "45000" && m.sqlMessage) {
     const match = /^([A-Z]{2,3}-\d+):\s*([\s\S]*)$/.exec(m.sqlMessage);
-    const testo = match ? match[2] : m.sqlMessage;
-    return new ErroreApp(testo.charAt(0).toUpperCase() + testo.slice(1), match?.[1]);
+    const testo = (match ? match[2] : m.sqlMessage).trim();
+    // come gli altri messaggi dell'app: maiuscola iniziale e punto finale
+    const frase = testo.charAt(0).toUpperCase() + testo.slice(1) + (/[.!?]$/.test(testo) ? "" : ".");
+    return new ErroreApp(frase, match?.[1]);
   }
   return e;
 }

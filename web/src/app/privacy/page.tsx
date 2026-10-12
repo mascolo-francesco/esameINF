@@ -22,7 +22,7 @@ const SEZIONI: { id: string; titolo: string; testo: ReactNode }[] = [
   },
   {
     id: "quali",
-    titolo: "Quali dati raccogliamo",
+    titolo: "Quali dati vengono raccolti",
     testo: (
       <ul>
         <li>
@@ -47,10 +47,10 @@ const SEZIONI: { id: string; titolo: string; testo: ReactNode }[] = [
     titolo: "Perché",
     testo: (
       <p>
-        Per farti accedere, pubblicare le segnalazioni dopo la moderazione, contare i sostegni (chi abita nello stesso Municipio
-        pesa un po&apos; di più, per questo serve il quartiere) e proteggere il servizio da abusi. Le notifiche e l&apos;uso
-        anonimo delle segnalazioni per i modelli di classificazione sono facoltativi: li scegli alla registrazione e li cambi dal
-        profilo.
+        Il comitato tratta i dati per consentirti l&apos;accesso, pubblicare le segnalazioni dopo la moderazione, calcolare i
+        sostegni e proteggere il servizio da abusi. Il quartiere serve perché il sostegno di chi risiede nello stesso Municipio
+        della segnalazione ha un peso maggiore. Le notifiche e l&apos;uso anonimo delle segnalazioni per i modelli di
+        classificazione sono facoltativi: puoi sceglierli alla registrazione e modificarli dal profilo.
       </p>
     ),
   },
@@ -85,7 +85,7 @@ const SEZIONI: { id: string; titolo: string; testo: ReactNode }[] = [
       <p>
         Dal <Link href="/profilo">profilo</Link> puoi correggere i tuoi dati, scaricarne una copia in formato JSON, cambiare i
         consensi e chiudere l&apos;account. Per qualsiasi altra richiesta (accesso, rettifica, opposizione) puoi scrivere al
-        comitato; hai anche diritto di reclamo al Garante per la protezione dei dati personali.
+        comitato. Hai anche diritto di presentare reclamo al Garante per la protezione dei dati personali.
       </p>
     ),
   },
@@ -96,7 +96,7 @@ export default function Privacy() {
     <Pagina
       sopratitolo="Trasparenza"
       titolo="Informativa privacy"
-      descrizione="In breve: raccogliamo solo quello che serve a segnalare, sostenere e moderare. Qui sotto i dettagli."
+      descrizione="Il comitato raccoglie solo i dati necessari per segnalare, sostenere e moderare. Di seguito trovi i dettagli."
       className="max-w-3xl"
     >
       <nav aria-label="In questa pagina" className="mb-8 rounded-xl bg-sunken p-4 ring-1 ring-border">

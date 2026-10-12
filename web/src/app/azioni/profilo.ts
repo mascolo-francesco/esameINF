@@ -63,7 +63,7 @@ export async function confermaTotp(_: Esito | null, fd: FormData): Promise<Esito
     } catch {
       throw new ErroreApp("Configurazione scaduta: ricomincia dall'inizio.");
     }
-    if (!(await verificaCodiceTotp(segreto, codice))) throw new ErroreApp("Codice non valido, riprova.");
+    if (!(await verificaCodiceTotp(segreto, codice))) throw new ErroreApp("Codice non valido. Riprova.");
     await db.esegui("UPDATE utente SET totp_attivo = TRUE, totp_segreto = ? WHERE id = ?", [cifraSegreto(segreto), u.id]);
     revalidatePath("/profilo");
   }, "Verifica in due passaggi attivata.");
@@ -94,7 +94,7 @@ export async function eliminaAccount(_: Esito | null, fd: FormData): Promise<Esi
   const esito = await eseguiAzione(async () => {
     const u = await richiediUtente();
     await controllaPassword(u.id, String(fd.get("password") ?? ""));
-    z.literal("on", { error: "Conferma di aver capito cosa succede" }).parse(fd.get("conferma"));
+    z.literal("on", { error: "Conferma di aver compreso le conseguenze." }).parse(fd.get("conferma"));
     if (u.livello > 1) throw new ErroreApp("Un membro del comitato deve prima farsi togliere il ruolo da un amministratore.");
     const { ip } = await contestoRichiesta();
     await inTransazione({ idUtente: u.id, ip }, async (tx) => {

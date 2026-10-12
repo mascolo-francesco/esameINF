@@ -27,9 +27,9 @@ export default async function PaginaMappa() {
           ))}
         </ul>
         <p className="text-sm text-muted-foreground">
-          Preferisci un elenco?{" "}
+          In alternativa puoi consultare la{" "}
           <Link href="/classifica" className="font-medium text-primary underline-offset-4 hover:underline">
-            Vai alla classifica
+            classifica
           </Link>
           , che mostra le stesse segnalazioni con filtri per quartiere e categoria.
         </p>

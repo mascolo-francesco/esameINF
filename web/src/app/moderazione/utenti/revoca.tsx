@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export function FormRevoca({ id }: { id: number }) {
   const [aperto, setAperto] = useState(false);
-  const { esito, onSubmit, inAttesa } = useFormAzione(revocaProvvedimento, (r) => r.ok && toast.success(r.messaggio ?? "Fatto"));
+  const { esito, onSubmit, inAttesa } = useFormAzione(revocaProvvedimento, (r) => r.ok && toast.success(r.messaggio ?? "Operazione completata."));
   if (!aperto)
     return (
       <Button size="sm" variant="outline" className="justify-self-start" onClick={() => setAperto(true)}>

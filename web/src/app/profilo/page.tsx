@@ -67,7 +67,7 @@ export default async function PaginaProfilo() {
           </CardHeader>
           <CardContent>
             <a href="/api/profilo/esporta" className="text-sm font-medium text-primary underline-offset-4 hover:underline" download>
-              Scarica i miei dati
+              Scarica i tuoi dati
             </a>
           </CardContent>
         </Card>

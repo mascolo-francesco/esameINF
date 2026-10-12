@@ -77,7 +77,7 @@ export async function salvaParametro(_: Esito | null, fd: FormData): Promise<Esi
   return eseguiAzione(async () => {
     const { attore } = await amministratore();
     const d = z
-      .object({ chiave: z.string().max(60), valore: z.coerce.number({ error: "Inserisci un numero" }) })
+      .object({ chiave: z.string().max(60), valore: z.coerce.number({ error: "Inserisci un numero." }) })
       .parse({ chiave: fd.get("chiave"), valore: String(fd.get("valore") ?? "").replace(",", ".") });
     const p = await db.riga<{ valore_min: number; valore_max: number }>(
       "SELECT valore_min, valore_max FROM parametro_sistema WHERE chiave = ?",

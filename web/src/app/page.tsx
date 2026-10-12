@@ -59,7 +59,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                 [
                   ["Segnalazioni pubblicate", numeri.pubblicate, <MegaphoneIcon key="m" weight="duotone" aria-hidden />],
                   ["Sostegni dei cittadini", numeri.sostegni, <HeartIcon key="h" weight="duotone" aria-hidden />],
-                  ["Cittadini iscritti", numeri.cittadini, <UsersThreeIcon key="u" weight="duotone" aria-hidden />],
+                  ["Cittadini registrati", numeri.cittadini, <UsersThreeIcon key="u" weight="duotone" aria-hidden />],
                 ] as const
               ).map(([t, n, icona]) => (
                 <div key={t} className="grid gap-1 rounded-xl bg-card p-3 shadow-card sm:p-4">
@@ -85,9 +85,9 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         <ol className="grid gap-6 sm:grid-cols-3 sm:gap-8">
           {(
             [
-              [CameraIcon, "Segnala", "Una foto, il punto sulla mappa e due righe di descrizione. Un moderatore la controlla e la pubblica."],
-              [HeartIcon, "Sostieni", "Ogni cittadino dà un sostegno alle segnalazioni che condivide. Chi abita nello stesso Municipio pesa un po' di più."],
-              [BankIcon, "Arriva ai candidati", "Il comitato raccoglie le più sostenute nel documento programmatico e lo invia a tutti i candidati."],
+              [CameraIcon, "Segnala", "Allega una foto, indica il punto sulla mappa e descrivi il problema. Un moderatore controlla la segnalazione e la pubblica."],
+              [HeartIcon, "Sostieni", "Sostieni le segnalazioni che condividi. Il sostegno di chi risiede nello stesso Municipio ha un peso maggiore."],
+              [BankIcon, "Arriva ai candidati", "Il comitato raccoglie le segnalazioni più sostenute nel documento programmatico e lo invia a tutti i candidati."],
             ] as const
           ).map(([Icona, t, d], i) => (
             <li key={t} className="relative grid grid-cols-[auto_1fr] content-start gap-x-4 gap-y-1 sm:grid-cols-1">
@@ -123,7 +123,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             </div>
             {voci.length === 0 ? (
               <StatoVuoto icona={<MegaphoneIcon weight="duotone" />} titolo="Ancora nessuna segnalazione pubblicata">
-                Le prime compariranno qui appena un moderatore le approva.
+                Le segnalazioni compaiono qui dopo l&apos;approvazione di un moderatore.
               </StatoVuoto>
             ) : (
               <ol className="grid gap-3">

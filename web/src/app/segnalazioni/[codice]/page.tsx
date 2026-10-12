@@ -137,7 +137,7 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
               </h2>
               {listaCommenti.length === 0 && (
                 <StatoVuoto icona={<ChatCircleIcon weight="duotone" />} titolo="Ancora nessun commento" className="py-8">
-                  Hai visto anche tu il problema o hai un&apos;idea? Scrivilo qui sotto.
+                  Aggiungi informazioni utili o una proposta nel campo qui sotto.
                 </StatoVuoto>
               )}
               <ul className="grid gap-4">

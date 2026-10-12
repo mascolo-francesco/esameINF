@@ -52,7 +52,7 @@ export default async function Ruoli({ searchParams }: PageProps<"/admin/utenti">
                   </span>
                 </td>
                 <td className="p-3">{u.totp_attivo ? "Sì" : "No"}</td>
-                <td className="p-3">{u.id === io.id ? <span className="text-muted-foreground">Tu</span> : <FormRuolo idUtente={u.id} idRuolo={u.id_ruolo} />}</td>
+                <td className="p-3">{u.id === io.id ? <span className="text-muted-foreground">Il tuo account</span> : <FormRuolo idUtente={u.id} idRuolo={u.id_ruolo} />}</td>
               </tr>
             ))}
           </tbody>

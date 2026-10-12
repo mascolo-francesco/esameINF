@@ -309,7 +309,7 @@ function PassoFoto({
   return (
     <div className="grid gap-4">
       <p className="text-sm text-muted-foreground">
-        Da 1 a 5 foto (JPEG, PNG, WebP o HEIC). Se la foto contiene la posizione GPS la useremo al passo successivo. In
+        Da 1 a 5 foto (JPEG, PNG, WebP o HEIC). Se la foto contiene la posizione GPS, al passo successivo puoi usarla per indicare il punto. In
         pubblico compare una copia senza metadati.
       </p>
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Foto scelte">
@@ -340,7 +340,7 @@ function PassoFoto({
           <li>
             <label className="flex aspect-[4/3] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-input bg-sunken/60 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary hover:text-secondary-foreground has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50">
               {inCorso ? <SpinnerGapIcon className="size-7 animate-spin" aria-hidden /> : <CameraPlusIcon weight="duotone" className="size-7" aria-hidden />}
-              {inCorso ? "Preparo le foto…" : "Aggiungi foto"}
+              {inCorso ? "Preparazione delle foto in corso…" : "Aggiungi foto"}
               <input
                 ref={input}
                 type="file"
@@ -355,7 +355,7 @@ function PassoFoto({
         )}
       </ul>
       <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        <CameraIcon className="size-4" aria-hidden /> Dal telefono puoi anche scattare la foto direttamente.
+        <CameraIcon className="size-4" aria-hidden /> Dal telefono puoi scattare la foto direttamente.
       </p>
     </div>
   );
@@ -450,7 +450,7 @@ function PassoPosizione({
       />
       <p aria-live="polite" className="text-sm">
         {!posizione && "Nessun punto scelto."}
-        {posizione && info === null && "Controllo il quartiere…"}
+        {posizione && info === null && "Ricerca del quartiere in corso…"}
         {posizione && info === "fuori" && (
           <span className="flex items-center gap-1.5 text-destructive">
             <WarningIcon weight="fill" className="size-4" aria-hidden /> Il punto è fuori dal Comune di Milano.
@@ -493,8 +493,8 @@ function Riepilogo({
             <WarningIcon weight="fill" className="size-5 text-amber-600" aria-hidden /> Qualcuno potrebbe averlo già segnalato
           </p>
           <p className="text-sm">
-            Ci sono segnalazioni simili nelle vicinanze. Se è lo stesso problema, sostenere quella esistente conta di più che
-            aprirne una nuova.
+            Ci sono segnalazioni simili nelle vicinanze. Se descrivono lo stesso problema, sostieni quella esistente: una
+            segnalazione doppia divide i sostegni.
           </p>
           <ul className="grid gap-2">
             {simili.map((s) => (
@@ -539,7 +539,7 @@ function Riepilogo({
         </dd>
       </dl>
       <p className="text-sm text-muted-foreground">
-        Dopo l&apos;invio un moderatore del comitato controlla la segnalazione prima di pubblicarla. Riceverai una notifica.
+        Dopo l&apos;invio un moderatore del comitato controlla la segnalazione prima di pubblicarla. Riceverai una notifica quando sarà pubblicata.
       </p>
     </div>
   );

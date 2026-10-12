@@ -46,11 +46,11 @@ export default async function MieSegnalazioni() {
           azione={
             <Link href="/nuova" className={buttonVariants()}>
               <PlusIcon weight="bold" aria-hidden />
-              Fai la prima
+              Crea una segnalazione
             </Link>
           }
         >
-          Una foto, il punto sulla mappa e due righe: bastano un paio di minuti.
+          Allega una foto, indica il punto sulla mappa e descrivi il problema.
         </StatoVuoto>
       ) : (
         <ul className="divide-y overflow-hidden rounded-xl border bg-card shadow-card">

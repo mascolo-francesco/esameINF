@@ -11,7 +11,7 @@ export function AzioniContenuto({ tipo, id, visibile }: { tipo: "commento" | "ag
   const esegui = (azione: "visibile" | "nascosto") =>
     avvia(async () => {
       const r = await moderaContenuto(tipo, id, azione);
-      if (r.ok) toast.success(r.messaggio ?? "Fatto");
+      if (r.ok) toast.success(r.messaggio ?? "Operazione completata.");
       else toast.error(r.errore);
     });
   return (

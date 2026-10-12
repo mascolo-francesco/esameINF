@@ -26,8 +26,8 @@ function useAzioneRapida() {
   const esegui = (fn: () => Promise<Risposta>) =>
     avvia(async () => {
       const r = await fn();
-      if (r.ok) toast.success(r.messaggio ?? "Fatto");
-      else toast.error(r.errore ?? "Operazione non riuscita");
+      if (r.ok) toast.success(r.messaggio ?? "Operazione completata.");
+      else toast.error(r.errore ?? "Operazione non riuscita. Riprova.");
     });
   return { inCorso, esegui };
 }
@@ -52,7 +52,7 @@ export function AzioniSostegno({
     return votabile ? (
       <Link href={`/accedi?da=/segnalazioni/${codice}`} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
         <HeartIcon weight="bold" aria-hidden />
-        Accedi per sostenerla
+        Accedi per sostenere la segnalazione
       </Link>
     ) : null;
   return (
@@ -171,7 +171,7 @@ export function SegnalaAbuso({
           </CampoSelect>
           <CampoTesto nome="nota" etichetta="Nota (facoltativa)" maxLength={500} rows={3} esito={esito} />
           <DialogFooter>
-            <PulsanteInvio inAttesa={inAttesa}>Invia</PulsanteInvio>
+            <PulsanteInvio inAttesa={inAttesa}>Invia ai moderatori</PulsanteInvio>
           </DialogFooter>
         </form>
       </DialogContent>
@@ -210,7 +210,7 @@ export const FormCommento = ({ codice }: { codice: string }) => (
 );
 
 export const FormAggiornamento = ({ codice }: { codice: string }) => (
-  <FormTesto codice={codice} azione={aggiungiAggiornamento} etichetta="Aggiungi un aggiornamento (sei l'autore)" pulsante="Pubblica l'aggiornamento" />
+  <FormTesto codice={codice} azione={aggiungiAggiornamento} etichetta="Aggiornamento per chi segue la segnalazione" pulsante="Pubblica l'aggiornamento" />
 );
 
 export function FormIntegrazione({ codice, titolo, descrizione }: { codice: string; titolo: string; descrizione: string }) {

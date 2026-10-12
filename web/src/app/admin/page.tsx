@@ -113,17 +113,17 @@ export default async function Dashboard() {
           righe={municipi.map((m) => ({
             etichetta: m.nome,
             valore: m.sostegni,
-            dettaglio: `${m.segnalazioni} segnalazioni, ${m.residenti_iscritti} residenti iscritti`,
+            dettaglio: `${m.segnalazioni} segnalazioni, ${m.residenti_iscritti} residenti registrati`,
           }))}
         />
         <TabellaBarre
-          titolo="Residenti iscritti per Municipio"
-          colonna="Iscritti"
+          titolo="Residenti registrati per Municipio"
+          colonna="Registrati"
           righe={municipi.map((m) => ({ etichetta: m.nome, valore: m.residenti_iscritti }))}
         />
       </div>
       <p className="text-xs text-muted-foreground">
-        Passa il mouse su una riga per il dettaglio. Le statistiche sui moduli di intelligenza artificiale compariranno quando i
+        Passa il puntatore su una riga per vedere il dettaglio. Le statistiche sui moduli di intelligenza artificiale compariranno quando i
         moduli saranno attivi.
       </p>
     </div>

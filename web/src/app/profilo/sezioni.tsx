@@ -20,7 +20,7 @@ export function FormProfilo({ quartieri, valori }: { quartieri: { id: number; no
       <MessaggioEsito esito={esito} />
       <Campo nome="nomeVisualizzato" etichetta="Nome visualizzato" defaultValue={valori.nomeVisualizzato} required esito={esito} />
       <Casella nome="mostraNomeReale" defaultChecked={valori.mostraNomeReale}>
-        Mostra il mio nome e cognome al posto del nome visualizzato
+        Mostra nome e cognome al posto del nome visualizzato
       </Casella>
       <CampoSelect nome="idQuartiere" etichetta="Quartiere" defaultValue={valori.idQuartiere ?? ""} esito={esito}>
         {quartieri.map((q) => (
@@ -33,7 +33,7 @@ export function FormProfilo({ quartieri, valori }: { quartieri: { id: number; no
         Ricevi notifiche sulle segnalazioni che segui
       </Casella>
       <Casella nome="consensoIa" defaultChecked={valori.consensoIa}>
-        Le mie segnalazioni possono servire, in forma anonima, ad addestrare i modelli di classificazione
+        Consenti l&apos;uso anonimo delle tue segnalazioni per migliorare i modelli di classificazione
       </Casella>
       <PulsanteInvio inAttesa={inAttesa} className="justify-self-start">
         Salva
@@ -50,7 +50,7 @@ export function SezioneTotp({ attiva, staff }: { attiva: boolean; staff: boolean
   const disattiva = useFormAzione(disattivaTotp);
 
   if (attiva) {
-    if (staff) return <p className="text-sm">Attiva. Per il tuo ruolo non si può disattivare.</p>;
+    if (staff) return <p className="text-sm">La verifica in due passaggi è attiva. Per il tuo ruolo è obbligatoria e non si può disattivare.</p>;
     return (
       <form onSubmit={disattiva.onSubmit} className="grid gap-3" noValidate>
         <MessaggioEsito esito={disattiva.esito} />
@@ -117,9 +117,9 @@ export function SezioneEliminaAccount() {
     <form onSubmit={onSubmit} className="grid gap-3" noValidate>
       <MessaggioEsito esito={esito} />
       <Campo nome="password" etichetta="Password" type="password" autoComplete="current-password" className="max-w-xs" />
-      <Casella nome="conferma">Ho capito che l&apos;operazione non si può annullare</Casella>
+      <Casella nome="conferma">Ho compreso che l&apos;operazione non si può annullare</Casella>
       <PulsanteInvio inAttesa={inAttesa} variant="destructive" className="justify-self-start">
-        Elimina il mio account
+        Elimina l&apos;account
       </PulsanteInvio>
     </form>
   );

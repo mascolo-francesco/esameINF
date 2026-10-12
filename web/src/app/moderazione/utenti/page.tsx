@@ -85,7 +85,7 @@ export default async function UtentiModerazione({ searchParams }: PageProps<"/mo
                 <span className="font-medium">{u.nome_visualizzato}</span> <span className="text-muted-foreground">· {u.email}</span>
               </p>
               <p className="text-xs text-muted-foreground">
-                {u.ruolo} · account {u.stato_account} · iscritto il {formattaData(u.data_registrazione)} · {u.segnalazioni} segnalazioni
+                {u.ruolo} · account {u.stato_account} · registrato il {formattaData(u.data_registrazione)} · {u.segnalazioni} segnalazioni
               </p>
               {u.livello < io.livello && u.stato_account !== "cancellato" && <FormSanzione idUtente={u.id} nome={u.nome_visualizzato} />}
             </li>

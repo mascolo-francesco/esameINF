@@ -188,11 +188,11 @@ export async function moderaContenuto(tipo: "commento" | "aggiornamento", id: nu
 const schemaSanzione = z
   .object({
     idUtente: z.coerce.number().int().positive(),
-    tipo: z.enum(["sospensione", "ban"], { error: "Scegli il tipo di provvedimento" }),
+    tipo: z.enum(["sospensione", "ban"], { error: "Scegli il tipo di provvedimento." }),
     giorni: z.coerce.number().int().min(1, "Almeno 1 giorno").max(365, "Al massimo 365 giorni").optional(),
     motivazione: z.string().trim().min(5, "Motivazione: almeno 5 caratteri").max(1000),
   })
-  .refine((d) => d.tipo === "ban" || d.giorni, { message: "Indica la durata della sospensione", path: ["giorni"] });
+  .refine((d) => d.tipo === "ban" || d.giorni, { message: "Indica la durata della sospensione.", path: ["giorni"] });
 
 // RF-44: il trigger impedisce di sanzionare un pari grado o un superiore
 export async function sanziona(_: Esito | null, fd: FormData): Promise<Esito> {

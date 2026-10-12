@@ -23,8 +23,8 @@ export function PulsanteAzione({
         if (conferma && !window.confirm(conferma)) return;
         avvia(async () => {
           const r = await azione();
-          if (r.ok) toast.success(r.messaggio ?? "Fatto");
-          else toast.error(r.errore ?? "Operazione non riuscita");
+          if (r.ok) toast.success(r.messaggio ?? "Operazione completata.");
+          else toast.error(r.errore ?? "Operazione non riuscita. Riprova.");
         });
       }}
     >

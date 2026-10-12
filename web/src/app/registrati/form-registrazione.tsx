@@ -23,7 +23,7 @@ export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { 
         minLength={10}
         required
         esito={esito}
-        aiuto="Almeno 10 caratteri."
+        aiuto="Almeno 10 caratteri. Puoi usare anche una frase."
       />
       <div className="grid gap-4 sm:grid-cols-2">
         <Campo nome="dataNascita" etichetta="Data di nascita" type="date" autoComplete="bday" required esito={esito} />
@@ -63,12 +63,12 @@ export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { 
           </Link>{" "}
           e accetto il trattamento dei dati per usare il servizio (obbligatorio).
         </Casella>
-        <Casella nome="consensoNotifiche">Voglio ricevere notifiche sulle segnalazioni che seguo.</Casella>
+        <Casella nome="consensoNotifiche">Ricevi notifiche sulle segnalazioni che segui.</Casella>
         <Casella nome="consensoIa">
-          Le mie segnalazioni possono servire, in forma anonima, a migliorare i modelli di classificazione.
+          Consenti l&apos;uso anonimo delle tue segnalazioni per migliorare i modelli di classificazione.
         </Casella>
       </fieldset>
-      <PulsanteInvio inAttesa={inAttesa}>Crea account</PulsanteInvio>
+      <PulsanteInvio inAttesa={inAttesa}>Crea l&apos;account</PulsanteInvio>
     </form>
   );
 }
