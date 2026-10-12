@@ -14,6 +14,7 @@ implementa (RF, RD, RNF, RIA), così si può controllare la corrispondenza riga 
 | `04_logica.sql` | 6 funzioni, 8 procedure e 53 trigger per i vincoli e il ciclo di vita |
 | `05_viste.sql` | 16 viste: segnalazioni pubbliche, classifica, cronologia, coda di moderazione, statistiche |
 | `06_eventi.sql` | La manutenzione notturna automatica |
+| `08_utente_app.sql` | I permessi dell'utente `lnc_app` con cui si collega la web app: solo dati ed esecuzione di procedure, niente modifiche allo schema |
 | `query_applicazione.sql` | Le 75 query della web app, raggruppate per caso d'uso |
 | `territorio/genera_territorio.py` | Scarica i confini dal portale open data del Comune e scrive `02_territorio.sql` |
 | `../docs/er/` | Il modello Entità-Relazione da cui deriva lo schema |
@@ -30,6 +31,9 @@ db/test/esegui_test.sh
 Nell'output dei test ogni riga "ATTESO ERRORE" deve essere seguita dal suo errore, e l'ultima riga deve
 dire "FINE: rollback eseguito". I file 04, 05 e 06 si possono rilanciare quando cambiano: ricreano
 trigger, procedure e viste e non toccano i dati.
+
+L'utente `lnc_app` lo creo con `avn service user-create`, poi lancio `08_utente_app.sql` per togliergli
+i permessi da amministratore che Aiven assegna di default.
 
 ## Come si usa dall'applicazione
 
