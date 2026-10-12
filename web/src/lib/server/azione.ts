@@ -4,7 +4,7 @@ import { z } from "zod";
 import { ErroreApp } from "./errori";
 
 /** Risposta di ogni Server Action: i form la usano per mostrare errori e messaggi. */
-export type Esito<T = undefined> =
+export type Esito<T = unknown> =
   | { ok: true; dati?: T; messaggio?: string }
   | { ok: false; errore: string; campi?: Record<string, string> };
 
@@ -26,7 +26,8 @@ export async function eseguiAzione<T>(fn: () => Promise<T>, messaggio?: string):
         const chiave = issue.path.join(".") || "_";
         campi[chiave] ??= issue.message;
       }
-      return { ok: false, errore: "Controlla i campi evidenziati.", campi };
+      const senzaCampo = campi._;
+      return { ok: false, errore: senzaCampo ?? "Controlla i campi evidenziati.", campi };
     }
     if (e instanceof ErroreApp) return { ok: false, errore: e.message };
     console.error(e);

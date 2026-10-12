@@ -1,0 +1,25 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { utenteCorrente } from "@/lib/server/auth/sessione";
+import { Pagina } from "@/components/pagina";
+import { FormAccesso } from "./form-accesso";
+
+export const metadata: Metadata = { title: "Accedi" };
+
+export default async function PaginaAccedi({ searchParams }: PageProps<"/accedi">) {
+  const { da } = await searchParams;
+  const destinazione = typeof da === "string" ? da : "/";
+  if (await utenteCorrente()) redirect(destinazione);
+  return (
+    <Pagina titolo="Accedi" descrizione="Entra per segnalare, sostenere e commentare." stretta>
+      <FormAccesso da={destinazione} />
+      <p className="mt-6 text-sm text-muted-foreground">
+        Non hai un account?{" "}
+        <Link href={`/registrati?da=${encodeURIComponent(destinazione)}`} className="font-medium text-primary underline-offset-4 hover:underline">
+          Registrati
+        </Link>
+      </p>
+    </Pagina>
+  );
+}
