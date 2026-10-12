@@ -26,3 +26,6 @@ __pycache__/
 
 # Log
 *.log
+
+# Appunti personali (stack e prompt di sviluppo)
+docs/stack-web-app.md
