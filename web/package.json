@@ -11,8 +11,8 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:e2e": "playwright test",
-    "seed": "tsx --env-file=.env.local scripts/seed-demo.ts"
+    "seed": "tsx --env-file=.env.local scripts/seed-demo.ts",
+    "test:e2e": "bash test/e2e.sh"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -39,7 +39,6 @@
     "zod": "^4.6.6"
   },
   "devDependencies": {
-    "@playwright/test": "^1.64.0",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^24.19.2",
     "@types/qrcode": "^1.5.6",

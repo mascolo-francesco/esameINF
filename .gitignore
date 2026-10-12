@@ -34,5 +34,3 @@ docs/stack-web-app.md
 web/.demo/
 web/AGENTS.md
 web/CLAUDE.md
-web/test-results/
-web/playwright-report/
