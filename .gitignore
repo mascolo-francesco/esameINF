@@ -29,3 +29,10 @@ __pycache__/
 
 # Appunti personali (stack e prompt di sviluppo)
 docs/stack-web-app.md
+
+# Web app: credenziali della demo e file rigenerati da next dev
+web/.demo/
+web/AGENTS.md
+web/CLAUDE.md
+web/test-results/
+web/playwright-report/
