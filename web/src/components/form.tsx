@@ -143,8 +143,15 @@ export function MessaggioEsito({ esito }: { esito: EsitoForm }) {
  * Come useActionState, ma invia il form senza svuotarlo: React 19 resetta i form con action,
  * e dopo un errore di validazione l'utente perderebbe quello che ha scritto.
  */
-export function useFormAzione<E extends EsitoForm>(azione: (prec: E | null, fd: FormData) => Promise<E>) {
-  const [esito, esegui, inAttesa] = useActionState(azione, null);
+export function useFormAzione<E extends EsitoForm>(
+  azione: (prec: E | null, fd: FormData) => Promise<E>,
+  dopo?: (esito: E) => void,
+) {
+  const [esito, esegui, inAttesa] = useActionState(async (prec: E | null, fd: FormData) => {
+    const r = await azione(prec, fd);
+    dopo?.(r);
+    return r;
+  }, null);
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
