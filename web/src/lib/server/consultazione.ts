@@ -162,3 +162,98 @@ export async function relazioneUtente(idUtente: number, idSegnalazione: number) 
   );
   return { sostiene: Boolean(r?.sostiene), segue: Boolean(r?.segue) };
 }
+
+export interface FiltriClassifica {
+  ordine: "sostenute" | "tendenza";
+  categoria: number | null;
+  municipio: number | null;
+  quartiere: number | null;
+  tipo: "problema" | "proposta" | null;
+  stato: string | null;
+  giorni: number | null;
+  pagina: number;
+}
+
+export interface VoceClassifica {
+  id: number;
+  codice: string;
+  titolo: string;
+  tipo: string;
+  stato: string;
+  statoCodice: string;
+  quartiere: string;
+  municipio: string;
+  categorie: string | null;
+  colore: string | null;
+  miniatura: string | null;
+  sostegni: number;
+  punteggio: number;
+  dataPubblicazione: Date | null;
+}
+
+export const PER_PAGINA = 20;
+
+/** RF-35, RF-36: query "classifica" con i filtri facoltativi (NULL = ignorato). */
+export async function classifica(f: FiltriClassifica): Promise<{ voci: VoceClassifica[]; altre: boolean }> {
+  const dal = f.giorni ? new Date(Date.now() - f.giorni * 86_400_000) : null;
+  const righe = await db.righe<{
+    id: number;
+    codice_pubblico: string;
+    titolo: string;
+    tipo: string;
+    stato: string;
+    stato_corrente: string;
+    quartiere: string;
+    municipio: string;
+    categorie: string | null;
+    colore_mappa: string | null;
+    miniatura: string | null;
+    num_sostegni: number;
+    punteggio_priorita: number;
+    data_pubblicazione: Date | null;
+  }>(
+    `SELECT v.id, v.codice_pubblico, v.titolo, v.tipo, v.stato, v.stato_corrente, v.quartiere, v.municipio, v.categorie,
+            v.colore_mappa, v.miniatura, v.num_sostegni, v.punteggio_priorita, v.punteggio_tendenza, v.data_pubblicazione
+       FROM v_classifica v
+      WHERE (? IS NULL OR EXISTS (SELECT 1 FROM classificazione c
+                                   WHERE c.id_segnalazione = v.id AND c.confermata AND c.id_categoria = ?))
+        AND (? IS NULL OR v.id_municipio = ?)
+        AND (? IS NULL OR v.id_quartiere = ?)
+        AND (? IS NULL OR v.tipo = ?)
+        AND (? IS NULL OR v.stato_corrente = ?)
+        AND (? IS NULL OR v.data_pubblicazione >= ?)
+      ORDER BY CASE WHEN ? = 'tendenza' THEN v.punteggio_tendenza ELSE v.punteggio_priorita END DESC,
+               v.num_sostegni DESC, v.data_pubblicazione DESC
+      LIMIT ? OFFSET ?`,
+    [
+      f.categoria, f.categoria,
+      f.municipio, f.municipio,
+      f.quartiere, f.quartiere,
+      f.tipo, f.tipo,
+      f.stato, f.stato,
+      dal, dal,
+      f.ordine,
+      // LIMIT e OFFSET come stringhe: MySQL 8 rifiuta i double che mysql2 manda per i numeri JS
+      String(PER_PAGINA + 1), String((f.pagina - 1) * PER_PAGINA),
+    ],
+  );
+  return {
+    altre: righe.length > PER_PAGINA,
+    voci: righe.slice(0, PER_PAGINA).map((r) => ({
+      id: r.id,
+      codice: r.codice_pubblico,
+      titolo: r.titolo,
+      tipo: r.tipo,
+      stato: r.stato,
+      statoCodice: r.stato_corrente,
+      quartiere: nomeQuartiere(r.quartiere),
+      municipio: r.municipio,
+      categorie: r.categorie,
+      colore: r.colore_mappa,
+      miniatura: r.miniatura,
+      sostegni: r.num_sostegni,
+      punteggio: r.punteggio_priorita,
+      dataPubblicazione: r.data_pubblicazione,
+    })),
+  };
+}
