@@ -67,7 +67,7 @@ web/
 │   └── api/              foto, marker della mappa, CSV, esportazione dei dati
 ├── src/lib/server/       accesso al database, sessioni, foto, query condivise
 ├── src/components/       componenti dell'interfaccia
-├── scripts/seed-demo.ts  dati di prova
+├── scripts/              dati di prova (seed-demo.ts) e le loro foto (foto-demo/)
 └── test/                 test automatici
 ```
 
@@ -86,6 +86,10 @@ cp .env.example .env.local   # poi compilare i tre valori
 npm run seed                 # solo su un database senza utenti
 npm run dev                  # http://localhost:3000
 ```
+
+Le segnalazioni di prova hanno foto vere prese da Wikimedia Commons; autori e licenze sono nella
+pagina `/crediti`. Se il database è stato riempito con un seed precedente, che usava immagini
+segnaposto, `npm run foto-demo` sostituisce le foto senza toccare il resto.
 
 ## Test
 
