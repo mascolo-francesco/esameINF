@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architettura La Nostra Città</title>
+<style>
+:root {
+  --sfondo: #F6F7F9; --pannello: #FFFFFF; --testo: #0F172A; --tenue: #64748B; --bordo: #E2E8F0;
+  --accento: #2F6FDB; --evidenza: #F59E0B;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--sfondo); color: var(--testo); font: 15px/1.45 'Helvetica Neue', Helvetica, Arial, sans-serif; display: grid; grid-template-columns: 1fr 380px; grid-template-rows: auto 1fr; overflow: hidden; }
+header { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 16px; background: var(--pannello); border-bottom: 1px solid var(--bordo); }
+header h1 { font-size: 17px; margin: 0 12px 0 0; }
+.gruppo-btn { display: flex; gap: 4px; padding-right: 10px; margin-right: 2px; border-right: 1px solid var(--bordo); }
+.gruppo-btn:last-child { border-right: 0; }
+button { font: inherit; font-size: 14px; border: 1px solid var(--bordo); background: #fff; color: var(--testo); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+button:hover { background: #F1F5F9; }
+button[aria-pressed="true"] { background: var(--testo); color: #fff; border-color: var(--testo); }
+button:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
+#area { position: relative; overflow: hidden; }
+#lavagna { width: 100%; height: 100%; display: block; cursor: grab; user-select: none; touch-action: none; }
+#lavagna.trascina { cursor: grabbing; }
+#lavagna.matita { cursor: crosshair; }
+.suggerimento { position: absolute; left: 12px; bottom: 12px; background: rgba(255,255,255,.92); border: 1px solid var(--bordo); border-radius: 8px; padding: 6px 10px; font-size: 13px; color: var(--tenue); pointer-events: none; }
+aside { background: var(--pannello); border-left: 1px solid var(--bordo); overflow-y: auto; padding: 14px 16px 40px; }
+aside h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--tenue); margin: 18px 0 8px; display: flex; justify-content: space-between; align-items: center; }
+aside h2 button { font-size: 12px; padding: 2px 8px; text-transform: none; letter-spacing: 0; }
+#scheda { border: 1px solid var(--bordo); border-radius: 12px; padding: 12px 14px; background: #FBFCFE; min-height: 120px; }
+#scheda .num { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-weight: 700; margin-right: 8px; font-size: 14px; }
+#scheda h3 { margin: 0 0 6px; font-size: 17px; display: flex; align-items: center; }
+#scheda p { margin: 0; color: #334155; }
+#scheda .nav { display: flex; gap: 6px; margin-top: 10px; }
+.voce { display: flex; gap: 8px; align-items: flex-start; padding: 6px 6px; border-radius: 8px; cursor: pointer; }
+.voce:hover { background: #F1F5F9; }
+.voce.attiva { background: #FEF3C7; }
+.voce input { margin-top: 5px; }
+.voce .num { flex: 0 0 24px; height: 24px; border-radius: 50%; color: #fff; font-weight: 700; font-size: 12.5px; display: grid; place-items: center; }
+.voce .tit { font-weight: 600; }
+.cont { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+/* stati del diagramma */
+.freccia, .badge, .nodo { transition: opacity .2s; }
+.freccia { cursor: pointer; }
+.freccia:hover .linea { stroke-width: 4.5; }
+.nodo { cursor: pointer; }
+.nodo:hover .corpo { stroke-width: 3.5; }
+.testata { cursor: pointer; }
+.testata:hover text { text-decoration: underline; }
+.nascosta { display: none; }
+.sfuma .freccia:not(.luce), .sfuma .badge:not(.luce) { opacity: .12; }
+.sfuma .nodo:not(.luce) { opacity: .35; }
+.freccia.luce .linea { stroke-width: 4.5; }
+.badge.luce circle { stroke: var(--evidenza); stroke-width: 4; }
+.nodo.luce .corpo { stroke: var(--evidenza); stroke-width: 4; }
+.nodo.compatto .dettaglio { display: none; }
+.senza-livelli .livelli { display: none; }
+.senza-fisico .fisico, .senza-fisico .testata { display: none; }
+#disegni path { fill: none; stroke: #E11D48; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 900px) {
+  body { grid-template-columns: 1fr; grid-template-rows: auto 60vh auto; overflow: auto; }
+  aside { border-left: 0; border-top: 1px solid var(--bordo); }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Architettura · La Nostra Città</h1>
+  <div class="gruppo-btn">
+    <button id="zoom-piu" title="Ingrandisci">＋</button>
+    <button id="zoom-meno" title="Riduci">－</button>
+    <button id="adatta" title="Mostra tutto">Adatta</button>
+  </div>
+  <div class="gruppo-btn">
+    <button id="tour" aria-pressed="false">▶ Percorso guidato</button>
+  </div>
+  <div class="gruppo-btn">
+    <button id="vista-livelli" aria-pressed="true">Livelli logici</button>
+    <button id="vista-fisico" aria-pressed="true">Luoghi fisici</button>
+  </div>
+  <div class="gruppo-btn">
+    <button id="espandi-tutto">Espandi tutto</button>
+    <button id="compatta-tutto">Compatta tutto</button>
+  </div>
+  <div class="gruppo-btn">
+    <button id="matita" aria-pressed="false">✎ Disegna</button>
+    <button id="cancella">Cancella disegni</button>
+  </div>
+</header>
+<div id="area">
+<svg id="lavagna" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1305" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" role="img" aria-labelledby="lavagna-title lavagna-desc">
+<title id="lavagna-title">Architettura di La Nostra Città</title>
+<desc id="lavagna-desc">Come una richiesta parte dal browser dell'utente, passa dal server Next.js e arriva al database MySQL su Aiven, con i servizi esterni e il lavoro dello sviluppatore; 20 frecce numerate e spiegate.</desc>
+<rect class="sfondo" x="-5000" y="-5000" width="12400" height="11305" fill="url(#griglia)"/>
+<defs><pattern id="griglia" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1.3" fill="#CBD5E1"/></pattern></defs>
+<g id="mondo">
+<defs>
+  <marker id="punta-req" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+    <path d="M0,0 L12,6 L0,12 z" fill="#1E293B"/>
+  </marker>
+  <marker id="punta-resp" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+    <path d="M0,0 L12,6 L0,12 z" fill="#0E7490"/>
+  </marker>
+  <marker id="punta-dev" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+    <path d="M0,0 L12,6 L0,12 z" fill="#8A94A6"/>
+  </marker></defs>
+<g class="intestazione">
+  <text class="" x="40" y="60" font-size="32" font-weight="800" fill="#0F172A" text-anchor="start"><tspan x="40" dy="0">La Nostra Città, Il Nostro Futuro · come funziona la piattaforma</tspan></text>
+  <text class="" x="40" y="92" font-size="16" font-weight="400" fill="#475569" text-anchor="start"><tspan x="40" dy="0">Le fasce colorate sono i livelli logici, i riquadri tratteggiati i luoghi fisici. Le frecce numerate seguono il viaggio di una richiesta.</tspan></text>
+</g>
+<g class="legenda"><path d="M1490,34 L1550,34" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" />
+  <text class="" x="1564" y="39" font-size="14.5" font-weight="400" fill="#334155" text-anchor="start"><tspan x="1564" dy="0">richiesta o azione</tspan></text><path d="M1930,34 L1990,34" stroke="#0E7490" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#punta-resp)" />
+  <text class="" x="2004" y="39" font-size="14.5" font-weight="400" fill="#334155" text-anchor="start"><tspan x="2004" dy="0">risposta: i dati tornano indietro</tspan></text><path d="M1490,60 L1550,60" stroke="#8A94A6" stroke-width="2.6" stroke-dasharray="3 6" stroke-linecap="round" marker-end="url(#punta-dev)" />
+  <text class="" x="1564" y="65" font-size="14.5" font-weight="400" fill="#334155" text-anchor="start"><tspan x="1564" dy="0">sviluppo, operazione una tantum</tspan></text><circle cx="1960" cy="60" r="11" fill="#1E293B"/><text x="1960" y="64" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">7</text>
+  <text class="" x="2004" y="65" font-size="14.5" font-weight="400" fill="#334155" text-anchor="start"><tspan x="2004" dy="0">numero del passo, spiegato sotto</tspan></text>
+  <rect x="1503" y="78" width="34" height="16" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text class="" x="1564" y="91" font-size="14.5" font-weight="400" fill="#334155" text-anchor="start"><tspan x="1564" dy="0">riquadro tratteggiato = luogo fisico (macchina o servizio)</tspan></text>
+</g>
+<g class="livelli"><rect x="30" y="120" width="240" height="34" rx="8" fill="#64748B"/>
+  <text class="" x="150" y="143" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="150" dy="0">PERSONE</tspan></text><rect x="320" y="120" width="560" height="34" rx="8" fill="#2F6FDB"/>
+  <text class="" x="600" y="143" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="600" dy="0">PRESENTAZIONE · ciò che l'utente vede</tspan></text><rect x="960" y="120" width="660" height="34" rx="8" fill="#D9861A"/>
+  <text class="" x="1290" y="143" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="1290" dy="0">LOGICA APPLICATIVA · regole e sicurezza</tspan></text><rect x="1700" y="120" width="670" height="34" rx="8" fill="#1F9D55"/>
+  <text class="" x="2035" y="143" font-size="14.5" font-weight="700" fill="#FFFFFF" text-anchor="middle"><tspan x="2035" dy="0">DATI · la memoria permanente</tspan></text></g>
+<g class="strato-contenitori"><g class="contenitore" data-id="dispositivo">
+  <rect class="fisico" x="320" y="170" width="560" height="830" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2" stroke-dasharray="10 7"/>
+  <g class="testata" data-contenitore="dispositivo">
+    <text class="interruttore" x="336" y="199" font-size="18" fill="#475569">▾</text>
+    <text class="" x="358" y="199" font-size="20" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="358" dy="0">Dispositivo dell'utente</tspan></text>
+    <text class="" x="358" y="220" font-size="14" font-weight="400" fill="#64748B" text-anchor="start"><tspan x="358" dy="0">PC, tablet o smartphone</tspan></text>
+  </g>
+</g><g class="contenitore" data-id="server">
+  <rect class="fisico" x="960" y="170" width="660" height="830" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2" stroke-dasharray="10 7"/>
+  <g class="testata" data-contenitore="server">
+    <text class="interruttore" x="976" y="199" font-size="18" fill="#475569">▾</text>
+    <text class="" x="998" y="199" font-size="20" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="998" dy="0">Server applicativo</tspan></text>
+    <text class="" x="998" y="220" font-size="14" font-weight="400" fill="#64748B" text-anchor="start"><tspan x="998" dy="0">Next.js 16 su Node.js</tspan></text>
+  </g>
+</g><g class="contenitore" data-id="cloud">
+  <rect class="fisico" x="1700" y="170" width="670" height="830" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2" stroke-dasharray="10 7"/>
+  <g class="testata" data-contenitore="cloud">
+    <text class="interruttore" x="1716" y="199" font-size="18" fill="#475569">▾</text>
+    <text class="" x="1738" y="199" font-size="20" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1738" dy="0">Cloud Aiven</tspan></text>
+    <text class="" x="1738" y="220" font-size="14" font-weight="400" fill="#64748B" text-anchor="start"><tspan x="1738" dy="0">data center DigitalOcean ad Amsterdam</tspan></text>
+  </g>
+</g><g class="contenitore" data-id="esterni">
+  <rect class="fisico" x="30" y="1030" width="2340" height="260" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2" stroke-dasharray="10 7"/>
+  <g class="testata" data-contenitore="esterni">
+    <text class="interruttore" x="46" y="1059" font-size="18" fill="#475569">▾</text>
+    <text class="" x="68" y="1059" font-size="20" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="68" dy="0">Fuori dal sistema</tspan></text>
+    <text class="" x="68" y="1080" font-size="14" font-weight="400" fill="#64748B" text-anchor="start"><tspan x="68" dy="0">servizi su Internet e lavoro dello sviluppatore</tspan></text>
+  </g>
+</g></g>
+<g class="strato-cornici"><g class="cornice" data-dentro="dispositivo">
+  <rect x="340" y="245" width="520" height="310" rx="10" fill="#FFFFFF" fill-opacity="0.75" stroke="#2F6FDB" stroke-width="1.5"/>
+  <text class="" x="356" y="269" font-size="14.5" font-weight="700" fill="#2F6FDB" text-anchor="start"><tspan x="356" dy="0">Browser web o app installata (PWA)</tspan></text>
+</g><g class="cornice" data-dentro="cloud">
+  <rect x="1720" y="245" width="630" height="665" rx="10" fill="#FFFFFF" fill-opacity="0.75" stroke="#1F9D55" stroke-width="1.5"/>
+  <text class="" x="1736" y="269" font-size="14.5" font-weight="700" fill="#1F9D55" text-anchor="start"><tspan x="1736" dy="0">Server MySQL 8.4 · servizio esameinf-mysql · database defaultdb</tspan></text>
+</g></g>
+<g class="strato-note"><g class="nota" data-dentro="dispositivo"><text class="" x="345" y="760" font-size="13.5" font-weight="400" fill="#64748B" text-anchor="start"><tspan x="345" dy="0">Sul dispositivo non restano password né dati del database:</tspan><tspan x="345" dy="18.9">solo i cookie di sessione (HttpOnly), che il JavaScript</tspan><tspan x="345" dy="18.9">della pagina non può leggere.</tspan></text></g><g class="nota" data-dentro="server"><text class="" x="980" y="935" font-size="13.5" font-weight="400" fill="#64748B" text-anchor="start"><tspan x="980" dy="0">Macchina fisica: oggi il PC di sviluppo (localhost:3000);</tspan><tspan x="980" dy="18.9">online girerà su Vercel, region Francoforte (fra1).</tspan></text></g><g class="nota" data-dentro="cloud"><text class="" x="1720" y="950" font-size="13.5" font-weight="400" fill="#64748B" text-anchor="start"><tspan x="1720" dy="0">Piano gratuito free-1-1gb: 1 GB di RAM e 1 GB di disco.</tspan></text></g></g>
+<g class="strato-nodi"><g class="nodo" data-id="cittadino" data-dentro="">
+  <rect class="corpo" x="40" y="230" width="220" height="175" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <g fill="#64748B"><circle cx="150" cy="254" r="11"/><path d="M130,286 a20,18 0 0 1 40,0 z"/></g><text class="" x="150" y="310" font-size="17" font-weight="700" fill="#0F172A" text-anchor="middle"><tspan x="150" dy="0">Cittadino o visitatore</tspan></text><text class="dettaglio" x="150" y="333" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle"><tspan x="150" dy="0">segnala, sostiene,</tspan><tspan x="150" dy="17.55">commenta; chi non è</tspan><tspan x="150" dy="17.55">iscritto può solo guardare</tspan></text>
+</g><g class="nodo" data-id="staff" data-dentro="">
+  <rect class="corpo" x="40" y="495" width="220" height="185" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <g fill="#64748B"><circle cx="150" cy="519" r="11"/><path d="M130,551 a20,18 0 0 1 40,0 z"/></g><text class="" x="150" y="575" font-size="17" font-weight="700" fill="#0F172A" text-anchor="middle"><tspan x="150" dy="0">Moderatore e</tspan><tspan x="150" dy="22.1">amministratore</tspan></text><text class="dettaglio" x="150" y="619" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle"><tspan x="150" dy="0">approvano le segnalazioni,</tspan><tspan x="150" dy="17.55">gestiscono utenti e</tspan><tspan x="150" dy="17.55">categorie</tspan></text>
+</g><g class="nodo" data-id="totp" data-dentro="">
+  <rect class="corpo" x="40" y="780" width="220" height="130" rx="8" fill="#F1E9FF" stroke="#8B5CF6" stroke-width="2"/>
+  <g><rect x="139" y="794" width="22" height="36" rx="4" fill="none" stroke="#8B5CF6" stroke-width="2.5"/><circle cx="150" cy="824" r="2" fill="#8B5CF6"/></g><rect x="211.2" y="788" width="40.8" height="18" rx="2" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1"/><text x="231.6" y="801" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#8B5CF6" text-anchor="middle">TOTP</text><text class="" x="150" y="860" font-size="17" font-weight="700" fill="#0F172A" text-anchor="middle"><tspan x="150" dy="0">App di autenticazione</tspan></text><text class="dettaglio" x="150" y="883" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle"><tspan x="150" dy="0">sul telefono dello staff,</tspan><tspan x="150" dy="17.55">genera i codici</tspan></text>
+</g><g class="nodo" data-id="interfaccia" data-dentro="dispositivo">
+  <rect class="corpo" x="380" y="280" width="460" height="95" rx="8" fill="#E3EDFF" stroke="#2F6FDB" stroke-width="2"/>
+  <rect x="762.4" y="288" width="69.6" height="18" rx="2" fill="#FFFFFF" stroke="#2F6FDB" stroke-width="1"/><text x="797.2" y="301" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#2F6FDB" text-anchor="middle">React 19</text><text class="" x="394" y="310" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="394" dy="0">Interfaccia del sito</tspan></text><text class="dettaglio" x="394" y="333" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="394" dy="0">pagine React con Tailwind e shadcn/ui: moduli, pulsanti,</tspan><tspan x="394" dy="17.55">classifica</tspan></text>
+</g><g class="nodo" data-id="sw" data-dentro="dispositivo">
+  <rect class="corpo" x="380" y="420" width="200" height="115" rx="8" fill="#E3EDFF" stroke="#2F6FDB" stroke-width="2"/>
+  <rect x="524" y="428" width="48" height="18" rx="2" fill="#FFFFFF" stroke="#2F6FDB" stroke-width="1"/><text x="548" y="441" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#2F6FDB" text-anchor="middle">sw.js</text><text class="" x="394" y="450" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="394" dy="0">Service</tspan><tspan x="394" dy="22.1">worker</tspan></text><text class="dettaglio" x="394" y="494" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="394" dy="0">pagina di cortesia quando</tspan><tspan x="394" dy="17.55">manca la rete</tspan></text>
+</g><g class="nodo" data-id="mappa" data-dentro="dispositivo">
+  <rect class="corpo" x="600" y="420" width="240" height="115" rx="8" fill="#E3EDFF" stroke="#2F6FDB" stroke-width="2"/>
+  <rect x="762.4" y="428" width="69.6" height="18" rx="2" fill="#FFFFFF" stroke="#2F6FDB" stroke-width="1"/><text x="797.2" y="441" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#2F6FDB" text-anchor="middle">MapLibre</text><text class="" x="614" y="450" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="614" dy="0">Mappa MapLibre</tspan></text><text class="dettaglio" x="614" y="473" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="614" dy="0">disegna Milano e i marker</tspan><tspan x="614" dy="17.55">delle segnalazioni</tspan></text>
+</g><g class="nodo" data-id="camera" data-dentro="dispositivo">
+  <rect class="corpo" x="380" y="600" width="220" height="90" rx="8" fill="#F1E9FF" stroke="#8B5CF6" stroke-width="2"/>
+  <text class="" x="394" y="630" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="394" dy="0">Fotocamera e GPS</tspan></text><text class="dettaglio" x="394" y="653" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="394" dy="0">del dispositivo</tspan></text>
+</g><g class="nodo" data-id="proxy" data-dentro="server">
+  <rect class="corpo" x="1000" y="245" width="600" height="85" rx="8" fill="#FFF1DB" stroke="#D9861A" stroke-width="2"/>
+  <rect x="1522.4" y="253" width="69.6" height="18" rx="2" fill="#FFFFFF" stroke="#D9861A" stroke-width="1"/><text x="1557.2" y="266" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#D9861A" text-anchor="middle">proxy.ts</text><text class="" x="1014" y="275" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1014" dy="0">Proxy: il portinaio</tspan></text><text class="dettaglio" x="1014" y="298" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1014" dy="0">guarda il cookie di sessione; se il pass è scaduto lo rinnova</tspan></text>
+</g><g class="nodo" data-id="api" data-dentro="server">
+  <rect class="corpo" x="1000" y="380" width="190" height="90" rx="8" fill="#FFF1DB" stroke="#D9861A" stroke-width="2"/>
+  <rect x="1112.4" y="388" width="69.6" height="18" rx="2" fill="#FFFFFF" stroke="#D9861A" stroke-width="1"/><text x="1147.2" y="401" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#D9861A" text-anchor="middle">route.ts</text><text class="" x="1014" y="410" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1014" dy="0">API</tspan></text><text class="dettaglio" x="1014" y="433" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1014" dy="0">/api/mappa,</tspan><tspan x="1014" dy="17.55">/api/allegati, CSV</tspan></text>
+</g><g class="nodo" data-id="pagine" data-dentro="server">
+  <rect class="corpo" x="1205" y="380" width="190" height="90" rx="8" fill="#FFF1DB" stroke="#D9861A" stroke-width="2"/>
+  <rect x="1353.4" y="388" width="33.6" height="18" rx="2" fill="#FFFFFF" stroke="#D9861A" stroke-width="1"/><text x="1370.2" y="401" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#D9861A" text-anchor="middle">RSC</text><text class="" x="1219" y="410" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1219" dy="0">Pagine</tspan></text><text class="dettaglio" x="1219" y="433" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1219" dy="0">Server Components:</tspan><tspan x="1219" dy="17.55">leggono i dati</tspan></text>
+</g><g class="nodo" data-id="azioni" data-dentro="server">
+  <rect class="corpo" x="1410" y="380" width="190" height="90" rx="8" fill="#FFF1DB" stroke="#D9861A" stroke-width="2"/>
+  <text class="" x="1424" y="410" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1424" dy="0">Server Actions</tspan></text><text class="dettaglio" x="1424" y="433" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1424" dy="0">ricevono i moduli</tspan><tspan x="1424" dy="17.55">inviati</tspan></text>
+</g><g class="nodo" data-id="controlli" data-dentro="server">
+  <rect class="corpo" x="1000" y="530" width="600" height="80" rx="8" fill="#FFF1DB" stroke="#D9861A" stroke-width="2"/>
+  <rect x="1472" y="538" width="120" height="18" rx="2" fill="#FFFFFF" stroke="#D9861A" stroke-width="1"/><text x="1532" y="551" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#D9861A" text-anchor="middle">lib/server/auth</text><text class="" x="1014" y="560" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1014" dy="0">Controlli di sicurezza</tspan></text><text class="dettaglio" x="1014" y="583" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1014" dy="0">Zod (dati validi) · permessi per ruolo · Argon2id · JWT · codice TOTP</tspan></text>
+</g><g class="nodo" data-id="foto" data-dentro="server">
+  <rect class="corpo" x="1310" y="670" width="290" height="80" rx="8" fill="#FFF1DB" stroke="#D9861A" stroke-width="2"/>
+  <rect x="1529.6" y="678" width="62.4" height="18" rx="2" fill="#FFFFFF" stroke="#D9861A" stroke-width="1"/><text x="1560.8" y="691" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#D9861A" text-anchor="middle">foto.ts</text><text class="" x="1324" y="700" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1324" dy="0">Elaborazione foto</tspan></text><text class="dettaglio" x="1324" y="723" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1324" dy="0">sharp + exifr: GPS, copia senza EXIF,</tspan><tspan x="1324" dy="17.55">miniatura</tspan></text>
+</g><g class="nodo" data-id="db" data-dentro="server">
+  <rect class="corpo" x="1000" y="810" width="600" height="85" rx="8" fill="#FFF1DB" stroke="#D9861A" stroke-width="2"/>
+  <rect x="1536.8" y="818" width="55.2" height="18" rx="2" fill="#FFFFFF" stroke="#D9861A" stroke-width="1"/><text x="1564.4" y="831" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#D9861A" text-anchor="middle">mysql2</text><text class="" x="1014" y="840" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1014" dy="0">Accesso ai dati (db.ts)</tspan></text><text class="dettaglio" x="1014" y="863" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1014" dy="0">pool mysql2 · SQL parametrizzato · transazioni con utente e IP per l'audit</tspan></text>
+</g><g class="nodo" data-id="tabelle" data-dentro="cloud">
+  <rect class="corpo" x="1740" y="300" width="280" height="100" rx="8" fill="#DEF5E7" stroke="#1F9D55" stroke-width="2"/>
+  <rect x="1935.2" y="308" width="76.8" height="18" rx="2" fill="#FFFFFF" stroke="#1F9D55" stroke-width="1"/><text x="1973.6" y="321" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#1F9D55" text-anchor="middle">01_schema</text><text class="" x="1754" y="330" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1754" dy="0">Tabelle (28)</tspan></text><text class="dettaglio" x="1754" y="353" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1754" dy="0">utenti, segnalazioni, sostegni,</tspan><tspan x="1754" dy="17.55">commenti, quartieri</tspan></text>
+</g><g class="nodo" data-id="fotodb" data-dentro="cloud">
+  <rect class="corpo" x="2050" y="300" width="280" height="100" rx="8" fill="#DEF5E7" stroke="#1F9D55" stroke-width="2"/>
+  <rect x="2259.6" y="308" width="62.4" height="18" rx="2" fill="#FFFFFF" stroke="#1F9D55" stroke-width="1"/><text x="2290.8" y="321" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#1F9D55" text-anchor="middle">07_file</text><text class="" x="2064" y="330" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="2064" dy="0">Foto (file_allegato)</tspan></text><text class="dettaglio" x="2064" y="353" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="2064" dy="0">originale, copia pubblica e</tspan><tspan x="2064" dy="17.55">miniatura</tspan></text>
+</g><g class="nodo" data-id="trigger" data-dentro="cloud">
+  <rect class="corpo" x="1740" y="450" width="280" height="100" rx="8" fill="#DEF5E7" stroke="#1F9D55" stroke-width="2"/>
+  <rect x="1935.2" y="458" width="76.8" height="18" rx="2" fill="#FFFFFF" stroke="#1F9D55" stroke-width="1"/><text x="1973.6" y="471" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#1F9D55" text-anchor="middle">04_logica</text><text class="" x="1754" y="480" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1754" dy="0">Trigger (53) e</tspan><tspan x="1754" dy="22.1">procedure (8)</tspan></text><text class="dettaglio" x="1754" y="524" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1754" dy="0">fanno rispettare le regole, es.</tspan><tspan x="1754" dy="17.55">sp_cambia_stato</tspan></text>
+</g><g class="nodo" data-id="viste" data-dentro="cloud">
+  <rect class="corpo" x="2050" y="450" width="280" height="100" rx="8" fill="#DEF5E7" stroke="#1F9D55" stroke-width="2"/>
+  <rect x="2252.4" y="458" width="69.6" height="18" rx="2" fill="#FFFFFF" stroke="#1F9D55" stroke-width="1"/><text x="2287.2" y="471" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#1F9D55" text-anchor="middle">05_viste</text><text class="" x="2064" y="480" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="2064" dy="0">Viste (16)</tspan></text><text class="dettaglio" x="2064" y="503" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="2064" dy="0">mappa, classifica, coda di</tspan><tspan x="2064" dy="17.55">moderazione, statistiche</tspan></text>
+</g><g class="nodo" data-id="evento" data-dentro="cloud">
+  <rect class="corpo" x="1740" y="600" width="220" height="115" rx="8" fill="#DEF5E7" stroke="#1F9D55" stroke-width="2"/>
+  <rect x="1875.2" y="608" width="76.8" height="18" rx="2" fill="#FFFFFF" stroke="#1F9D55" stroke-width="1"/><text x="1913.6" y="621" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#1F9D55" text-anchor="middle">06_eventi</text><text class="" x="1754" y="630" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1754" dy="0">Evento</tspan><tspan x="1754" dy="22.1">notturno</tspan></text><text class="dettaglio" x="1754" y="674" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1754" dy="0">alle 4: archivia, pulisce,</tspan><tspan x="1754" dy="17.55">anonimizza</tspan></text>
+</g><g class="nodo" data-id="ingresso" data-dentro="cloud">
+  <rect class="corpo" x="1740" y="810" width="590" height="85" rx="8" fill="#DEF5E7" stroke="#1F9D55" stroke-width="2"/>
+  <rect x="2259.6" y="818" width="62.4" height="18" rx="2" fill="#FFFFFF" stroke="#1F9D55" stroke-width="1"/><text x="2290.8" y="831" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#1F9D55" text-anchor="middle">lnc_app</text><text class="" x="1754" y="840" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1754" dy="0">Porta d'ingresso cifrata (TLS)</tspan></text><text class="dettaglio" x="1754" y="863" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1754" dy="0">l'app entra come lnc_app: legge e scrive i dati, non può cambiare lo schema</tspan></text>
+</g><g class="nodo" data-id="sviluppatore" data-dentro="esterni">
+  <rect class="corpo" x="40" y="1095" width="220" height="125" rx="8" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <g fill="#64748B"><circle cx="150" cy="1119" r="11"/><path d="M130,1151 a20,18 0 0 1 40,0 z"/></g><text class="" x="150" y="1175" font-size="17" font-weight="700" fill="#0F172A" text-anchor="middle"><tspan x="150" dy="0">Sviluppatore</tspan></text><text class="dettaglio" x="150" y="1198" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle"><tspan x="150" dy="0">scrive il codice sul suo PC</tspan></text>
+</g><g class="nodo" data-id="osm" data-dentro="esterni">
+  <rect class="corpo" x="600" y="1095" width="240" height="100" rx="8" fill="#F5F5F4" stroke="#78716C" stroke-width="2"/>
+  <rect x="784" y="1103" width="48" height="18" rx="2" fill="#FFFFFF" stroke="#78716C" stroke-width="1"/><text x="808" y="1116" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#78716C" text-anchor="middle">tiles</text><text class="" x="614" y="1125" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="614" dy="0">OpenFreeMap</tspan></text><text class="dettaglio" x="614" y="1148" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="614" dy="0">server gratuito dello sfondo</tspan><tspan x="614" dy="17.55">della mappa</tspan></text>
+</g><g class="nodo" data-id="github" data-dentro="esterni">
+  <rect class="corpo" x="1020" y="1095" width="240" height="100" rx="8" fill="#F5F5F4" stroke="#78716C" stroke-width="2"/>
+  <rect x="1218.4" y="1103" width="33.6" height="18" rx="2" fill="#FFFFFF" stroke="#78716C" stroke-width="1"/><text x="1235.2" y="1116" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#78716C" text-anchor="middle">git</text><text class="" x="1034" y="1125" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="1034" dy="0">GitHub</tspan></text><text class="dettaglio" x="1034" y="1148" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="1034" dy="0">repository del codice, con la</tspan><tspan x="1034" dy="17.55">storia delle modifiche</tspan></text>
+</g><g class="nodo" data-id="opendata" data-dentro="esterni">
+  <rect class="corpo" x="2080" y="1095" width="260" height="100" rx="8" fill="#F5F5F4" stroke="#78716C" stroke-width="2"/>
+  <rect x="2276.8" y="1103" width="55.2" height="18" rx="2" fill="#FFFFFF" stroke="#78716C" stroke-width="1"/><text x="2304.4" y="1116" font-size="11.5" font-family="Menlo, Consolas, monospace" fill="#78716C" text-anchor="middle">Comune</text><text class="" x="2094" y="1125" font-size="17" font-weight="700" fill="#0F172A" text-anchor="start"><tspan x="2094" dy="0">Open data del</tspan><tspan x="2094" dy="22.1">Comune</tspan></text><text class="dettaglio" x="2094" y="1169" font-size="13.5" font-weight="400" fill="#475569" text-anchor="start"><tspan x="2094" dy="0">confini ufficiali di Municipi e</tspan><tspan x="2094" dy="17.55">quartieri</tspan></text>
+</g></g>
+<g class="strato-riepiloghi"><g class="riepilogo" data-id="dispositivo" style="display:none">
+  <rect x="340" y="240" width="520" height="740" rx="14" fill="#EEF2F7" stroke="#94A3B8" stroke-width="1.5"/>
+  <text class="" x="600" y="602" font-size="18" font-weight="400" fill="#334155" text-anchor="middle"><tspan x="600" dy="0">Browser con il sito, la mappa</tspan><tspan x="600" dy="23.400000000000002">e la fotocamera del telefono</tspan></text>
+  <text class="" x="600" y="660" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle"><tspan x="600" dy="0">clic sul titolo per aprire</tspan></text>
+</g><g class="riepilogo" data-id="server" style="display:none">
+  <rect x="980" y="240" width="620" height="740" rx="14" fill="#EEF2F7" stroke="#94A3B8" stroke-width="1.5"/>
+  <text class="" x="1290" y="602" font-size="18" font-weight="400" fill="#334155" text-anchor="middle"><tspan x="1290" dy="0">Riceve le richieste, controlla</tspan><tspan x="1290" dy="23.400000000000002">permessi e dati, parla col database</tspan></text>
+  <text class="" x="1290" y="660" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle"><tspan x="1290" dy="0">clic sul titolo per aprire</tspan></text>
+</g><g class="riepilogo" data-id="cloud" style="display:none">
+  <rect x="1720" y="240" width="630" height="740" rx="14" fill="#EEF2F7" stroke="#94A3B8" stroke-width="1.5"/>
+  <text class="" x="2035" y="602" font-size="18" font-weight="400" fill="#334155" text-anchor="middle"><tspan x="2035" dy="0">MySQL 8.4: tabelle, regole,</tspan><tspan x="2035" dy="23.400000000000002">viste e manutenzione notturna</tspan></text>
+  <text class="" x="2035" y="660" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle"><tspan x="2035" dy="0">clic sul titolo per aprire</tspan></text>
+</g><g class="riepilogo" data-id="esterni" style="display:none">
+  <rect x="50" y="1100" width="2300" height="170" rx="14" fill="#EEF2F7" stroke="#94A3B8" stroke-width="1.5"/>
+  <text class="" x="1200" y="1177" font-size="18" font-weight="400" fill="#334155" text-anchor="middle"><tspan x="1200" dy="0">OpenFreeMap, GitHub, open data</tspan><tspan x="1200" dy="23.400000000000002">del Comune, lo sviluppatore</tspan></text>
+  <text class="" x="1200" y="1235" font-size="13" font-weight="400" fill="#64748B" text-anchor="middle"><tspan x="1200" dy="0">clic sul titolo per aprire</tspan></text>
+</g></g>
+<g class="strato-frecce"><g class="freccia" data-n="1" data-dentro="" data-nodi="cittadino staff interfaccia"><path class="area" d="M260,310 L380,310" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M260,310 L380,310" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><path class="area" d="M260,590 L292,590 Q300,590 300,582 L300,353 Q300,345 308,345 L380,345" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M260,590 L292,590 Q300,590 300,582 L300,353 Q300,345 308,345 L380,345" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="314.5" y="288" width="31.000000000000004" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="330" y="300" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="middle"><tspan x="330" dy="0">usa</tspan></text><rect x="307" y="518" width="31.000000000000004" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="312" y="530" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="312" dy="0">usa</tspan></text></g><g class="freccia" data-n="2" data-dentro="dispositivo" data-nodi="camera interfaccia"><path class="area" d="M380,645 L363,645 Q355,645 355,637 L355,373 Q355,365 363,365 L380,365" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M380,645 L363,645 Q355,645 355,637 L355,373 Q355,365 363,365 L380,365" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="361" y="572" width="122.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="366" y="584" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="366" dy="0">foto e posizione</tspan></text></g><g class="freccia" data-n="3" data-dentro="" data-nodi="totp staff"><path class="area" d="M150,780 L150,680" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M150,780 L150,680" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="161" y="740" width="122.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="166" y="752" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="166" dy="0">codice a 6 cifre</tspan></text></g><g class="freccia" data-n="4" data-dentro="" data-nodi="interfaccia proxy"><path class="area" d="M840,296 L1000,296" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M840,296 L1000,296" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="890" y="275" width="108.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="944" y="287" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="middle"><tspan x="944" dy="0">HTTPS + cookie</tspan></text></g><g class="freccia" data-n="5" data-dentro="server" data-nodi="proxy pagine azioni"><path class="area" d="M1300,330 L1300,380" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1300,330 L1300,380" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><path class="area" d="M1505,330 L1505,380" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1505,330 L1505,380" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="1317" y="347" width="59.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1322" y="359" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="1322" dy="0">inoltra</tspan></text></g><g class="freccia" data-n="6" data-dentro="server" data-nodi="api pagine azioni controlli"><path class="area" d="M1095,470 L1095,530" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1095,470 L1095,530" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><path class="area" d="M1300,470 L1300,530" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1300,470 L1300,530" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><path class="area" d="M1505,470 L1505,530" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1505,470 L1505,530" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="1317" y="493" width="108.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1322" y="505" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="1322" dy="0">fa controllare</tspan></text></g><g class="freccia" data-n="7" data-dentro="server" data-nodi="controlli foto"><path class="area" d="M1455,610 L1455,670" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1455,610 L1455,670" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="1472" y="633" width="150" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1477" y="645" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="1477" dy="0">solo se ci sono foto</tspan></text></g><g class="freccia" data-n="8" data-dentro="server" data-nodi="controlli foto db"><path class="area" d="M1150,610 L1150,810" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1150,610 L1150,810" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><path class="area" d="M1455,750 L1455,810" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1455,750 L1455,810" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="1167" y="703" width="101.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1172" y="715" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="1172" dy="0">chiede i dati</tspan></text><rect x="1472" y="773" width="101.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1477" y="785" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="1477" dy="0">salva le foto</tspan></text></g><g class="freccia" data-n="9" data-dentro="" data-nodi="db ingresso"><path class="area" d="M1600,835 L1740,835" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1600,835 L1740,835" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="1654" y="814" width="80" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1694" y="826" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="middle"><tspan x="1694" dy="0">SQL su TLS</tspan></text></g><g class="freccia" data-n="10" data-dentro="cloud" data-nodi="ingresso trigger tabelle viste"><path class="area" d="M1990,810 L1990,550" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1990,810 L1990,550" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><path class="area" d="M1880,450 L1880,400" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1880,450 L1880,400" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><path class="area" d="M2190,810 L2190,550" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M2190,810 L2190,550" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="2007" y="743" width="115.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="2012" y="755" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="2012" dy="0">scrive: trigger</tspan></text><rect x="1897" y="418" width="52.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1902" y="430" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="1902" dy="0">scrive</tspan></text><rect x="2207" y="673" width="94.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="2212" y="685" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="2212" dy="0">legge: viste</tspan></text></g><g class="freccia" data-n="11" data-dentro="" data-nodi="ingresso db"><path class="area" d="M1740,870 L1600,870" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1740,870 L1600,870" fill="none" stroke="#0E7490" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#punta-resp)" /><rect x="1637.5" y="877" width="101.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1688" y="889" font-size="12.5" font-weight="600" fill="#0E7490" text-anchor="middle"><tspan x="1688" dy="0">dati o errore</tspan></text></g><g class="freccia" data-n="12" data-dentro="" data-nodi="proxy interfaccia"><path class="area" d="M1000,326 L840,326" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1000,326 L840,326" fill="none" stroke="#0E7490" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#punta-resp)" /><rect x="847.5" y="334" width="101.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="898" y="346" font-size="12.5" font-weight="600" fill="#0E7490" text-anchor="middle"><tspan x="898" dy="0">pagina pronta</tspan></text></g><g class="freccia" data-n="13" data-dentro="" data-nodi="mappa api"><path class="area" d="M840,475 L912,475 Q920,475 920,467 L920,433 Q920,425 928,425 L1000,425" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M840,475 L912,475 Q920,475 920,467 L920,433 Q920,425 928,425 L1000,425" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="854" y="482" width="52.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="880" y="494" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="middle"><tspan x="880" dy="0">marker</tspan></text></g><g class="freccia" data-n="14" data-dentro="" data-nodi="mappa osm"><path class="area" d="M720,535 L720,1095" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M720,535 L720,1095" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="737" y="966" width="136" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="742" y="978" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="742" dy="0">scarica i tasselli</tspan></text></g><g class="freccia" data-n="15" data-dentro="dispositivo" data-nodi="sw interfaccia"><path class="area" d="M480,420 L480,375" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M480,420 L480,375" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="497" y="391" width="122.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="502" y="403" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="502" dy="0">se manca la rete</tspan></text></g><g class="freccia" data-n="16" data-dentro="cloud" data-nodi="evento trigger"><path class="area" d="M1850,600 L1850,550" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1850,600 L1850,550" fill="none" stroke="#1E293B" stroke-width="2.6"  marker-end="url(#punta-req)" /><rect x="1867" y="568" width="80" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1872" y="580" font-size="12.5" font-weight="600" fill="#1E293B" text-anchor="start"><tspan x="1872" dy="0">ogni notte</tspan></text></g><g class="freccia" data-n="17" data-dentro="" data-nodi="sviluppatore github"><path class="area" d="M260,1155 L292,1155 Q300,1155 300,1163 L300,1237 Q300,1245 308,1245 L1132,1245 Q1140,1245 1140,1237 L1140,1195" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M260,1155 L292,1155 Q300,1155 300,1163 L300,1237 Q300,1245 308,1245 L1132,1245 Q1140,1245 1140,1237 L1140,1195" fill="none" stroke="#8A94A6" stroke-width="2.6" stroke-dasharray="3 6" stroke-linecap="round" marker-end="url(#punta-dev)" /><rect x="717" y="1224" width="66" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="722" y="1236" font-size="12.5" font-weight="600" fill="#8A94A6" text-anchor="start"><tspan x="722" dy="0">git push</tspan></text></g><g class="freccia" data-n="18" data-dentro="" data-nodi="github proxy"><path class="area" d="M1140,1095 L1140,1000" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M1140,1095 L1140,1000" fill="none" stroke="#8A94A6" stroke-width="2.6" stroke-dasharray="3 6" stroke-linecap="round" marker-end="url(#punta-dev)" /><rect x="1157" y="1034" width="171.00000000000003" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1162" y="1046" font-size="12.5" font-weight="600" fill="#8A94A6" text-anchor="start"><tspan x="1162" dy="0">pubblicazione (da fare)</tspan></text></g><g class="freccia" data-n="19" data-dentro="" data-nodi="sviluppatore ingresso"><path class="area" d="M260,1205 L272,1205 Q280,1205 280,1213 L280,1262 Q280,1270 288,1270 L1872,1270 Q1880,1270 1880,1262 L1880,1000" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M260,1205 L272,1205 Q280,1205 280,1213 L280,1262 Q280,1270 288,1270 L1872,1270 Q1880,1270 1880,1262 L1880,1000" fill="none" stroke="#8A94A6" stroke-width="2.6" stroke-dasharray="3 6" stroke-linecap="round" marker-end="url(#punta-dev)" /><rect x="1617" y="1249" width="206.00000000000003" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="1622" y="1261" font-size="12.5" font-weight="600" fill="#8A94A6" text-anchor="start"><tspan x="1622" dy="0">avn · mysql (amministratore)</tspan></text></g><g class="freccia" data-n="20" data-dentro="" data-nodi="opendata tabelle"><path class="area" d="M2210,1095 L2210,1000" fill="none" stroke="transparent" stroke-width="18"/><path class="linea" d="M2210,1095 L2210,1000" fill="none" stroke="#8A94A6" stroke-width="2.6" stroke-dasharray="3 6" stroke-linecap="round" marker-end="url(#punta-dev)" /><rect x="2227" y="1034" width="108.00000000000001" height="17" rx="3" fill="#FFFFFF" fill-opacity="0.92"/><text class="" x="2232" y="1046" font-size="12.5" font-weight="600" fill="#8A94A6" text-anchor="start"><tspan x="2232" dy="0">una volta sola</tspan></text></g></g>
+<g class="strato-badge"><g class="badge" data-n="1" data-dentro="">
+  <circle cx="283" cy="310" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="283" y="315" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+</g><g class="badge" data-n="1" data-dentro="">
+  <circle cx="300" cy="470" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="300" y="475" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+</g><g class="badge" data-n="2" data-dentro="dispositivo">
+  <circle cx="355" cy="500" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="355" y="505" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+</g><g class="badge" data-n="3" data-dentro="">
+  <circle cx="150" cy="730" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="150" y="735" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+</g><g class="badge" data-n="4" data-dentro="">
+  <circle cx="866" cy="296" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="866" y="301" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+</g><g class="badge" data-n="5" data-dentro="server">
+  <circle cx="1300" cy="354" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1300" y="359" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+</g><g class="badge" data-n="5" data-dentro="server">
+  <circle cx="1505" cy="354" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1505" y="359" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+</g><g class="badge" data-n="6" data-dentro="server">
+  <circle cx="1095" cy="500" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1095" y="505" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+</g><g class="badge" data-n="6" data-dentro="server">
+  <circle cx="1300" cy="500" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1300" y="505" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+</g><g class="badge" data-n="6" data-dentro="server">
+  <circle cx="1505" cy="500" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1505" y="505" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+</g><g class="badge" data-n="7" data-dentro="server">
+  <circle cx="1455" cy="640" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1455" y="645" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text>
+</g><g class="badge" data-n="8" data-dentro="server">
+  <circle cx="1150" cy="710" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1150" y="715" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">8</text>
+</g><g class="badge" data-n="8" data-dentro="server">
+  <circle cx="1455" cy="780" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1455" y="785" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">8</text>
+</g><g class="badge" data-n="9" data-dentro="">
+  <circle cx="1640" cy="835" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1640" y="840" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">9</text>
+</g><g class="badge" data-n="10" data-dentro="cloud">
+  <circle cx="1990" cy="750" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1990" y="755" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">10</text>
+</g><g class="badge" data-n="10" data-dentro="cloud">
+  <circle cx="1880" cy="425" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1880" y="430" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">10</text>
+</g><g class="badge" data-n="10" data-dentro="cloud">
+  <circle cx="2190" cy="680" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="2190" y="685" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">10</text>
+</g><g class="badge" data-n="11" data-dentro="">
+  <circle cx="1620" cy="870" r="15" fill="#0E7490" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1620" y="875" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">11</text>
+</g><g class="badge" data-n="12" data-dentro="">
+  <circle cx="972" cy="326" r="15" fill="#0E7490" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="972" y="331" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">12</text>
+</g><g class="badge" data-n="13" data-dentro="">
+  <circle cx="920" cy="450" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="920" y="455" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">13</text>
+</g><g class="badge" data-n="14" data-dentro="">
+  <circle cx="720" cy="940" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="720" y="945" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">14</text>
+</g><g class="badge" data-n="15" data-dentro="dispositivo">
+  <circle cx="480" cy="398" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="480" y="403" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">15</text>
+</g><g class="badge" data-n="16" data-dentro="cloud">
+  <circle cx="1850" cy="575" r="15" fill="#1E293B" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1850" y="580" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">16</text>
+</g><g class="badge" data-n="17" data-dentro="">
+  <circle cx="700" cy="1245" r="15" fill="#8A94A6" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="700" y="1250" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">17</text>
+</g><g class="badge" data-n="18" data-dentro="">
+  <circle cx="1140" cy="1040" r="15" fill="#8A94A6" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1140" y="1045" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">18</text>
+</g><g class="badge" data-n="19" data-dentro="">
+  <circle cx="1600" cy="1270" r="15" fill="#8A94A6" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1600" y="1275" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">19</text>
+</g><g class="badge" data-n="20" data-dentro="">
+  <circle cx="2210" cy="1040" r="15" fill="#8A94A6" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="2210" y="1045" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">20</text>
+</g></g></g>
+<g id="disegni"></g>
+</svg>
+<div class="suggerimento">Trascina per spostarti · rotellina per lo zoom · clic su una freccia o un componente per i dettagli · clic sul titolo di un riquadro per chiuderlo</div>
+</div>
+<aside>
+  <div id="scheda"><h3>Come si usa</h3><p>Clicca una freccia, un numero o un componente: qui compare la spiegazione e il diagramma evidenzia i collegamenti. Con <b>Percorso guidato</b> segui il viaggio di una richiesta passo per passo.</p></div>
+  <h2>Riquadri fisici</h2>
+  <div id="lista-contenitori"></div>
+  <h2>Frecce <span><button id="tutte-si">tutte</button> <button id="tutte-no">nessuna</button></span></h2>
+  <div id="lista-frecce"></div>
+</aside>
+<script>
+const DATI = {"frecce":[{"n":1,"tipo":"req","titolo":"Usare il sito","testo":"Le persone toccano, scrivono e guardano lo schermo. È l'unico punto in cui l'utente tocca il sistema: tutto il resto lavora dietro le quinte.","gruppo":0,"nodi":["cittadino","staff","interfaccia"],"dentro":null},{"n":2,"tipo":"req","titolo":"Foto e posizione","testo":"Quando si crea una segnalazione il browser prende la foto dalla fotocamera e la posizione dal GPS. Le foto HEIC dell'iPhone vengono convertite già qui.","gruppo":0,"nodi":["camera","interfaccia"],"dentro":"dispositivo"},{"n":3,"tipo":"req","titolo":"Il codice dello staff","testo":"Moderatori e amministratori, oltre alla password, scrivono il codice di 6 cifre che l'app di autenticazione cambia ogni 30 secondi.","gruppo":0,"nodi":["totp","staff"],"dentro":null},{"n":4,"tipo":"req","titolo":"Parte la richiesta","testo":"Il browser manda al server una richiesta cifrata (HTTPS): una pagina da aprire o un modulo da inviare. Insieme viaggiano i cookie, che dicono chi è l'utente.","gruppo":0,"nodi":["interfaccia","proxy"],"dentro":null},{"n":5,"tipo":"req","titolo":"Il portinaio","testo":"Il proxy guarda il cookie: se il pass di 15 minuti è scaduto lo rinnova col refresh token, poi manda la richiesta alla pagina o all'azione giusta.","gruppo":0,"nodi":["proxy","pagine","azioni"],"dentro":"server"},{"n":6,"tipo":"req","titolo":"I controlli","testo":"Prima di toccare i dati il server verifica che siano scritti bene (Zod) e che l'utente abbia il permesso: un cittadino non entra nell'area di moderazione.","gruppo":1,"nodi":["api","pagine","azioni","controlli"],"dentro":"server"},{"n":7,"tipo":"req","titolo":"Le foto","testo":"Il server controlla che il file sia davvero un'immagine, legge GPS e data dello scatto e prepara una copia pubblica senza dati personali e una miniatura.","gruppo":1,"nodi":["controlli","foto"],"dentro":"server"},{"n":8,"tipo":"req","titolo":"Verso i dati","testo":"Pagine e azioni chiedono i dati a db.ts, l'unico modulo che parla col database. Ogni scrittura è una transazione che registra chi agisce e da quale IP.","gruppo":1,"nodi":["controlli","foto","db"],"dentro":"server"},{"n":9,"tipo":"req","titolo":"Il viaggio fino ad Amsterdam","testo":"db.ts invia le query SQL a MySQL su Aiven con una connessione cifrata (TLS). Usa l'utente lnc_app, che legge e scrive i dati ma non cambia la struttura.","gruppo":1,"nodi":["db","ingresso"],"dentro":null},{"n":10,"tipo":"req","titolo":"Il database controlla","testo":"Le scritture passano da trigger e procedure, che bloccano ciò che viola le regole (es. sostenere la propria segnalazione). Le letture usano le viste.","gruppo":1,"nodi":["ingresso","trigger","tabelle","viste"],"dentro":"cloud"},{"n":11,"tipo":"resp","titolo":"La risposta del database","testo":"Tornano i dati chiesti, oppure un errore col codice della regola violata (es. \"RD-06: ...\"). Il server toglie il codice e tiene il messaggio in italiano.","gruppo":2,"nodi":["ingresso","db"],"dentro":null},{"n":12,"tipo":"resp","titolo":"La pagina torna all'utente","testo":"Il server costruisce la pagina con i dati e la rimanda al browser, che la mostra. Se c'era un errore, l'utente legge il messaggio in parole semplici.","gruppo":2,"nodi":["proxy","interfaccia"],"dentro":null},{"n":13,"tipo":"req","titolo":"Marker e foto","testo":"Quando si sposta la mappa il browser chiede a /api/mappa i marker della sola zona visibile. Le foto arrivano da /api/allegati, che le legge dal database.","gruppo":2,"nodi":["mappa","api"],"dentro":null},{"n":14,"tipo":"req","titolo":"Lo sfondo della mappa","testo":"Strade, parchi e nomi delle vie arrivano a tasselli da OpenFreeMap, un servizio gratuito che non chiede chiavi d'accesso.","gruppo":2,"nodi":["mappa","osm"],"dentro":null},{"n":15,"tipo":"req","titolo":"Senza rete","testo":"Se il telefono perde la connessione, il service worker mostra una pagina di cortesia al posto dell'errore. Serve anche a installare il sito come app.","gruppo":2,"nodi":["sw","interfaccia"],"dentro":"dispositivo"},{"n":16,"tipo":"req","titolo":"Il turno di notte","testo":"Ogni notte un evento di MySQL lancia la manutenzione: archivia le segnalazioni ferme da 120 giorni, cancella le bozze abbandonate, riattiva i sospesi.","gruppo":3,"nodi":["evento","trigger"],"dentro":"cloud"},{"n":17,"tipo":"dev","titolo":"Il codice","testo":"Lo sviluppatore scrive il codice sul suo computer e lo carica su GitHub, che conserva la storia di ogni modifica.","gruppo":3,"nodi":["sviluppatore","github"],"dentro":null},{"n":18,"tipo":"dev","titolo":"La pubblicazione","testo":"Da GitHub il codice verrà pubblicato su Vercel, a Francoforte, che lo farà girare per tutti. È il prossimo passo: per ora l'app gira in locale.","gruppo":3,"nodi":["github","proxy"],"dentro":null},{"n":19,"tipo":"dev","titolo":"La gestione del database","testo":"Con la riga di comando di Aiven (avn) e il client mysql lo sviluppatore crea tabelle, trigger e viste e lancia i test, con un utente che l'app non usa.","gruppo":3,"nodi":["sviluppatore","ingresso"],"dentro":null},{"n":20,"tipo":"dev","titolo":"I confini dei quartieri","testo":"Uno script ha scaricato una volta i confini ufficiali dal portale del Comune. Servono a capire in quale quartiere cade una segnalazione.","gruppo":3,"nodi":["opendata","tabelle"],"dentro":null}],"nodi":[{"id":"cittadino","titolo":"Cittadino o visitatore","righe":["segnala, sostiene, commenta; chi non è iscritto può solo guardare"],"dentro":null},{"id":"staff","titolo":"Moderatore e amministratore","righe":["approvano le segnalazioni, gestiscono utenti e categorie"],"dentro":null},{"id":"totp","titolo":"App di autenticazione","righe":["sul telefono dello staff, genera i codici"],"dentro":null},{"id":"interfaccia","titolo":"Interfaccia del sito","righe":["pagine React con Tailwind e shadcn/ui: moduli, pulsanti, classifica"],"dentro":"dispositivo"},{"id":"sw","titolo":"Service worker","righe":["pagina di cortesia quando manca la rete"],"dentro":"dispositivo"},{"id":"mappa","titolo":"Mappa MapLibre","righe":["disegna Milano e i marker delle segnalazioni"],"dentro":"dispositivo"},{"id":"camera","titolo":"Fotocamera e GPS","righe":["del dispositivo"],"dentro":"dispositivo"},{"id":"proxy","titolo":"Proxy: il portinaio","righe":["guarda il cookie di sessione; se il pass è scaduto lo rinnova"],"dentro":"server"},{"id":"api","titolo":"API","righe":["/api/mappa, /api/allegati, CSV"],"dentro":"server"},{"id":"pagine","titolo":"Pagine","righe":["Server Components: leggono i dati"],"dentro":"server"},{"id":"azioni","titolo":"Server Actions","righe":["ricevono i moduli inviati"],"dentro":"server"},{"id":"controlli","titolo":"Controlli di sicurezza","righe":["Zod (dati validi) · permessi per ruolo · Argon2id · JWT · codice TOTP"],"dentro":"server"},{"id":"foto","titolo":"Elaborazione foto","righe":["sharp + exifr: GPS, copia senza EXIF, miniatura"],"dentro":"server"},{"id":"db","titolo":"Accesso ai dati (db.ts)","righe":["pool mysql2 · SQL parametrizzato · transazioni con utente e IP per l'audit"],"dentro":"server"},{"id":"tabelle","titolo":"Tabelle (28)","righe":["utenti, segnalazioni, sostegni, commenti, quartieri"],"dentro":"cloud"},{"id":"fotodb","titolo":"Foto (file_allegato)","righe":["originale, copia pubblica e miniatura"],"dentro":"cloud"},{"id":"trigger","titolo":"Trigger (53) e procedure (8)","righe":["fanno rispettare le regole, es. sp_cambia_stato"],"dentro":"cloud"},{"id":"viste","titolo":"Viste (16)","righe":["mappa, classifica, coda di moderazione, statistiche"],"dentro":"cloud"},{"id":"evento","titolo":"Evento notturno","righe":["alle 4: archivia, pulisce, anonimizza"],"dentro":"cloud"},{"id":"ingresso","titolo":"Porta d'ingresso cifrata (TLS)","righe":["l'app entra come lnc_app: legge e scrive i dati, non può cambiare lo schema"],"dentro":"cloud"},{"id":"sviluppatore","titolo":"Sviluppatore","righe":["scrive il codice sul suo PC"],"dentro":"esterni"},{"id":"osm","titolo":"OpenFreeMap","righe":["server gratuito dello sfondo della mappa"],"dentro":"esterni"},{"id":"github","titolo":"GitHub","righe":["repository del codice, con la storia delle modifiche"],"dentro":"esterni"},{"id":"opendata","titolo":"Open data del Comune","righe":["confini ufficiali di Municipi e quartieri"],"dentro":"esterni"}],"contenitori":[{"id":"dispositivo","titolo":"Dispositivo dell'utente"},{"id":"server","titolo":"Server applicativo"},{"id":"cloud","titolo":"Cloud Aiven"},{"id":"esterni","titolo":"Fuori dal sistema"}],"gruppi":["Dall'utente al server · 1–5","Dentro il server e il database · 6–10","Risposte e mappa · 11–15","Manutenzione e sviluppo · 16–20"],"colori":{"req":"#1E293B","resp":"#0E7490","dev":"#8A94A6"}};
+const svg = document.getElementById("lavagna");
+const mondo = document.getElementById("mondo");
+const scheda = document.getElementById("scheda");
+const W = 2400, H = 1305;
+
+// ---- pan e zoom sulla viewBox ----
+let vb = { x: 0, y: 0, w: W, h: H };
+function applica() { svg.setAttribute("viewBox", vb.x + " " + vb.y + " " + vb.w + " " + vb.h); }
+function puntoSvg(ev) {
+  const r = svg.getBoundingClientRect();
+  const s = Math.max(vb.w / r.width, vb.h / r.height);
+  const ox = (r.width * s - vb.w) / 2, oy = (r.height * s - vb.h) / 2;
+  return { x: vb.x - ox + (ev.clientX - r.left) * s, y: vb.y - oy + (ev.clientY - r.top) * s, s };
+}
+function zoom(f, cx, cy) {
+  const nw = Math.min(W * 4, Math.max(250, vb.w * f));
+  const k = nw / vb.w;
+  cx ??= vb.x + vb.w / 2; cy ??= vb.y + vb.h / 2;
+  vb = { x: cx - (cx - vb.x) * k, y: cy - (cy - vb.y) * k, w: nw, h: vb.h * k };
+  applica();
+}
+function adatta() { vb = { x: 0, y: 0, w: W, h: H }; applica(); }
+function centraSu(box) {
+  const m = 120;
+  const w = Math.max(box.width + m * 2, 900), h = Math.max(box.height + m * 2, 900 * H / W);
+  const k = Math.max(w / W, h / H);
+  vb = { w: W * k, h: H * k, x: box.x + box.width / 2 - W * k / 2, y: box.y + box.height / 2 - H * k / 2 };
+  applica();
+}
+svg.addEventListener("wheel", (e) => { e.preventDefault(); const p = puntoSvg(e); zoom(e.deltaY > 0 ? 1.12 : 1 / 1.12, p.x, p.y); }, { passive: false });
+document.getElementById("zoom-piu").onclick = () => zoom(1 / 1.25);
+document.getElementById("zoom-meno").onclick = () => zoom(1.25);
+document.getElementById("adatta").onclick = adatta;
+
+let trascina = null, tratto = null, matita = false, mosso = false;
+const disegni = document.getElementById("disegni");
+svg.addEventListener("pointerdown", (e) => {
+  mosso = false;
+  const p = puntoSvg(e);
+  if (matita) {
+    tratto = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    tratto.setAttribute("d", "M" + p.x.toFixed(1) + "," + p.y.toFixed(1));
+    disegni.appendChild(tratto);
+  } else {
+    trascina = { x: e.clientX, y: e.clientY, vb: { ...vb }, s: p.s };
+  }
+  // catturo il puntatore subito solo col disegno: altrimenti il clic finirebbe sull'svg e non sul componente
+  if (matita) svg.setPointerCapture(e.pointerId);
+});
+svg.addEventListener("pointermove", (e) => {
+  if (tratto) { const p = puntoSvg(e); tratto.setAttribute("d", tratto.getAttribute("d") + " L" + p.x.toFixed(1) + "," + p.y.toFixed(1)); return; }
+  if (!trascina) return;
+  const dx = e.clientX - trascina.x, dy = e.clientY - trascina.y;
+  if (!mosso && Math.abs(dx) + Math.abs(dy) > 4) { mosso = true; svg.classList.add("trascina"); svg.setPointerCapture(e.pointerId); }
+  vb.x = trascina.vb.x - dx * trascina.s; vb.y = trascina.vb.y - dy * trascina.s; applica();
+});
+svg.addEventListener("pointerup", () => { trascina = null; tratto = null; svg.classList.remove("trascina"); });
+document.getElementById("matita").onclick = (e) => {
+  matita = !matita; e.currentTarget.setAttribute("aria-pressed", matita); svg.classList.toggle("matita", matita);
+};
+document.getElementById("cancella").onclick = () => { disegni.innerHTML = ""; };
+
+// ---- viste ----
+function interruttore(id, cls) {
+  document.getElementById(id).onclick = (e) => {
+    const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+    e.currentTarget.setAttribute("aria-pressed", on);
+    mondo.classList.toggle(cls, !on);
+  };
+}
+interruttore("vista-livelli", "senza-livelli");
+interruttore("vista-fisico", "senza-fisico");
+
+// ---- frecce visibili ----
+const visibili = new Set(DATI.frecce.map((f) => f.n));
+const chiusi = new Set();
+function aggiorna() {
+  for (const el of mondo.querySelectorAll(".freccia, .badge")) {
+    const n = +el.dataset.n, d = el.dataset.dentro;
+    el.classList.toggle("nascosta", !visibili.has(n) || (d && chiusi.has(d)));
+  }
+  for (const el of mondo.querySelectorAll(".nodo, .cornice, .nota")) {
+    el.classList.toggle("nascosta", chiusi.has(el.dataset.dentro));
+  }
+  for (const c of DATI.contenitori) {
+    const chiuso = chiusi.has(c.id);
+    mondo.querySelector('.riepilogo[data-id="' + c.id + '"]').style.display = chiuso ? "" : "none";
+    mondo.querySelector('.testata[data-contenitore="' + c.id + '"] .interruttore').textContent = chiuso ? "▸" : "▾";
+    const cb = document.querySelector('#lista-contenitori input[data-id="' + c.id + '"]');
+    if (cb) cb.checked = !chiuso;
+  }
+  for (const cb of document.querySelectorAll("#lista-frecce input")) cb.checked = visibili.has(+cb.dataset.n);
+}
+
+// ---- evidenziazione e scheda ----
+let attiva = null;
+function pulisci() {
+  mondo.classList.remove("sfuma");
+  for (const el of mondo.querySelectorAll(".luce")) el.classList.remove("luce");
+  for (const el of document.querySelectorAll(".voce.attiva")) el.classList.remove("attiva");
+}
+function mostraFreccia(n, centra) {
+  const f = DATI.frecce.find((x) => x.n === n);
+  attiva = n;
+  visibili.add(n);
+  if (f.dentro) chiusi.delete(f.dentro);
+  for (const id of f.nodi) { const nd = DATI.nodi.find((x) => x.id === id); if (nd?.dentro) chiusi.delete(nd.dentro); }
+  aggiorna();
+  pulisci();
+  mondo.classList.add("sfuma");
+  for (const el of mondo.querySelectorAll('[data-n="' + n + '"]')) el.classList.add("luce");
+  for (const id of f.nodi) mondo.querySelector('.nodo[data-id="' + id + '"]')?.classList.add("luce");
+  document.querySelector('.voce[data-n="' + n + '"]')?.classList.add("attiva");
+  scheda.innerHTML = '<h3><span class="num" style="background:' + DATI.colori[f.tipo] + '">' + n + "</span>" + f.titolo + "</h3><p>" + f.testo +
+    '</p><div class="nav"><button id="prec">◀ ' + (n > 1 ? n - 1 : "") + '</button><button id="succ">' + (n < DATI.frecce.length ? n + 1 : "") + ' ▶</button><button id="chiudi">Chiudi</button></div>';
+  document.getElementById("prec").onclick = () => mostraFreccia(n > 1 ? n - 1 : DATI.frecce.length, true);
+  document.getElementById("succ").onclick = () => mostraFreccia(n < DATI.frecce.length ? n + 1 : 1, true);
+  document.getElementById("chiudi").onclick = () => { fermaTour(); pulisci(); attiva = null; };
+  if (centra) {
+    const els = [...mondo.querySelectorAll('.freccia[data-n="' + n + '"]'), ...f.nodi.map((id) => mondo.querySelector('.nodo[data-id="' + id + '"]'))].filter(Boolean);
+    let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
+    for (const el of els) { const b = el.getBBox(); x1 = Math.min(x1, b.x); y1 = Math.min(y1, b.y); x2 = Math.max(x2, b.x + b.width); y2 = Math.max(y2, b.y + b.height); }
+    centraSu({ x: x1, y: y1, width: x2 - x1, height: y2 - y1 });
+  }
+}
+function mostraNodo(id) {
+  const nd = DATI.nodi.find((x) => x.id === id);
+  const collegate = DATI.frecce.filter((f) => f.nodi.includes(id));
+  pulisci();
+  mondo.classList.add("sfuma");
+  mondo.querySelector('.nodo[data-id="' + id + '"]').classList.add("luce");
+  for (const f of collegate) for (const el of mondo.querySelectorAll('[data-n="' + f.n + '"]')) el.classList.add("luce");
+  scheda.innerHTML = "<h3>" + nd.titolo + "</h3><p>" + nd.righe.join(" ") + "</p>" +
+    '<p style="margin-top:8px;color:#64748B">Frecce collegate: ' + collegate.map((f) => '<a href="#" data-vai="' + f.n + '">' + f.n + "</a>").join(", ") + "</p>" +
+    '<div class="nav"><button id="compatta">' + (mondo.querySelector('.nodo[data-id="' + id + '"]').classList.contains("compatto") ? "Espandi testo" : "Compatta testo") + '</button><button id="chiudi">Chiudi</button></div>';
+  for (const a of scheda.querySelectorAll("[data-vai]")) a.onclick = (e) => { e.preventDefault(); mostraFreccia(+a.dataset.vai, true); };
+  document.getElementById("compatta").onclick = () => { mondo.querySelector('.nodo[data-id="' + id + '"]').classList.toggle("compatto"); mostraNodo(id); };
+  document.getElementById("chiudi").onclick = () => pulisci();
+}
+
+mondo.addEventListener("click", (e) => {
+  if (mosso || matita) return;
+  const t = e.target.closest(".testata");
+  if (t) { const id = t.dataset.contenitore; chiusi.has(id) ? chiusi.delete(id) : chiusi.add(id); aggiorna(); return; }
+  const r = e.target.closest(".riepilogo");
+  if (r) { chiusi.delete(r.dataset.id); aggiorna(); return; }
+  const f = e.target.closest(".freccia, .badge");
+  if (f) { fermaTour(); mostraFreccia(+f.dataset.n, false); return; }
+  const n = e.target.closest(".nodo");
+  if (n) { fermaTour(); mostraNodo(n.dataset.id); return; }
+  fermaTour(); pulisci();
+});
+
+// ---- liste nel pannello ----
+const listaC = document.getElementById("lista-contenitori");
+for (const c of DATI.contenitori) {
+  const l = document.createElement("label"); l.className = "cont";
+  l.innerHTML = '<input type="checkbox" checked data-id="' + c.id + '"> ' + c.titolo;
+  l.querySelector("input").onchange = (e) => { e.target.checked ? chiusi.delete(c.id) : chiusi.add(c.id); aggiorna(); };
+  listaC.appendChild(l);
+}
+const listaF = document.getElementById("lista-frecce");
+DATI.gruppi.forEach((g, gi) => {
+  const h = document.createElement("h2");
+  h.innerHTML = "<span>" + g + '</span><button data-g="' + gi + '">mostra/nascondi</button>';
+  h.style.fontSize = "12px";
+  h.querySelector("button").onclick = () => {
+    const del = DATI.frecce.filter((f) => f.gruppo === gi);
+    const tutteOn = del.every((f) => visibili.has(f.n));
+    for (const f of del) tutteOn ? visibili.delete(f.n) : visibili.add(f.n);
+    aggiorna();
+  };
+  listaF.appendChild(h);
+  for (const f of DATI.frecce.filter((f) => f.gruppo === gi)) {
+    const v = document.createElement("div"); v.className = "voce"; v.dataset.n = f.n;
+    v.innerHTML = '<input type="checkbox" checked data-n="' + f.n + '" aria-label="Mostra freccia ' + f.n + '"><span class="num" style="background:' + DATI.colori[f.tipo] + '">' + f.n + '</span><span><span class="tit">' + f.titolo + "</span></span>";
+    v.querySelector("input").onclick = (e) => { e.stopPropagation(); e.target.checked ? visibili.add(f.n) : visibili.delete(f.n); aggiorna(); };
+    v.onclick = () => { fermaTour(); mostraFreccia(f.n, true); };
+    listaF.appendChild(v);
+  }
+});
+document.getElementById("tutte-si").onclick = () => { DATI.frecce.forEach((f) => visibili.add(f.n)); aggiorna(); };
+document.getElementById("tutte-no").onclick = () => { visibili.clear(); aggiorna(); };
+document.getElementById("espandi-tutto").onclick = () => { chiusi.clear(); mondo.querySelectorAll(".nodo").forEach((n) => n.classList.remove("compatto")); aggiorna(); };
+document.getElementById("compatta-tutto").onclick = () => { mondo.querySelectorAll(".nodo").forEach((n) => n.classList.add("compatto")); };
+
+// ---- percorso guidato ----
+let timer = null;
+const btnTour = document.getElementById("tour");
+function fermaTour() { clearInterval(timer); timer = null; btnTour.setAttribute("aria-pressed", "false"); btnTour.textContent = "▶ Percorso guidato"; }
+btnTour.onclick = () => {
+  if (timer) { fermaTour(); return; }
+  btnTour.setAttribute("aria-pressed", "true"); btnTour.textContent = "❚❚ Pausa";
+  let n = attiva && attiva < DATI.frecce.length ? attiva + 1 : 1;
+  mostraFreccia(n, true);
+  timer = setInterval(() => { n = n < DATI.frecce.length ? n + 1 : 1; mostraFreccia(n, true); }, 5000);
+};
+document.addEventListener("keydown", (e) => {
+  if (e.target.matches("input")) return;
+  if (e.key === "ArrowRight") { fermaTour(); mostraFreccia(attiva && attiva < DATI.frecce.length ? attiva + 1 : 1, true); }
+  if (e.key === "ArrowLeft") { fermaTour(); mostraFreccia(attiva && attiva > 1 ? attiva - 1 : DATI.frecce.length, true); }
+  if (e.key === "Escape") { fermaTour(); pulisci(); attiva = null; adatta(); }
+});
+aggiorna();
+</script>
+</body>
+</html>

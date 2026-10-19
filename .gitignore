@@ -40,3 +40,5 @@ web/CLAUDE.md
 
 # Guida per agenti AI (documento di lavoro locale, non versionato)
 GUIDA.md
+docs/architettura/*.mjs
+docs/architettura/esporta-jpeg.sh

@@ -20,7 +20,10 @@ Se ha poco tempo, le consiglio quest'ordine:
    vincoli, con i commenti che rimandano ai requisiti.
 5. [Le note sul database](db/README.md), dove spiego le scelte fatte e dove mi sono discostato
    dall'analisi.
-6. [La web app](web/README.md): cosa fa, come l'ho costruita e come provarla con gli account di prova.
+6. [L'architettura](docs/architettura/README.md): un disegno con tutti i pezzi del sistema, dove
+   gira ciascuno e 20 frecce numerate che seguono una richiesta dal browser al database. C'è anche
+   una [versione interattiva](docs/architettura/architettura.html) da aprire nel browser.
+7. [La web app](web/README.md): cosa fa, come l'ho costruita e come provarla con gli account di prova.
 
 Poi, se vuole entrare nel dettaglio:
 
@@ -43,6 +46,7 @@ del documento di analisi.
 .
 ├── README.md                  questa pagina
 ├── docs/                      consegna e analisi dei requisiti
+│   ├── architettura/          disegno dell'architettura (JPEG, SVG e versione interattiva)
 │   └── er/                    modello Entità-Relazione (SVG e PNG)
 ├── db/                        database MySQL
 │   ├── 01_schema.sql          le 28 tabelle
@@ -90,10 +94,13 @@ esterni: le foto stanno nel database e l'accesso con password e codice a due fat
 Servono il client `mysql` e un file `.env` compilato come `.env.example`. Poi:
 
 ```bash
-db/esegui.sh db/01_schema.sql db/02_territorio.sql db/03_seed.sql db/04_logica.sql db/05_viste.sql db/06_eventi.sql
+db/esegui.sh db/01_schema.sql db/02_territorio.sql db/03_seed.sql db/04_logica.sql db/05_viste.sql db/06_eventi.sql db/07_file_allegato.sql
 db/test/esegui_test.sh
 ```
 
 I test girano dentro una transazione che alla fine viene annullata, quindi non lasciano dati.
+
+L'ultimo file, `08_utente_app.sql`, lo lancio dopo aver creato l'utente `lnc_app` con la CLI di
+Aiven: toglie all'utente dell'app i permessi da amministratore (i passi sono in [`db/README.md`](db/README.md)).
 
 Per avviare la web app in locale trova le istruzioni in [`web/README.md`](web/README.md).
