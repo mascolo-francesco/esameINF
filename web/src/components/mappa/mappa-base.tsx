@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useEffectEvent, useRef } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
+import { MapTrifoldIcon, WarningCircleIcon } from "@phosphor-icons/react";
 import { Map as MappaLibre, NavigationControl, setWorkerUrl, type MapOptions } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { cn } from "@/lib/utils";
@@ -29,6 +30,8 @@ interface Props {
 export function MappaBase({ className, etichetta, opzioni, onPronta }: Props) {
   const contenitore = useRef<HTMLDivElement>(null);
   const pronta = useEffectEvent((m: MappaLibre) => onPronta(m));
+  // lo stile e le prime tessere arrivano da OpenFreeMap: finché non ci sono il riquadro resterebbe vuoto
+  const [stato, setStato] = useState<"carica" | "pronta" | "errore">("carica");
 
   useEffect(() => {
     if (!contenitore.current) return;
@@ -46,7 +49,12 @@ export function MappaBase({ className, etichetta, opzioni, onPronta }: Props) {
     mappa.addControl(new NavigationControl({ showCompass: false }), "top-right");
     let pulizia: void | (() => void);
     mappa.on("load", () => {
+      setStato("pronta");
       pulizia = pronta(mappa);
+    });
+    // un errore prima di "load" vuol dire che lo stile non è arrivato; dopo sono tessere singole e la mappa resta usabile
+    mappa.on("error", () => {
+      if (!mappa.loaded()) setStato((s) => (s === "carica" ? "errore" : s));
     });
     return () => {
       pulizia?.();
@@ -56,5 +64,28 @@ export function MappaBase({ className, etichetta, opzioni, onPronta }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div ref={contenitore} role="region" aria-label={etichetta} className={cn("h-80 w-full overflow-hidden rounded-xl border shadow-card", className)} />;
+  return (
+    <div className={cn("relative h-80 w-full overflow-hidden rounded-xl border bg-sunken shadow-card", className)}>
+      <div ref={contenitore} role="region" aria-label={etichetta} aria-busy={stato === "carica"} className="size-full" />
+      <div
+        className={cn(
+          "pointer-events-none absolute inset-0 grid place-items-center bg-sunken transition-opacity duration-300 ease-(--ease-out)",
+          stato === "pronta" && "opacity-0",
+        )}
+        aria-hidden={stato === "pronta"}
+      >
+        {stato === "errore" ? (
+          <p role="alert" className="flex max-w-xs flex-col items-center gap-2 px-4 text-center text-sm text-muted-foreground">
+            <WarningCircleIcon className="size-6" aria-hidden />
+            Non riesco a caricare la mappa. Controlla la connessione e ricarica la pagina.
+          </p>
+        ) : (
+          <p role="status" className="flex flex-col items-center gap-2 text-sm text-muted-foreground">
+            <MapTrifoldIcon weight="duotone" className="size-7 motion-safe:animate-pulse" aria-hidden />
+            {stato === "carica" ? "Caricamento della mappa…" : ""}
+          </p>
+        )}
+      </div>
+    </div>
+  );
 }

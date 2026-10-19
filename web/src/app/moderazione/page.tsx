@@ -64,7 +64,11 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
     <div className="grid gap-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <p className="text-muted-foreground" role="status">
-          {voci.length === 0 ? "Nessun contenuto da controllare." : `${voci.length} contenuti da controllare, i più gravi in alto.`}
+          {voci.length === 0
+            ? "Nessun contenuto da controllare."
+            : voci.length === 1
+              ? "1 contenuto da controllare."
+              : `${voci.length} contenuti da controllare, i più gravi in alto.`}
         </p>
         <form action={apriPerCodice} className="flex w-full items-end gap-2 sm:w-auto">
           <label className="grid flex-1 gap-1.5 text-sm font-medium sm:flex-none">

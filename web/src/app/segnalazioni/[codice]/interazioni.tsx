@@ -50,7 +50,11 @@ export function AzioniSostegno({
   const { inCorso, esegui } = useAzioneRapida();
   if (!accesso)
     return votabile ? (
-      <Link href={`/accedi?da=/segnalazioni/${codice}`} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
+      // il testo è lungo per la colonna laterale: va a capo invece di uscire dal pulsante
+      <Link
+        href={`/accedi?da=/segnalazioni/${codice}`}
+        className={cn(buttonVariants({ size: "lg" }), "h-auto min-h-12 w-full py-2.5 text-center leading-snug text-balance whitespace-normal")}
+      >
         <HeartIcon weight="bold" aria-hidden />
         Accedi per sostenere la segnalazione
       </Link>

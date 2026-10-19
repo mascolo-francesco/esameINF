@@ -64,8 +64,10 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
         </p>
       )}
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
-        <article className="grid min-w-0 content-start gap-6">
+      {/* Ordine nel DOM: contenuto, colonna del sostegno, commenti. Su telefono il pulsante "Sostieni"
+          arriva subito dopo la descrizione; da lg in su la colonna occupa entrambe le righe a destra. */}
+      <div className="grid gap-8 lg:grid-cols-[1fr_20rem] lg:grid-rows-[auto_1fr]">
+        <article className="grid min-w-0 content-start gap-6 lg:col-start-1 lg:row-start-1">
           <header className="grid gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <BadgeStato codice={s.statoCodice} nome={s.stato} />
@@ -102,7 +104,59 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
 
           <Galleria foto={s.foto} titolo={s.titolo} />
           <p className="max-w-prose text-lg leading-relaxed whitespace-pre-line">{s.descrizione}</p>
+        </article>
 
+        <aside className="grid content-start gap-6 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <div className="grid gap-4 rounded-2xl border bg-card p-5 shadow-raised">
+            <div className="grid gap-1">
+              <p className="flex items-baseline gap-2">
+                <span className="text-4xl font-semibold tracking-tight tabular-nums">{s.sostegni}</span>
+                <span className="text-muted-foreground">{s.sostegni === 1 ? "sostegno" : "sostegni"}</span>
+              </p>
+              {s.pubblico && <p className="text-sm text-muted-foreground">Punteggio di priorità {formattaNumero(s.punteggio, 2)}</p>}
+            </div>
+            <AzioniSostegno
+              codice={s.codice}
+              accesso={Boolean(u)}
+              autore={autore}
+              votabile={s.votabile}
+              sostiene={rel.sostiene}
+              segue={rel.segue}
+            />
+            {s.pubblico && <Condividi titolo={s.titolo} />}
+            {((u && !autore && s.pubblico) || puoRitirare) && (
+              <div className="grid gap-1 border-t pt-3">
+                {u && !autore && s.pubblico && <SegnalaAbuso codice={s.codice} oggetto="segnalazione" idOggetto={s.id} />}
+                {puoRitirare && <PulsanteRitira codice={s.codice} />}
+              </div>
+            )}
+          </div>
+
+          <MappaPunto lat={s.lat} lon={s.lon} colore={colore} className="h-56" />
+
+          <section aria-labelledby="cronologia" className="grid gap-3">
+            <h2 id="cronologia" className="text-lg font-semibold tracking-tight">
+              Cronologia
+            </h2>
+            <ol className="ml-1.5 grid gap-4 border-l-2 pl-5">
+              {passi.map((p, i) => (
+                <li key={p.id} className="relative text-sm">
+                  <span
+                    className={`absolute top-1 -left-[1.69rem] size-3 rounded-full ring-4 ring-background ${i === passi.length - 1 ? "bg-primary" : "bg-border"}`}
+                    aria-hidden
+                  />
+                  <p className="font-medium">{p.a}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {formattaDataOra(p.data)} · {ATTORI[p.attore] ?? p.attore}
+                  </p>
+                  {p.motivazione && <p className="mt-0.5 text-xs">{p.motivazione}</p>}
+                </li>
+              ))}
+            </ol>
+          </section>
+        </aside>
+
+        <div className="grid min-w-0 content-start gap-6 lg:col-start-1 lg:row-start-2">
           {autore && s.statoCodice === "DA_INTEGRARE" && (
             <section className="grid gap-3 rounded-xl border border-orange-300 bg-orange-50 p-5" aria-labelledby="integra">
               <h2 id="integra" className="font-semibold text-orange-950">
@@ -167,57 +221,8 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
                 ))}
             </section>
           )}
-        </article>
+        </div>
 
-        <aside className="grid content-start gap-6">
-          <div className="grid gap-4 rounded-2xl border bg-card p-5 shadow-raised">
-            <div className="grid gap-1">
-              <p className="flex items-baseline gap-2">
-                <span className="text-4xl font-semibold tracking-tight tabular-nums">{s.sostegni}</span>
-                <span className="text-muted-foreground">{s.sostegni === 1 ? "sostegno" : "sostegni"}</span>
-              </p>
-              {s.pubblico && <p className="text-sm text-muted-foreground">Punteggio di priorità {formattaNumero(s.punteggio, 2)}</p>}
-            </div>
-            <AzioniSostegno
-              codice={s.codice}
-              accesso={Boolean(u)}
-              autore={autore}
-              votabile={s.votabile}
-              sostiene={rel.sostiene}
-              segue={rel.segue}
-            />
-            {s.pubblico && <Condividi titolo={s.titolo} />}
-            {((u && !autore && s.pubblico) || puoRitirare) && (
-              <div className="grid gap-1 border-t pt-3">
-                {u && !autore && s.pubblico && <SegnalaAbuso codice={s.codice} oggetto="segnalazione" idOggetto={s.id} />}
-                {puoRitirare && <PulsanteRitira codice={s.codice} />}
-              </div>
-            )}
-          </div>
-
-          <MappaPunto lat={s.lat} lon={s.lon} colore={colore} className="h-56" />
-
-          <section aria-labelledby="cronologia" className="grid gap-3">
-            <h2 id="cronologia" className="text-lg font-semibold tracking-tight">
-              Cronologia
-            </h2>
-            <ol className="ml-1.5 grid gap-4 border-l-2 pl-5">
-              {passi.map((p, i) => (
-                <li key={p.id} className="relative text-sm">
-                  <span
-                    className={`absolute top-1 -left-[1.69rem] size-3 rounded-full ring-4 ring-background ${i === passi.length - 1 ? "bg-primary" : "bg-border"}`}
-                    aria-hidden
-                  />
-                  <p className="font-medium">{p.a}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {formattaDataOra(p.data)} · {ATTORI[p.attore] ?? p.attore}
-                  </p>
-                  {p.motivazione && <p className="mt-0.5 text-xs">{p.motivazione}</p>}
-                </li>
-              ))}
-            </ol>
-          </section>
-        </aside>
       </div>
     </div>
   );
