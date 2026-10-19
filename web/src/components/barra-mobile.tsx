@@ -18,7 +18,7 @@ export function BarraMobile() {
   return (
     <nav
       aria-label="Navigazione rapida"
-      className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-md sm:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 bg-carta pb-[env(safe-area-inset-bottom)] sm:hidden"
     >
       <ul className="grid grid-cols-4 px-1">
         {VOCI.map(({ href, testo, Icona }) => {

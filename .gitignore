@@ -34,3 +34,9 @@ docs/stack-web-app.md
 web/.demo/
 web/AGENTS.md
 web/CLAUDE.md
+
+# file di lavoro della skill di design (screenshot e report dell'inspector)
+.taste-skill/
+
+# Guida per agenti AI (documento di lavoro locale, non versionato)
+GUIDA.md

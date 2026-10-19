@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import Link from "next/link";
-import { Geist_Mono, Public_Sans } from "next/font/google";
+import { Source_Serif_4, Young_Serif } from "next/font/google";
 import { Intestazione } from "@/components/intestazione";
 import { Toaster } from "@/components/ui/sonner";
 import { RegistraServiceWorker } from "@/components/registra-sw";
 import { BarraMobile } from "@/components/barra-mobile";
+import { PieDiPagina } from "@/components/pie-di-pagina";
+import { AttivaRivela } from "@/components/rivela";
 import "./globals.css";
 
-const sans = Public_Sans({ variable: "--font-sans", subsets: ["latin"] });
-const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const titoli = Young_Serif({ variable: "--font-titoli", weight: "400", subsets: ["latin"] });
+const testo = Source_Serif_4({ variable: "--font-testo", subsets: ["latin"], style: ["normal", "italic"] });
 
 // URL assoluto del sito per le anteprime Open Graph (RF-41); su Vercel lo ricavo dal dominio di produzione
 const sito =
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1f6f5c",
+  themeColor: "#1f3038",
   viewportFit: "cover",
   width: "device-width",
   initialScale: 1,
@@ -33,7 +34,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="it" className={`${sans.variable} ${mono.variable} h-full antialiased`}>
+    <html lang="it" suppressHydrationWarning className={`${titoli.variable} ${testo.variable} h-full antialiased`}>
+      <head>
+        {/* segnala al CSS che gli script girano: solo allora le entrate partono da nascoste */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="flex min-h-full flex-col pb-[calc(4rem+env(safe-area-inset-bottom))] sm:pb-0">
         <a
           href="#contenuto"
@@ -45,36 +50,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="contenuto" className="flex flex-1 flex-col">
           {children}
         </main>
-        <footer className="border-t bg-sunken/60">
-          <div className="mx-auto grid max-w-6xl gap-4 px-4 py-8 text-sm text-muted-foreground sm:flex sm:items-center sm:justify-between">
-            <p>
-              <span className="font-medium text-foreground">La Nostra Città, Il Nostro Futuro</span> · progetto d&apos;esame, dati
-              dimostrativi
-            </p>
-            <nav aria-label="Piè di pagina">
-              <ul className="flex flex-wrap gap-x-5 gap-y-2">
-                <li>
-                  <Link href="/mappa" className="hover:text-foreground hover:underline">
-                    Mappa
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/classifica" className="hover:text-foreground hover:underline">
-                    Classifica
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy" className="hover:text-foreground hover:underline">
-                    Informativa privacy
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </footer>
+        <PieDiPagina />
         <BarraMobile />
         <Toaster richColors position="top-center" />
         <RegistraServiceWorker />
+        <AttivaRivela />
       </body>
     </html>
   );

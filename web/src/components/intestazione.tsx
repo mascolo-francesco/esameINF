@@ -13,7 +13,7 @@ export async function Intestazione() {
     ? ((await db.riga<{ n: number }>("SELECT COUNT(*) AS n FROM notifica WHERE id_utente = ? AND NOT letta", [utente.id]))?.n ?? 0)
     : 0;
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
+    <header className="sticky top-0 z-40 bg-carta">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4">
         <Link href="/" className="mr-2 flex items-center gap-2.5 rounded-lg font-semibold tracking-tight">
           <span className="grid size-8 place-items-center rounded-lg bg-primary text-primary-foreground shadow-card" aria-hidden>

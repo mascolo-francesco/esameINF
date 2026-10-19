@@ -7,9 +7,30 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  /* Young Serif per i titoli (un solo peso), Source Serif 4 per il testo. Niente monospazio:
+     i codici delle segnalazioni usano il carattere del testo con le cifre tabellari. */
+  --font-sans: var(--font-testo);
+  --font-mono: var(--font-testo); /* taste-skill-ignore: il token mono punta al carattere del testo, non a un monospazio */
+  --font-heading: var(--font-titoli);
+  --font-display: var(--font-titoli);
+  --text-step-small: var(--step-small);
+  --text-step-body: var(--step-body);
+  --text-step-lead: var(--step-lead);
+  --text-step-head: var(--step-head);
+  --text-step-display: var(--step-display);
+  --color-carta: var(--carta);
+  --color-tinta-50: var(--tinta-50);
+  --color-tinta-100: var(--tinta-100);
+  --color-tinta-200: var(--tinta-200);
+  --color-tinta-ink: var(--tinta-ink);
+  --color-avviso: var(--avviso);
+  --color-avviso-ink: var(--avviso-ink);
+  --color-avviso-bordo: var(--avviso-bordo);
+  --color-negativo: var(--negativo);
+  --color-negativo-ink: var(--negativo-ink);
+  --color-positivo: var(--positivo);
+  --color-lamiera: var(--lamiera);
+  --color-lamiera-foreground: var(--lamiera-foreground);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -54,47 +75,72 @@
 }
 
 :root {
-  /* Carta calda e inchiostro blu-grigio: un solo neutro (caldo) e un solo accento (verde). */
-  --background: oklch(0.984 0.005 85);
-  --foreground: oklch(0.21 0.02 250);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.02 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.02 250);
-  --primary: oklch(0.44 0.09 165);
-  --primary-foreground: oklch(0.99 0.01 165);
-  --secondary: oklch(0.95 0.025 165);
-  --secondary-foreground: oklch(0.3 0.06 165);
-  --muted: oklch(0.955 0.006 85);
-  --muted-foreground: oklch(0.46 0.02 250);
-  --accent: oklch(0.95 0.025 165);
-  --accent-foreground: oklch(0.21 0.02 250);
-  --destructive: oklch(0.53 0.2 27);
-  --border: oklch(0.9 0.008 85);
-  --input: oklch(0.64 0.012 85); /* bordo dei campi: almeno 3:1 sullo sfondo (WCAG 1.4.11) */
-  --ring: oklch(0.5 0.1 165);
+  /* "Frost and slate": bianco freddo, un grigio-azzurro più scuro di un passo, inchiostro ardesia.
+     Il verde acqua compare una volta per schermata: sull'azione principale. */
+  --background: #f7f9fa;
+  --foreground: #1f3038;
+  --card: #ffffff;
+  --card-foreground: #1f3038;
+  --popover: #ffffff;
+  --popover-foreground: #1f3038;
+  --primary: #0d7480;
+  --primary-foreground: #ffffff;
+  --secondary: #ecf0f2;
+  --secondary-foreground: #1f3038;
+  --muted: #ecf0f2;
+  --muted-foreground: #5d6b72;
+  --accent: #ecf0f2;
+  --accent-foreground: #1f3038;
+  --destructive: #b42318;
+  --border: #dde4e8;
+  --input: #8a979e; /* bordo dei campi: almeno 3:1 sullo sfondo (WCAG 1.4.11) */
+  --ring: #0d7480;
   /* superficie "incassata" per raggruppare pannelli e filtri */
-  --sunken: oklch(0.965 0.006 85);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.75rem;
-  /* ombre tinte con il colore dell'inchiostro, non nere */
-  --shadow-card: 0 1px 2px oklch(0.21 0.02 250 / 0.05), 0 1px 1px oklch(0.21 0.02 250 / 0.03);
-  --shadow-raised: 0 1px 2px oklch(0.21 0.02 250 / 0.06), 0 8px 24px -8px oklch(0.21 0.02 250 / 0.14);
+  --sunken: #ecf0f2;
+  /* la carta dei manifesti e la lamiera del tabellone su cui sono affissi */
+  --carta: #ffffff;
+  --lamiera: #1f3038;
+  --lamiera-foreground: #f7f9fa;
+  /* la scala del verde acqua: il tono pieno solo sui segni piccoli (azione, dati, voce attiva),
+     le tinte chiare sulle aree (voce di menu attiva, stati, tracce di avanzamento) */
+  --tinta-50: #e8f3f4;
+  --tinta-100: #d0e8eb;
+  --tinta-200: #a7d3d9;
+  --tinta-ink: #0a4a52;
+  /* coppie per gli stati: fondo chiaro e testo scuro della stessa tinta */
+  --avviso: #fffbeb;
+  --avviso-ink: #92400e;
+  --avviso-bordo: #fde68a;
+  --negativo: #ffedea;
+  --negativo-ink: #831c1e;
+  --positivo: #247b50;
+  --chart-1: #0d7480;
+  --chart-2: #5d6b72;
+  --chart-3: #1f3038;
+  --chart-4: #8a979e;
+  --chart-5: #c5d0d5;
+  /* angoli vivi, come la carta */
+  --radius: 0rem;
+  /* niente ombre su ciò che sta fermo: solo menu e finestre che galleggiano */
+  --shadow-card: none;
+  --shadow-raised: 0 2px 4px rgb(31 48 56 / 0.08), 0 12px 32px -8px rgb(31 48 56 / 0.22);
   /* movimento: uscite rapide, mai ease-in */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* taste-skill-ignore: solo per la deriva lenta della foto */
+  /* cinque gradini di testo */
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --step-display: clamp(2.75rem, 1rem + 7.4vw, 8.5rem);
+  --sidebar: #f7f9fa;
+  --sidebar-foreground: #1f3038;
+  --sidebar-primary: #0d7480;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ecf0f2;
+  --sidebar-accent-foreground: #1f3038;
+  --sidebar-border: #dde4e8;
+  --sidebar-ring: #0d7480;
 }
 
 .dark {
@@ -153,10 +199,18 @@
     outline-offset: 2px;
   }
 
+  /* Young Serif ha un solo peso: niente grassetto finto anche dove una classe chiede font-semibold */
   h1,
   h2,
   h3 {
+    font-family: var(--font-titoli);
+    font-synthesis: none;
+    letter-spacing: -0.02em;
     text-wrap: balance;
+  }
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
   p {
     text-wrap: pretty;
@@ -185,4 +239,58 @@
   .premibile:active {
     scale: none !important;
   }
+}
+
+/* Bordo superiore smerlato del foglio (piè di pagina, cartoline): mezzi cerchi ritagliati con una maschera */
+@utility bordo-smerlato {
+  --smerlo: 1.25rem;
+  /* taste-skill-ignore: maschere che ritagliano il bordo, non riempimenti a gradiente */
+  mask:
+    radial-gradient(var(--smerlo) at 50% 0, #0000 98%, #000) 50% 0 / calc(var(--smerlo) * 2.4) calc(var(--smerlo) * 2) repeat-x, /* taste-skill-ignore */
+    linear-gradient(#000 0 0) 0 calc(var(--smerlo) * 2) / 100% 100% no-repeat; /* taste-skill-ignore */
+}
+
+/* Entrate: solo con JavaScript attivo (classe "js" messa nel <head>), così senza script si vede tutto */
+html.js [data-rivela]:not([data-visibile]) {
+  opacity: 0;
+  translate: 0 1.5rem;
+}
+[data-rivela] {
+  transition:
+    opacity 700ms var(--ease-out),
+    translate 700ms var(--ease-out);
+  transition-delay: var(--ritardo, 0ms);
+}
+/* la foto del tabellone respira piano: l'unica immagine che si muove da sola */
+@keyframes deriva {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.07;
+  }
+}
+.deriva {
+  animation: deriva 26s var(--ease-in-out) infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-rivela]:not([data-visibile]) {
+    translate: none;
+  }
+  .deriva {
+    animation: none;
+  }
+}
+/* lo stesso smerlo sul bordo inferiore (la striscia da strappare sotto la lettera) */
+@utility bordo-smerlato-sotto {
+  --smerlo: 0.75rem;
+  /* taste-skill-ignore: maschera di ritaglio del bordo */
+  mask:
+    radial-gradient(var(--smerlo) at 50% 100%, #0000 98%, #000) 50% 100% / calc(var(--smerlo) * 2.4) calc(var(--smerlo) * 2) repeat-x, /* taste-skill-ignore */
+    linear-gradient(#000 0 0) 0 0 / 100% calc(100% - var(--smerlo) * 2) no-repeat; /* taste-skill-ignore */
+}
+
+/* i crediti della mappa usano il carattere del sito, non l'Helvetica del CSS di MapLibre */
+.maplibregl-map {
+  font-family: var(--font-testo);
 }
