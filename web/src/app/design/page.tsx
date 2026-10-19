@@ -81,7 +81,6 @@ function Pannello({ titolo, children }: { titolo: string; children: ReactNode })
 export default function SistemaDesign() {
   return (
     <Pagina
-      sopratitolo="Per chi sviluppa"
       titolo="Sistema di design"
       descrizione="Le regole che tengono insieme l'interfaccia: pensata per il cittadino che segnala dal telefono e per il comitato che modera dal computer."
       className="grid gap-10"

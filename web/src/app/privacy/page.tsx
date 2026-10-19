@@ -94,7 +94,6 @@ const SEZIONI: { id: string; titolo: string; testo: ReactNode }[] = [
 export default function Privacy() {
   return (
     <Pagina
-      sopratitolo="Trasparenza"
       titolo="Informativa privacy"
       descrizione="Il comitato raccoglie solo i dati necessari per segnalare, sostenere e moderare. Di seguito trovi i dettagli."
       className="max-w-3xl"

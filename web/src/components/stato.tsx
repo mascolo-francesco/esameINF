@@ -1,39 +1,40 @@
 import { cn } from "@/lib/utils";
 
-// colori dei 10 stati visibili; il testo resta sempre leggibile (contrasto AA) e il pallino
-// ripete il colore, così lo stato non dipende solo dallo sfondo
-const COLORI: Record<string, [badge: string, pallino: string]> = {
-  RICEVUTA: ["bg-slate-100 text-slate-800 border-slate-300", "bg-slate-500"],
-  IN_REVISIONE: ["bg-amber-50 text-amber-900 border-amber-300", "bg-amber-500"],
-  DA_INTEGRARE: ["bg-orange-50 text-orange-900 border-orange-300", "bg-orange-500"],
-  RIFIUTATA: ["bg-red-50 text-red-900 border-red-300", "bg-red-500"],
-  PUBBLICATA: ["bg-emerald-50 text-emerald-900 border-emerald-300", "bg-emerald-600"],
-  PRESA_IN_CARICO: ["bg-sky-50 text-sky-900 border-sky-300", "bg-sky-600"],
-  INVIATA_CANDIDATI: ["bg-indigo-50 text-indigo-900 border-indigo-300", "bg-indigo-500"],
-  UNITA: ["bg-zinc-100 text-zinc-800 border-zinc-300", "bg-zinc-500"],
-  ARCHIVIATA: ["bg-zinc-100 text-zinc-700 border-zinc-300", "bg-zinc-400"],
-  RITIRATA: ["bg-zinc-100 text-zinc-700 border-zinc-300", "bg-zinc-400"],
+// Gli stati sono una macchina a stati: una sola tinta (il verde acqua) che si fa più intensa man mano che la
+// segnalazione avanza verso i candidati. Grigio per ciò che aspetta o è chiuso; giallo solo per "da integrare",
+// che chiede qualcosa all'autore; rosso solo per il rifiuto.
+const COLORI: Record<string, string> = {
+  RICEVUTA: "bg-sunken text-foreground",
+  IN_REVISIONE: "bg-sunken text-foreground",
+  DA_INTEGRARE: "bg-avviso text-avviso-ink ring-1 ring-inset ring-avviso-bordo",
+  RIFIUTATA: "bg-negativo text-negativo-ink",
+  PUBBLICATA: "bg-tinta-50 text-tinta-ink",
+  PRESA_IN_CARICO: "bg-tinta-100 text-tinta-ink",
+  INVIATA_CANDIDATI: "bg-tinta-200 text-tinta-ink",
+  UNITA: "bg-sunken text-muted-foreground",
+  ARCHIVIATA: "bg-sunken text-muted-foreground",
+  RITIRATA: "bg-sunken text-muted-foreground",
 };
 
+/** Una sola etichetta di stato per riga: fondo chiaro, testo scuro della stessa tinta, mai schiacciata. */
 export function BadgeStato({ codice, nome, className }: { codice: string; nome: string; className?: string }) {
-  const [badge, pallino] = COLORI[codice] ?? COLORI.RICEVUTA;
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-xs font-medium",
-        badge,
+        "inline-flex h-6 flex-none items-center px-2 text-xs font-semibold whitespace-nowrap",
+        COLORI[codice] ?? COLORI.RICEVUTA,
         className,
       )}
     >
-      <span className={cn("size-1.5 rounded-full", pallino)} aria-hidden />
       {nome}
     </span>
   );
 }
 
+/** La categoria resta un'informazione, non uno stato: il suo colore (lo stesso della mappa) solo nel pallino. */
 export function BadgeCategoria({ nome, colore }: { nome: string; colore: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-md border bg-card px-2 py-0.5 text-xs">
+    <span className="inline-flex flex-none items-center gap-1.5 text-sm whitespace-nowrap text-muted-foreground">
       <span className="size-2 rounded-full" style={{ background: colore }} aria-hidden />
       {nome}
     </span>

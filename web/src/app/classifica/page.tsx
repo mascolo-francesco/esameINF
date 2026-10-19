@@ -79,8 +79,8 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
   return (
     <Pagina titolo="Classifica" descrizione="Le segnalazioni pubblicate, ordinate per sostegno dei cittadini.">
       <div className="grid grid-cols-1 gap-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <nav aria-label="Ordinamento" className="grid w-full grid-cols-2 gap-1 rounded-xl bg-sunken p-1 ring-1 ring-border sm:w-fit">
+        <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-b">
+          <nav aria-label="Ordinamento" className="-mb-px flex gap-6">
             {(
               [
                 ["sostenute", "Più sostenute", <HeartIcon key="s" aria-hidden />],
@@ -92,8 +92,8 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
                 href={url({ ordine: v, pagina: 1 })}
                 aria-current={p.ordine === v ? "page" : undefined}
                 className={cn(
-                  "flex h-9 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium whitespace-nowrap transition-[color,background-color,box-shadow] [&_svg]:size-4",
-                  p.ordine === v ? "bg-card text-foreground shadow-card ring-1 ring-border" : "text-muted-foreground hover:text-foreground",
+                  "flex h-11 items-center gap-2 border-b-2 text-[15px] whitespace-nowrap transition-colors [&_svg]:size-4",
+                  p.ordine === v ? "border-primary font-semibold text-foreground" : "border-transparent text-muted-foreground hover:text-foreground",
                 )}
               >
                 {icona}
@@ -102,18 +102,18 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
             ))}
           </nav>
           {p.ordine === "tendenza" && (
-            <p className="max-w-md text-sm text-muted-foreground">
+            <p className="max-w-md pb-3 text-sm text-muted-foreground">
               Premia le segnalazioni recenti: il punteggio cala man mano che passano i giorni dalla pubblicazione.
             </p>
           )}
         </div>
 
-        <details className="group rounded-xl bg-sunken ring-1 ring-border" open={attivi.length > 0}>
-          <summary className="flex h-12 cursor-pointer list-none items-center gap-2 rounded-xl px-4 text-sm font-medium select-none [&::-webkit-details-marker]:hidden">
+        <details className="group bg-sunken" open={attivi.length > 0}>
+          <summary className="flex h-12 cursor-pointer list-none items-center gap-2 px-4 text-sm font-medium select-none [&::-webkit-details-marker]:hidden">
             <FunnelSimpleIcon className="size-4 text-muted-foreground" aria-hidden />
             Filtri
             {attivi.length > 0 && (
-              <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground tabular-nums">
+              <span className="bg-tinta-100 px-2 py-0.5 text-xs font-semibold text-tinta-ink tabular-nums">
                 {attivi.length}
                 <span className="sr-only"> attivi</span>
               </span>
@@ -155,7 +155,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
               <Link
                 key={f.chiave}
                 href={url({ [f.chiave]: "", pagina: 1 })}
-                className="inline-flex h-8 items-center gap-1.5 rounded-full border bg-card pr-2 pl-3 text-sm shadow-card transition-colors hover:border-destructive/40 hover:text-destructive"
+                className="inline-flex h-8 items-center gap-1.5 bg-tinta-50 pr-2 pl-3 text-sm text-tinta-ink transition-colors hover:bg-negativo hover:text-negativo-ink"
               >
                 {f.testo}
                 <XIcon className="size-3.5" aria-hidden />
@@ -177,7 +177,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
             Prova a togliere un filtro o a scegliere un periodo più lungo.
           </StatoVuoto>
         ) : (
-          <ol className="grid gap-3">
+          <ol className="grid divide-y border-y">
             {voci.map((v, i) => (
               <li key={v.id}>
                 <SchedaSegnalazione s={v} posizione={(p.pagina - 1) * PER_PAGINA + i + 1} />

@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 /** Contenitore comune: larghezza massima, margini e titolo della pagina. */
 export function Pagina({
   titolo,
-  sopratitolo,
   descrizione,
   azioni,
   stretta,
@@ -12,7 +11,6 @@ export function Pagina({
   children,
 }: {
   titolo?: ReactNode;
-  sopratitolo?: ReactNode;
   descrizione?: ReactNode;
   azioni?: ReactNode;
   stretta?: boolean;
@@ -24,9 +22,8 @@ export function Pagina({
       {(titolo || azioni) && (
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div className="grid gap-2">
-            {sopratitolo && <p className="text-sm font-medium text-primary">{sopratitolo}</p>}
-            {titolo && <h1 className="text-3xl font-semibold tracking-tight">{titolo}</h1>}
-            {descrizione && <p className="max-w-prose text-muted-foreground">{descrizione}</p>}
+                        {titolo && <h1 className="text-2xl leading-tight tracking-tight sm:text-[2rem]">{titolo}</h1>}
+            {descrizione && <p className="max-w-prose text-base text-muted-foreground">{descrizione}</p>}
           </div>
           {azioni}
         </div>

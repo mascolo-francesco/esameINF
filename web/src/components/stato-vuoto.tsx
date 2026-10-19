@@ -19,12 +19,12 @@ export function StatoVuoto({
   className?: string;
 }) {
   return (
-    <div className={cn("grid justify-items-center gap-3 rounded-2xl border border-dashed bg-sunken/60 px-6 py-12 text-center", className)}>
-      <span className="grid size-12 place-items-center rounded-xl bg-card text-primary shadow-card [&_svg]:size-6" aria-hidden>
+    <div className={cn("grid justify-items-center gap-3 border border-dashed border-input/60 px-6 py-10 text-center", className)}>
+      <span className="text-muted-foreground [&_svg]:size-6" aria-hidden>
         {icona}
       </span>
       <div className="grid max-w-sm gap-1">
-        {principale ? <h1 className="text-2xl font-semibold tracking-tight">{titolo}</h1> : <p className="font-semibold">{titolo}</p>}
+        {principale ? <h1 className="text-[1.75rem] leading-tight tracking-tight">{titolo}</h1> : <p className="font-semibold">{titolo}</p>}
         {children && <p className="text-sm text-muted-foreground">{children}</p>}
       </div>
       {azione}

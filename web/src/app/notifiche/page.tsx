@@ -47,7 +47,7 @@ export default async function PaginaNotifiche() {
               </>
             );
             return (
-              <li key={r.id} className={cn(!r.letta && "bg-secondary/40")}>
+              <li key={r.id} className={cn(!r.letta && "bg-tinta-50")}>
                 {r.codice_pubblico ? (
                   <Link href={`/segnalazioni/${r.codice_pubblico}`} className="grid gap-1 p-4 transition-colors hover:bg-muted/60">
                     {contenuto}

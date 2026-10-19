@@ -8,6 +8,7 @@ import { formattaData, formattaDataOra, formattaNumero } from "@/lib/formato";
 import { BadgeCategoria, BadgeStato } from "@/components/stato";
 import { MappaPunto } from "@/components/mappa/mappa-punto";
 import { StatoVuoto } from "@/components/stato-vuoto";
+import { Percorso } from "@/components/percorso";
 import { Galleria } from "./galleria";
 import { AzioniSostegno, Condividi, FormAggiornamento, FormCommento, FormIntegrazione, PulsanteRitira, SegnalaAbuso } from "./interazioni";
 
@@ -45,14 +46,14 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 pt-8 pb-12 sm:pt-10">
       {inviata && (
-        <p role="status" className="flex items-start gap-3 rounded-xl border border-primary/30 bg-secondary p-4 text-sm text-secondary-foreground">
+        <p role="status" className="flex items-start gap-3 bg-tinta-50 p-4 text-sm text-tinta-ink">
           <CheckCircleIcon weight="fill" className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
           Segnalazione inviata con il codice {s.codice}. Un moderatore la controllerà a breve: riceverai una notifica
           quando sarà pubblicata.
         </p>
       )}
       {s.statoCodice === "UNITA" && s.codicePrincipale && (
-        <p role="status" className="flex items-start gap-3 rounded-xl border bg-sunken p-4 text-sm">
+        <p role="status" className="flex items-start gap-3 bg-sunken p-4 text-sm">
           <InfoIcon weight="fill" className="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden />
           <span>
           Questa segnalazione è stata unita a{" "}
@@ -72,10 +73,10 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
             <div className="flex flex-wrap items-center gap-2">
               <BadgeStato codice={s.statoCodice} nome={s.stato} />
               <span className="text-sm text-muted-foreground">
-                {s.tipo === "proposta" ? "Proposta" : "Problema"} · <span className="font-mono text-xs">{s.codice}</span>
+                {s.tipo === "proposta" ? "Proposta" : "Problema"} · <span className="tabular-nums">{s.codice}</span>
               </span>
             </div>
-            <h1 className="text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">{s.titolo}</h1>
+            <h1 className="text-2xl leading-tight tracking-tight sm:text-[2rem]">{s.titolo}</h1>
             <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
               <li className="flex items-center gap-1.5">
                 <MapPinIcon className="size-4 shrink-0" aria-hidden />
@@ -100,6 +101,7 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
                 ))}
               </div>
             )}
+            <Percorso codice={s.statoCodice} className="mt-2 max-w-2xl" />
           </header>
 
           <Galleria foto={s.foto} titolo={s.titolo} />
@@ -107,10 +109,10 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
         </article>
 
         <aside className="grid content-start gap-6 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-          <div className="grid gap-4 rounded-2xl border bg-card p-5 shadow-raised">
+          <div className="grid gap-4 border bg-card p-5">
             <div className="grid gap-1">
               <p className="flex items-baseline gap-2">
-                <span className="text-4xl font-semibold tracking-tight tabular-nums">{s.sostegni}</span>
+                <span className="text-4xl tabular-nums">{s.sostegni}</span>
                 <span className="text-muted-foreground">{s.sostegni === 1 ? "sostegno" : "sostegni"}</span>
               </p>
               {s.pubblico && <p className="text-sm text-muted-foreground">Punteggio di priorità {formattaNumero(s.punteggio, 2)}</p>}
@@ -142,7 +144,7 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
               {passi.map((p, i) => (
                 <li key={p.id} className="relative text-sm">
                   <span
-                    className={`absolute top-1 -left-[1.69rem] size-3 rounded-full ring-4 ring-background ${i === passi.length - 1 ? "bg-primary" : "bg-border"}`}
+                    className={`absolute top-1 -left-[1.69rem] size-3 rounded-full ring-4 ring-background ${i === passi.length - 1 ? "bg-primary" : "bg-foreground/55"}`}
                     aria-hidden
                   />
                   <p className="font-medium">{p.a}</p>
@@ -158,11 +160,11 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
 
         <div className="grid min-w-0 content-start gap-6 lg:col-start-1 lg:row-start-2">
           {autore && s.statoCodice === "DA_INTEGRARE" && (
-            <section className="grid gap-3 rounded-xl border border-orange-300 bg-orange-50 p-5" aria-labelledby="integra">
-              <h2 id="integra" className="font-semibold text-orange-950">
+            <section className="grid gap-3 border border-avviso-bordo bg-avviso p-5" aria-labelledby="integra">
+              <h2 id="integra" className="text-xl text-avviso-ink">
                 Il comitato ti chiede di integrare la segnalazione
               </h2>
-              <p className="text-sm text-orange-950">{passi.at(-1)?.motivazione}</p>
+              <p className="text-sm text-avviso-ink">{passi.at(-1)?.motivazione}</p>
               <FormIntegrazione codice={s.codice} titolo={s.titolo} descrizione={s.descrizione} />
             </section>
           )}
@@ -174,7 +176,7 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
               </h2>
               <ul className="grid gap-3">
                 {listaAggiornamenti.map((a) => (
-                  <li key={a.id} className="rounded-xl border-l-4 border-primary bg-secondary/50 p-4 text-sm">
+                  <li key={a.id} className="bg-tinta-50 p-4 text-sm">
                     <p className="whitespace-pre-line">{a.testo}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{formattaDataOra(a.data)}</p>
                   </li>

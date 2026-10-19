@@ -122,14 +122,14 @@ export function MessaggioEsito({ esito }: { esito: EsitoForm }) {
   if (!esito) return null;
   if (!esito.ok && esito.errore)
     return (
-      <p role="alert" className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
+      <p role="alert" className="flex items-start gap-2 bg-negativo p-3 text-sm text-negativo-ink">
         <WarningCircleIcon weight="fill" className="mt-0.5 size-4 shrink-0" aria-hidden />
         {esito.errore}
       </p>
     );
   if (esito.ok && esito.messaggio)
     return (
-      <p role="status" className="flex items-start gap-2 rounded-lg border border-primary/30 bg-primary/5 p-3 text-sm text-primary">
+      <p role="status" className="flex items-start gap-2 bg-tinta-50 p-3 text-sm text-tinta-ink">
         <CheckCircleIcon weight="fill" className="mt-0.5 size-4 shrink-0" aria-hidden />
         {esito.messaggio}
       </p>

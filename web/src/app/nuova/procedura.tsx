@@ -123,7 +123,7 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
       <ol className="grid grid-cols-4 gap-2" aria-label="Avanzamento">
         {PASSI.map((p, i) => (
           <li key={p} aria-current={i === passo ? "step" : undefined} className="grid gap-2">
-            <span className={cn("h-1.5 rounded-full transition-colors duration-300", i <= passo ? "bg-primary" : "bg-border")} aria-hidden />
+            <span className={cn("h-1.5 transition-colors duration-300", i <= passo ? "bg-primary" : "bg-sunken")} aria-hidden />
             <span className={cn("flex items-center gap-1.5 text-sm", i === passo ? "font-semibold" : "text-muted-foreground")}>
               <span
                 className={cn(
@@ -174,7 +174,7 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
                 ).map(([v, t, d]) => (
                   <label
                     key={v}
-                    className="flex min-w-44 flex-1 cursor-pointer flex-col gap-0.5 rounded-xl border bg-card p-4 text-sm shadow-card transition-[border-color,background-color] has-[:checked]:border-primary has-[:checked]:bg-secondary has-[:checked]:ring-1 has-[:checked]:ring-primary has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
+                    className="flex min-w-44 flex-1 cursor-pointer flex-col gap-0.5 rounded-xl border bg-card p-4 text-sm shadow-card transition-[border-color,background-color] has-[:checked]:border-primary has-[:checked]:bg-tinta-50 has-[:checked]:ring-1 has-[:checked]:ring-primary has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
                   >
                     <input type="radio" name="tipo" value={v} checked={tipo === v} onChange={() => setTipo(v)} className="sr-only" />
                     <span className="font-semibold">{t}</span>
@@ -217,7 +217,7 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
                     <label
                       key={k.id}
                       title={k.descrizione}
-                      className="flex min-h-10 cursor-pointer items-center gap-2 rounded-full border bg-card px-3.5 py-2 text-sm shadow-card transition-[border-color,background-color] has-[:checked]:border-primary has-[:checked]:bg-secondary has-[:checked]:font-medium has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
+                      className="flex min-h-10 cursor-pointer items-center gap-2 border bg-card px-3.5 py-2 text-sm transition-[border-color,background-color] has-[:checked]:border-primary has-[:checked]:bg-tinta-50 has-[:checked]:font-medium has-[:checked]:text-tinta-ink has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
                     >
                       <input
                         type="checkbox"
@@ -338,7 +338,7 @@ function PassoFoto({
         ))}
         {foto.length < MAX_FOTO && (
           <li>
-            <label className="flex aspect-[4/3] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-input bg-sunken/60 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:bg-secondary hover:text-secondary-foreground has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50">
+            <label className="flex aspect-[4/3] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-input bg-sunken/60 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:bg-tinta-50 hover:text-tinta-ink has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50">
               {inCorso ? <SpinnerGapIcon className="size-7 animate-spin" aria-hidden /> : <CameraPlusIcon weight="duotone" className="size-7" aria-hidden />}
               {inCorso ? "Preparazione delle foto in corso…" : "Aggiungi foto"}
               <input
@@ -488,9 +488,9 @@ function Riepilogo({
   return (
     <div className="grid gap-5">
       {simili && simili.length > 0 && (
-        <div className="grid gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-950">
+        <div className="grid gap-3 border border-avviso-bordo bg-avviso p-4 text-avviso-ink">
           <p className="flex items-center gap-2 font-semibold">
-            <WarningIcon weight="fill" className="size-5 text-amber-600" aria-hidden /> Qualcuno potrebbe averlo già segnalato
+            <WarningIcon weight="fill" className="size-5" aria-hidden /> Qualcuno potrebbe averlo già segnalato
           </p>
           <p className="text-sm">
             Ci sono segnalazioni simili nelle vicinanze. Se descrivono lo stesso problema, sostieni quella esistente: una

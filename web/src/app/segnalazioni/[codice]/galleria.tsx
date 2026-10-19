@@ -17,7 +17,7 @@ export function Galleria({ foto, titolo }: { foto: Foto[]; titolo: string }) {
   const f = foto[attiva];
   return (
     <div className="grid gap-2">
-      <a href={f.pubblica} target="_blank" rel="noopener" className="block overflow-hidden rounded-lg border bg-muted">
+      <a href={f.pubblica} target="_blank" rel="noopener" className="block overflow-hidden bg-muted">
         {/* eslint-disable-next-line @next/next/no-img-element -- immagini servite dal nostro endpoint, già ridimensionate */}
         <img
           src={f.pubblica}

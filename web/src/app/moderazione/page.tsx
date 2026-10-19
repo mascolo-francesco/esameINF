@@ -15,7 +15,6 @@ import { formattaDataOra, tempoFa } from "@/lib/formato";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { StatoVuoto } from "@/components/stato-vuoto";
-import { cn } from "@/lib/utils";
 import { apriPerCodice } from "./azioni";
 import { AzioniContenuto } from "./azioni-contenuto";
 
@@ -73,7 +72,7 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
         <form action={apriPerCodice} className="flex w-full items-end gap-2 sm:w-auto">
           <label className="grid flex-1 gap-1.5 text-sm font-medium sm:flex-none">
             Apri una segnalazione per codice
-            <Input name="codice" placeholder="MI-2026-000012" className="font-mono sm:w-52" required />
+            <Input name="codice" placeholder="MI-2026-000012" className="tabular-nums sm:w-52" required />
           </label>
           <Button type="submit" variant="outline">
             <MagnifyingGlassIcon aria-hidden />
@@ -92,17 +91,14 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
           Quando arrivano nuove segnalazioni o qualcuno segnala un abuso, compaiono qui.
         </StatoVuoto>
       ) : (
-        <ul className="grid gap-3">
+        <ul className="grid divide-y border bg-card">
           {voci.map((v) => {
             const motivi = motiviDi(v);
             const Icona = ICONE_TIPO[v.tipo_contenuto];
             return (
               <li
                 key={`${v.tipo_contenuto}-${v.id_contenuto}`}
-                className={cn(
-                  "grid gap-3 rounded-xl border border-l-4 bg-card p-4 shadow-card",
-                  v.abusi_aperti > 0 ? "border-l-destructive" : "border-l-amber-400",
-                )}
+                className="grid gap-2 p-4 sm:px-5"
               >
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
                   <span className="flex items-center gap-1.5 font-medium capitalize">
@@ -113,10 +109,10 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
                   <time className="text-muted-foreground" dateTime={new Date(v.data_ingresso).toISOString()} title={formattaDataOra(v.data_ingresso)}>
                     {tempoFa(v.data_ingresso)}
                   </time>
-                  <span className="ml-auto font-mono text-xs text-muted-foreground">{v.codice_pubblico}</span>
+                  <span className="ml-auto text-sm text-muted-foreground tabular-nums">{v.codice_pubblico}</span>
                 </div>
                 {v.abusi_aperti > 0 && (
-                  <p className="flex w-fit items-center gap-1.5 rounded-md bg-red-50 px-2 py-1 text-sm font-medium text-red-900">
+                  <p className="flex w-fit items-center gap-1.5 bg-negativo px-2 py-1 text-sm font-medium text-negativo-ink">
                     <FlagIcon weight="fill" className="size-4" aria-hidden />
                     {v.abusi_aperti} {v.abusi_aperti === 1 ? "segnalazione di abuso" : "segnalazioni di abuso"}
                     {motivi && `: ${motivi.replaceAll("_", " ")}`}
@@ -125,7 +121,7 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
                 {v.tipo_contenuto === "segnalazione" ? (
                   <Link
                     href={`/moderazione/${v.codice_pubblico}`}
-                    className="flex items-center justify-between gap-3 text-lg leading-snug font-semibold text-foreground underline-offset-4 hover:text-primary hover:underline"
+                    className="flex items-center justify-between gap-3 text-[17px] leading-snug font-semibold text-foreground underline-offset-4 hover:text-primary hover:underline"
                   >
                     {v.anteprima}
                     <ArrowRightIcon className="size-5 shrink-0 text-primary" aria-hidden />

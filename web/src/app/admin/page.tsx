@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
-import { ClockIcon, HourglassIcon, UserCheckIcon, UsersThreeIcon } from "@phosphor-icons/react/ssr";
+import Link from "next/link";
 import { db } from "@/lib/server/db";
 import { LIVELLO, richiediUtente } from "@/lib/server/auth/sessione";
 import { formattaNumero } from "@/lib/formato";
@@ -18,8 +17,8 @@ interface Barra {
 function TabellaBarre({ titolo, colonna, righe }: { titolo: string; colonna: string; righe: Barra[] }) {
   const max = Math.max(1, ...righe.map((r) => r.valore));
   return (
-    <section className="grid content-start gap-4 rounded-xl border bg-card p-5 shadow-card">
-      <h2 className="text-lg font-semibold tracking-tight">{titolo}</h2>
+    <section className="grid content-start gap-4 border bg-card p-5">
+      <h2 className="text-lg tracking-tight">{titolo}</h2>
       <table className="w-full text-sm">
         <thead className="sr-only">
           <tr>
@@ -38,8 +37,8 @@ function TabellaBarre({ titolo, colonna, righe }: { titolo: string; colonna: str
               </th>
               <td className="py-1">
                 <div className="flex items-center gap-2">
-                  <div className="h-3 flex-1 overflow-hidden rounded-r bg-muted/60">
-                    <div className="h-full rounded-r bg-primary" style={{ width: `${(r.valore / max) * 100}%` }} />
+                  <div className="h-2 flex-1 overflow-hidden bg-sunken">
+                    <div className="h-full bg-primary" style={{ width: `${(r.valore / max) * 100}%` }} />
                   </div>
                   <span className="w-10 text-right tabular-nums">{formattaNumero(r.valore)}</span>
                 </div>
@@ -69,29 +68,32 @@ export default async function Dashboard() {
     ),
   ]);
 
-  const tile: [string, string, ReactNode][] = [
-    ["Utenti registrati", formattaNumero(utenti?.registrati ?? 0), <UsersThreeIcon key="r" weight="duotone" />],
-    ["Attivi negli ultimi 30 giorni", formattaNumero(utenti?.attivi_ultimi_30_giorni ?? 0), <UserCheckIcon key="a" weight="duotone" />],
-    ["In attesa di moderazione", formattaNumero(moderazione?.in_attesa ?? 0), <HourglassIcon key="m" weight="duotone" />],
-    [
-      "Tempo medio di revisione",
-      moderazione?.ore_medie != null ? `${formattaNumero(moderazione.ore_medie, 1)} h` : "—",
-      <ClockIcon key="t" weight="duotone" />,
-    ],
+  // sotto l'ora il tempo medio si legge meglio in minuti; senza revisioni concluse è un trattino, non uno zero
+  const ore = moderazione?.ore_medie;
+  const tempoMedio = ore == null ? "—" : ore < 1 ? `${formattaNumero(Math.round(ore * 60))} min` : `${formattaNumero(ore, 1)} h`;
+  const concluse = moderazione?.revisioni_concluse ?? 0;
+  const inAttesa = moderazione?.in_attesa ?? 0;
+  const cifre: { etichetta: string; valore: string; nota: React.ReactNode }[] = [
+    {
+      etichetta: "In attesa di moderazione",
+      valore: formattaNumero(inAttesa),
+      nota: inAttesa > 0 ? <Link href="/moderazione" className="font-medium text-primary hover:underline">Apri la coda</Link> : "Coda vuota",
+    },
+    { etichetta: "Tempo medio di revisione", valore: tempoMedio, nota: `su ${formattaNumero(concluse)} ${concluse === 1 ? "revisione conclusa" : "revisioni concluse"}` },
+    { etichetta: "Utenti registrati", valore: formattaNumero(utenti?.registrati ?? 0), nota: `${formattaNumero(utenti?.sanzionati ?? 0)} con un provvedimento` },
+    { etichetta: "Attivi negli ultimi 30 giorni", valore: formattaNumero(utenti?.attivi_ultimi_30_giorni ?? 0), nota: `su ${formattaNumero(utenti?.registrati ?? 0)} registrati` },
   ];
 
   return (
     <div className="grid gap-6">
-      <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {tile.map(([t, v, icona]) => (
-          <div key={t} className="grid content-start gap-2 rounded-xl border bg-card p-4 shadow-card">
-            <dt className="order-last text-sm text-muted-foreground">{t}</dt>
-            {/* in un <dl> stanno solo dt e dd: l'icona va dentro il dd */}
-            <dd className="grid gap-2">
-              <span className="grid size-9 place-items-center rounded-lg bg-secondary text-primary [&_svg]:size-5" aria-hidden>
-                {icona}
-              </span>
-              <span className="text-3xl font-semibold tracking-tight tabular-nums">{v}</span>
+      {/* un solo contenitore diviso da righe sottili: etichetta sopra, cifra sotto, una nota che dice rispetto a cosa */}
+      <dl className="grid grid-cols-2 border bg-card lg:grid-cols-4 [&>div]:border-border max-lg:[&>div:nth-child(-n+2)]:border-b max-lg:[&>div:nth-child(odd)]:border-r lg:[&>div:not(:last-child)]:border-r">
+        {cifre.map((c) => (
+          <div key={c.etichetta} className="grid content-start gap-1 p-4 sm:p-5">
+            <dt className="text-sm text-muted-foreground">{c.etichetta}</dt>
+            <dd className="grid gap-1">
+              <span className="text-[1.75rem] leading-tight tabular-nums">{c.valore}</span>
+              <span className="text-[13px] text-muted-foreground">{c.nota}</span>
             </dd>
           </div>
         ))}
@@ -122,9 +124,8 @@ export default async function Dashboard() {
           righe={municipi.map((m) => ({ etichetta: m.nome, valore: m.residenti_iscritti }))}
         />
       </div>
-      <p className="text-xs text-muted-foreground">
-        Passa il puntatore su una riga per vedere il dettaglio. Le statistiche sui moduli di intelligenza artificiale compariranno quando i
-        moduli saranno attivi.
+      <p className="text-[13px] text-muted-foreground">
+        Le statistiche sui moduli di intelligenza artificiale compariranno quando i moduli saranno attivi.
       </p>
     </div>
   );

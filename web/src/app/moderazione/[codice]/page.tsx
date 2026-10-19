@@ -8,6 +8,7 @@ import { cronologia, dettaglioSegnalazione } from "@/lib/server/consultazione";
 import { elencoCategorie } from "@/lib/server/catalogo";
 import { formattaDataOra, formattaNumero } from "@/lib/formato";
 import { BadgeCategoria, BadgeStato } from "@/components/stato";
+import { Percorso } from "@/components/percorso";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CorreggiPosizione, FormCategorie, FormSanzione, FormUnisci, PannelloDecisioni } from "./pannelli";
 
@@ -66,7 +67,7 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
           <header className="grid gap-2">
             <div className="flex flex-wrap items-center gap-2">
               <BadgeStato codice={s.statoCodice} nome={s.stato} />
-              <span className="font-mono text-xs text-muted-foreground">{s.codice}</span>
+              <span className="text-sm text-muted-foreground tabular-nums">{s.codice}</span>
               <span className="text-xs text-muted-foreground">{s.tipo === "proposta" ? "Proposta" : "Problema"}</span>
               {s.pubblico && (
                 <Link href={`/segnalazioni/${s.codice}`} className="text-xs text-primary underline-offset-4 hover:underline">
@@ -79,6 +80,7 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
               {s.indirizzo ? `${s.indirizzo} · ` : ""}
               {s.quartiere} · {s.municipio}
             </p>
+            <Percorso codice={s.statoCodice} className="mt-2 max-w-xl" />
             <div className="flex flex-wrap gap-1.5">
               {s.categorie.length ? (
                 s.categorie.map((k) => <BadgeCategoria key={k.id} nome={k.nome} colore={k.colore} />)
@@ -134,16 +136,21 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
             <h3 id="cronologia" className="font-semibold">
               Cronologia
             </h3>
-            <ol className="grid gap-2 text-sm">
-              {passi.map((p) => (
-                <li key={p.id} className="rounded-lg bg-sunken px-3 py-2 ring-1 ring-border">
-                  <span className="font-medium">
-                    {p.da} → {p.a}
-                  </span>{" "}
-                  <span className="text-xs text-muted-foreground">
+            {/* la stessa linea del tempo della pagina pubblica, con in più lo stato di partenza */}
+            <ol className="ml-1.5 grid gap-4 border-l-2 pl-5 text-sm">
+              {passi.map((p, i) => (
+                <li key={p.id} className="relative">
+                  <span
+                    className={`absolute top-1 -left-[1.69rem] size-3 rounded-full ring-4 ring-background ${i === passi.length - 1 ? "bg-primary" : "bg-foreground/55"}`}
+                    aria-hidden
+                  />
+                  <p>
+                    <span className="text-muted-foreground">{p.da} →</span> <span className="font-medium">{p.a}</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground">
                     {formattaDataOra(p.data)} · {p.attore}
-                  </span>
-                  {p.motivazione && <p className="text-xs">{p.motivazione}</p>}
+                  </p>
+                  {p.motivazione && <p className="mt-0.5 text-xs">{p.motivazione}</p>}
                 </li>
               ))}
             </ol>
@@ -151,7 +158,7 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
         </div>
 
         <aside className="grid content-start gap-4">
-          <Card className="shadow-raised ring-primary/30">
+          <Card className="ring-primary/40">
             <CardHeader>
               <CardTitle className="text-lg font-semibold">Decisione</CardTitle>
             </CardHeader>
