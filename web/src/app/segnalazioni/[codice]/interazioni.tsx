@@ -163,16 +163,7 @@ export function SegnalaAbuso({
           <input type="hidden" name="oggetto" value={oggetto} />
           <input type="hidden" name="idOggetto" value={idOggetto} />
           <MessaggioEsito esito={esito?.ok ? null : esito} />
-          <CampoSelect nome="motivo" etichetta="Motivo" defaultValue="" esito={esito}>
-            <option value="" disabled>
-              Scegli…
-            </option>
-            {MOTIVI.map(([v, t]) => (
-              <option key={v} value={v}>
-                {t}
-              </option>
-            ))}
-          </CampoSelect>
+          <CampoSelect nome="motivo" etichetta="Motivo" esito={esito} segnaposto="Scegli il motivo…" opzioni={MOTIVI} />
           <CampoTesto nome="nota" etichetta="Nota (facoltativa)" maxLength={500} rows={3} esito={esito} />
           <DialogFooter>
             <PulsanteInvio inAttesa={inAttesa}>Invia ai moderatori</PulsanteInvio>

@@ -1,11 +1,12 @@
 "use client";
 
-import { startTransition, useActionState, useId, type ComponentProps, type FormEvent, type ReactNode } from "react";
+import { startTransition, useActionState, useId, useState, type ComponentProps, type FormEvent, type ReactNode } from "react";
 import { CheckCircleIcon, SpinnerGapIcon, WarningCircleIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { NativeSelect } from "@/components/ui/native-select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
@@ -65,23 +66,137 @@ export function CampoTesto({ nome, etichetta, esito, aiuto, className, ...area }
   );
 }
 
+export type Opzione = readonly [valore: string | number, etichetta: string];
+
+/**
+ * Tendina del sito (Select di shadcn su Base UI) al posto di quella del browser.
+ * Con `name` manda il valore insieme al form; "" vale come "nessuna scelta" e mostra il segnaposto.
+ */
+export function Scelta({
+  name,
+  opzioni,
+  defaultValue,
+  segnaposto,
+  onValueChange,
+  size,
+  disabled,
+  required,
+  className,
+  ...trigger
+}: {
+  name?: string;
+  opzioni: readonly Opzione[];
+  defaultValue?: string | number | null;
+  segnaposto?: string;
+  onValueChange?: (valore: string) => void;
+  size?: "sm" | "default";
+  disabled?: boolean;
+  required?: boolean;
+  className?: string;
+  id?: string;
+  "aria-describedby"?: string;
+  "aria-invalid"?: boolean;
+  "aria-label"?: string;
+}) {
+  const voci = opzioni.map(([v, t]) => ({ value: String(v), label: t }));
+  const iniziale = defaultValue == null || defaultValue === "" ? null : String(defaultValue);
+  return (
+    <Select
+      name={name}
+      items={voci}
+      defaultValue={iniziale}
+      onValueChange={(v) => onValueChange?.((v as string | null) ?? "")}
+      disabled={disabled}
+      required={required}
+    >
+      <SelectTrigger size={size} className={className} {...trigger}>
+        <SelectValue placeholder={segnaposto ?? "Scegli…"} />
+      </SelectTrigger>
+      <SelectContent alignItemWithTrigger={false}>
+        {voci.map((v) => (
+          <SelectItem key={v.value} value={v.value}>
+            {v.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
+
 export function CampoSelect({
   nome,
   etichetta,
   esito,
   aiuto,
   className,
-  children,
-  ...select
-}: CampoProps & Omit<ComponentProps<"select">, "size">) {
+  ...scelta
+}: CampoProps & Omit<ComponentProps<typeof Scelta>, "name" | "className">) {
   return (
     <Contenitore nome={nome} etichetta={etichetta} esito={esito} aiuto={aiuto} className={className}>
-      {(attr) => (
-        <NativeSelect name={nome} {...attr} {...select}>
-          {children}
-        </NativeSelect>
-      )}
+      {(attr) => <Scelta name={nome} {...attr} {...scelta} />}
     </Contenitore>
+  );
+}
+
+const MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+
+/**
+ * Data in tre tendine (giorno, mese, anno) al posto del calendario del browser: per una data di nascita
+ * si fa prima che sfogliare i mesi all'indietro. Il form riceve un solo campo nascosto in formato AAAA-MM-GG.
+ * I giorni seguono il mese e gli anni bisestili; gli anni partono da `etaMinima` anni fa.
+ */
+export function CampoData({
+  nome,
+  etichetta,
+  esito,
+  aiuto,
+  className,
+  etaMinima = 0,
+  anni = 100,
+}: CampoProps & { etaMinima?: number; anni?: number }) {
+  const id = useId();
+  const errore = esito?.campi?.[nome];
+  const [giorno, setGiorno] = useState("");
+  const [mese, setMese] = useState("");
+  const [anno, setAnno] = useState("");
+  const ultimo = new Date().getFullYear() - etaMinima;
+  const giorniNelMese = mese ? new Date(Number(anno || 2000), Number(mese), 0).getDate() : 31;
+  const valore = giorno && mese && anno && Number(giorno) <= giorniNelMese ? `${anno}-${mese.padStart(2, "0")}-${giorno.padStart(2, "0")}` : "";
+  const descrizione = [aiuto ? `${id}-aiuto` : null, errore ? `${id}-errore` : null].filter(Boolean).join(" ") || undefined;
+  const comuni = { size: "default" as const, "aria-invalid": errore ? true : undefined, "aria-describedby": descrizione };
+
+  return (
+    <fieldset className={cn("grid gap-1.5", className)}>
+      <legend className="mb-1.5 text-sm font-medium">{etichetta}</legend>
+      <input type="hidden" name={nome} value={valore} />
+      <div className="grid grid-cols-[6rem_1fr_6.5rem] gap-2">
+        <Scelta
+          aria-label="Giorno"
+          segnaposto="Giorno"
+          opzioni={Array.from({ length: giorniNelMese }, (_, i) => [String(i + 1), String(i + 1)] as const)}
+          onValueChange={setGiorno}
+          {...comuni}
+        />
+        <Scelta aria-label="Mese" segnaposto="Mese" opzioni={MESI.map((m, i) => [String(i + 1), m] as const)} onValueChange={setMese} {...comuni} />
+        <Scelta
+          aria-label="Anno"
+          segnaposto="Anno"
+          opzioni={Array.from({ length: anni }, (_, i) => [String(ultimo - i), String(ultimo - i)] as const)}
+          onValueChange={setAnno}
+          {...comuni}
+        />
+      </div>
+      {aiuto && (
+        <p id={`${id}-aiuto`} className="text-xs text-muted-foreground">
+          {aiuto}
+        </p>
+      )}
+      {errore && (
+        <p id={`${id}-errore`} className="text-sm text-destructive">
+          {errore}
+        </p>
+      )}
+    </fieldset>
   );
 }
 
@@ -89,21 +204,24 @@ export function Casella({
   nome,
   esito,
   children,
-  ...input
-}: { nome: string; esito?: EsitoForm; children: ReactNode } & ComponentProps<"input">) {
+  value = "on",
+  defaultChecked,
+  required,
+}: { nome: string; esito?: EsitoForm; children: ReactNode; value?: string; defaultChecked?: boolean; required?: boolean }) {
   const id = useId();
   const errore = esito?.campi?.[nome];
   return (
     <div className="grid gap-1">
       <div className="flex items-start gap-2">
-        <input
+        <Checkbox
           id={id}
-          type="checkbox"
           name={nome}
-          className="mt-0.5 size-5 shrink-0 accent-primary"
+          value={value}
+          defaultChecked={defaultChecked}
+          required={required}
+          className="mt-0.5"
           aria-invalid={errore ? true : undefined}
           aria-describedby={errore ? `${id}-errore` : undefined}
-          {...input}
         />
         <label htmlFor={id} className="text-sm leading-snug [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4">
           {children}

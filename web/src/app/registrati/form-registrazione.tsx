@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { registrati } from "@/app/azioni/sessione";
-import { Campo, CampoSelect, Casella, MessaggioEsito, PulsanteInvio, useFormAzione } from "@/components/form";
+import { Campo, CampoData, CampoSelect, Casella, MessaggioEsito, PulsanteInvio, useFormAzione } from "@/components/form";
 
 export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { id: number; nome: string }[] }) {
   const { esito, onSubmit, inAttesa } = useFormAzione(registrati);
@@ -25,10 +25,8 @@ export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { 
         esito={esito}
         aiuto="Almeno 10 caratteri. Puoi usare anche una frase."
       />
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Campo nome="dataNascita" etichetta="Data di nascita" type="date" autoComplete="bday" required esito={esito} />
-        <Campo nome="telefono" etichetta="Telefono (facoltativo)" type="tel" autoComplete="tel" esito={esito} />
-      </div>
+      <CampoData nome="dataNascita" etichetta="Data di nascita" etaMinima={14} esito={esito} />
+      <Campo nome="telefono" etichetta="Telefono (facoltativo)" type="tel" autoComplete="tel" esito={esito} />
       <Campo
         nome="nomeVisualizzato"
         etichetta="Nome visualizzato"
@@ -43,16 +41,9 @@ export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { 
         defaultValue=""
         esito={esito}
         aiuto="Serve per dare più peso ai sostegni dei residenti del Municipio."
-      >
-        <option value="" disabled>
-          Scegli il quartiere…
-        </option>
-        {quartieri.map((q) => (
-          <option key={q.id} value={q.id}>
-            {q.nome}
-          </option>
-        ))}
-      </CampoSelect>
+        segnaposto="Scegli il quartiere…"
+        opzioni={quartieri.map((q) => [q.id, q.nome] as const)}
+      />
       <fieldset className="grid gap-3 rounded-xl bg-sunken p-4 ring-1 ring-border">
         <legend className="px-1 text-sm font-medium">Consensi</legend>
         <Casella nome="privacy" esito={esito} required>

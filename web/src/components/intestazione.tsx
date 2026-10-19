@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MapPinIcon, PlusIcon } from "@phosphor-icons/react/ssr";
+import { Logo } from "@/components/logo";
+import { PlusIcon } from "@phosphor-icons/react/ssr";
 import { utenteCorrente } from "@/lib/server/auth/sessione";
 import { db } from "@/lib/server/db";
 import { buttonVariants } from "@/components/ui/button";
@@ -15,14 +16,8 @@ export async function Intestazione() {
   return (
     <header className="sticky top-0 z-40 bg-carta">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4">
-        <Link href="/" className="mr-2 flex items-center gap-2.5 rounded-lg font-semibold tracking-tight">
-          <span className="grid size-8 place-items-center rounded-lg bg-primary text-primary-foreground shadow-card" aria-hidden>
-            <MapPinIcon weight="fill" className="size-[18px]" />
-          </span>
-          <span className="text-[15px] leading-tight">
-            La Nostra Città
-            <span className="block text-xs font-normal text-muted-foreground">Milano</span>
-          </span>
+        <Link href="/" className="mr-3 flex-none" aria-label="La Nostra Città, Milano: pagina iniziale">
+          <Logo />
         </Link>
         <NavPrincipale />
         <div className="ml-auto flex items-center gap-2">

@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { cambiaRuolo, creaDocumento, includiSegnalazione, salvaCandidato, salvaCategoria, salvaParametro } from "./azioni";
-import { Campo, CampoTesto, Casella, MessaggioEsito, PulsanteInvio, useFormAzione, type EsitoForm } from "@/components/form";
+import { Campo, CampoTesto, Casella, MessaggioEsito, PulsanteInvio, useFormAzione, type EsitoForm, Scelta } from "@/components/form";
 import { Input } from "@/components/ui/input";
-import { NativeSelect } from "@/components/ui/native-select";
 
 const avvisa = (r: EsitoForm) => {
   if (r?.ok) toast.success(r.messaggio ?? "Operazione completata.");
@@ -20,11 +19,18 @@ export function FormRuolo({ idUtente, idRuolo }: { idUtente: number; idRuolo: nu
         <label className="sr-only" htmlFor={`ruolo-${idUtente}`}>
           Ruolo
         </label>
-        <NativeSelect id={`ruolo-${idUtente}`} name="idRuolo" defaultValue={idRuolo} size="sm" className="w-44">
-          <option value={1}>Cittadino</option>
-          <option value={2}>Moderatore</option>
-          <option value={3}>Amministratore</option>
-        </NativeSelect>
+        <Scelta
+          id={`ruolo-${idUtente}`}
+          name="idRuolo"
+          defaultValue={idRuolo}
+          size="sm"
+          className="w-44"
+          opzioni={[
+            [1, "Cittadino"],
+            [2, "Moderatore"],
+            [3, "Amministratore"],
+          ]}
+        />
         <PulsanteInvio inAttesa={inAttesa} size="sm" variant="outline">
           Salva
         </PulsanteInvio>

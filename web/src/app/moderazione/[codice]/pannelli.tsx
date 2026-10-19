@@ -5,6 +5,7 @@ import { Marker, type Map as MappaLibre } from "maplibre-gl";
 import { toast } from "sonner";
 import { ArrowCounterClockwiseIcon, ChatCircleDotsIcon, CheckCircleIcon, ClipboardTextIcon, XCircleIcon, type Icon } from "@phosphor-icons/react";
 import { chiudiAbusiSegnalazione, correggiCategorie, correggiPosizione, decidi, sanziona, unisci } from "../azioni";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Campo, CampoSelect, CampoTesto, MessaggioEsito, PulsanteInvio, useFormAzione } from "@/components/form";
 import { MappaBase } from "@/components/mappa/mappa-base";
 import { Button } from "@/components/ui/button";
@@ -153,8 +154,8 @@ export function FormCategorie({
       <fieldset className="grid gap-1.5">
         <legend className="sr-only">Categorie confermate</legend>
         {categorie.map((k) => (
-          <label key={k.id} className="-mx-2 flex min-h-9 cursor-pointer items-center gap-2.5 rounded-lg px-2 text-sm hover:bg-muted">
-            <input type="checkbox" name="categorie" value={k.id} defaultChecked={scelte.includes(k.id)} className="size-[18px] accent-primary" />
+          <label key={k.id} className="-mx-2 flex min-h-9 cursor-pointer items-center gap-2.5 px-2 text-sm hover:bg-sunken">
+            <Checkbox name="categorie" value={String(k.id)} defaultChecked={scelte.includes(k.id)} />
             <span className="size-2.5 rounded-full" style={{ background: k.colore }} aria-hidden />
             {k.nome}
           </label>
@@ -205,10 +206,16 @@ export function FormSanzione({ idUtente, nome }: { idUtente: number; nome: strin
     <form onSubmit={onSubmit} className="grid gap-3" noValidate>
       <input type="hidden" name="idUtente" value={idUtente} />
       <MessaggioEsito esito={esito?.ok ? null : esito} />
-      <CampoSelect nome="tipo" etichetta="Provvedimento" defaultValue="sospensione" esito={esito}>
-        <option value="sospensione">Sospensione temporanea</option>
-        <option value="ban">Ban permanente</option>
-      </CampoSelect>
+      <CampoSelect
+        nome="tipo"
+        etichetta="Provvedimento"
+        defaultValue="sospensione"
+        esito={esito}
+        opzioni={[
+          ["sospensione", "Sospensione temporanea"],
+          ["ban", "Ban permanente"],
+        ]}
+      />
       <Campo nome="giorni" etichetta="Durata della sospensione (giorni)" type="number" min={1} max={365} defaultValue={7} esito={esito} />
       <CampoTesto nome="motivazione" etichetta="Motivazione" rows={3} esito={esito} />
       <div className="flex gap-2">

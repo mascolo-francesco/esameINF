@@ -21,7 +21,7 @@ import { StatoVuoto } from "@/components/stato-vuoto";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { NativeSelect } from "@/components/ui/native-select";
+import { Scelta } from "@/components/form";
 import { Textarea } from "@/components/ui/textarea";
 
 export const metadata: Metadata = {
@@ -179,10 +179,14 @@ export default function SistemaDesign() {
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="d-quartiere">Quartiere</Label>
-              <NativeSelect id="d-quartiere" defaultValue="lorenteggio">
-                <option value="lorenteggio">Lorenteggio</option>
-                <option value="bovisa">Bovisa</option>
-              </NativeSelect>
+              <Scelta
+                id="d-quartiere"
+                defaultValue="lorenteggio"
+                opzioni={[
+                  ["lorenteggio", "Lorenteggio"],
+                  ["bovisa", "Bovisa"],
+                ]}
+              />
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="d-email">Email</Label>

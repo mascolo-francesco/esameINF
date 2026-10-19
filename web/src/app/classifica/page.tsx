@@ -16,10 +16,9 @@ import { elencoCategorie, elencoMunicipi, elencoQuartieri } from "@/lib/server/c
 import { Pagina } from "@/components/pagina";
 import { SchedaSegnalazione } from "@/components/scheda-segnalazione";
 import { StatoVuoto } from "@/components/stato-vuoto";
-import { NativeSelect } from "@/components/ui/native-select";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { FiltriAutomatici } from "./filtri";
+import { FiltroScelta } from "./filtri";
 
 export const metadata: Metadata = {
   title: "Classifica",
@@ -121,31 +120,25 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
             <CaretDownIcon className="ml-auto size-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" aria-hidden />
           </summary>
           <form method="get" action="/classifica" className="grid grid-cols-2 gap-3 px-4 pb-4 sm:grid-cols-3 lg:grid-cols-6" aria-label="Filtri">
-            <FiltriAutomatici />
             {p.ordine !== "sostenute" && <input type="hidden" name="ordine" value={p.ordine} />}
-            <Filtro etichetta="Categoria" name="categoria" valore={p.categoria || ""} vuoto="Tutte" opzioni={categorie.map((k) => [k.id, k.nome])} />
-            <Filtro etichetta="Municipio" name="municipio" valore={p.municipio || ""} vuoto="Tutti" opzioni={municipi.map((m) => [m.id, m.nome])} />
-            <Filtro
+            <FiltroScelta etichetta="Categoria" nome="categoria" valore={p.categoria || ""} vuoto="Tutte" opzioni={categorie.map((k) => [k.id, k.nome])} />
+            <FiltroScelta etichetta="Municipio" nome="municipio" valore={p.municipio || ""} vuoto="Tutti" opzioni={municipi.map((m) => [m.id, m.nome])} />
+            <FiltroScelta
               etichetta="Quartiere"
-              name="quartiere"
+              nome="quartiere"
               valore={p.quartiere || ""}
               vuoto="Tutti"
               opzioni={quartieri.filter((q) => !p.municipio || q.idMunicipio === p.municipio).map((q) => [q.id, q.nome])}
             />
-            <Filtro etichetta="Tipo" name="tipo" valore={p.tipo} vuoto="Tutti" opzioni={[["problema", "Problemi"], ["proposta", "Proposte"]]} />
-            <Filtro etichetta="Stato" name="stato" valore={p.stato} vuoto="Tutti" opzioni={Object.entries(STATI)} />
-            <Filtro
+            <FiltroScelta etichetta="Tipo" nome="tipo" valore={p.tipo} vuoto="Tutti" opzioni={[["problema", "Problemi"], ["proposta", "Proposte"]]} />
+            <FiltroScelta etichetta="Stato" nome="stato" valore={p.stato} vuoto="Tutti" opzioni={Object.entries(STATI)} />
+            <FiltroScelta
               etichetta="Periodo"
-              name="giorni"
+              nome="giorni"
               valore={p.giorni || ""}
               vuoto="Sempre"
               opzioni={[7, 30, 90].map((g) => [g, `Ultimi ${g} giorni`])}
             />
-            <div className="col-span-full">
-              <button type="submit" className={cn(buttonVariants({ size: "sm" }), "js-nascondi")}>
-                Applica i filtri
-              </button>
-            </div>
           </form>
         </details>
 
@@ -213,31 +206,3 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
 }
 
 const STATI = { PUBBLICATA: "Pubblicata", PRESA_IN_CARICO: "Presa in carico", INVIATA_CANDIDATI: "Inviata ai candidati" } as Record<string, string>;
-
-function Filtro({
-  etichetta,
-  name,
-  valore,
-  vuoto,
-  opzioni,
-}: {
-  etichetta: string;
-  name: string;
-  valore: string | number;
-  vuoto: string;
-  opzioni: (readonly [string | number, string])[];
-}) {
-  return (
-    <label className="grid min-w-0 gap-1.5 text-sm font-medium">
-      {etichetta}
-      <NativeSelect name={name} defaultValue={valore} size="sm">
-        <option value="">{vuoto}</option>
-        {opzioni.map(([v, t]) => (
-          <option key={v} value={v}>
-            {t}
-          </option>
-        ))}
-      </NativeSelect>
-    </label>
-  );
-}

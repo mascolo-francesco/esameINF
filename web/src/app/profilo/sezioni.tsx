@@ -22,13 +22,14 @@ export function FormProfilo({ quartieri, valori }: { quartieri: { id: number; no
       <Casella nome="mostraNomeReale" defaultChecked={valori.mostraNomeReale}>
         Mostra nome e cognome al posto del nome visualizzato
       </Casella>
-      <CampoSelect nome="idQuartiere" etichetta="Quartiere" defaultValue={valori.idQuartiere ?? ""} esito={esito}>
-        {quartieri.map((q) => (
-          <option key={q.id} value={q.id}>
-            {q.nome}
-          </option>
-        ))}
-      </CampoSelect>
+      <CampoSelect
+        nome="idQuartiere"
+        etichetta="Quartiere"
+        defaultValue={valori.idQuartiere ?? ""}
+        esito={esito}
+        segnaposto="Scegli il quartiere…"
+        opzioni={quartieri.map((q) => [q.id, q.nome] as const)}
+      />
       <Casella nome="consensoNotifiche" defaultChecked={valori.consensoNotifiche}>
         Ricevi notifiche sulle segnalazioni che segui
       </Casella>

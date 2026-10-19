@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Logo } from "./logo";
 
 const VOCI = [
   ["/nuova", "Fai una segnalazione"],
@@ -14,6 +15,7 @@ export function PieDiPagina() {
     <footer className="mt-auto bg-lamiera px-4 pt-16 text-foreground sm:px-8 sm:pt-24">
       <div className="bordo-smerlato mx-auto grid max-w-5xl gap-10 bg-carta px-6 pt-14 pb-8 sm:grid-cols-2 sm:gap-12 sm:px-12 sm:pt-16">
         <div className="grid content-start gap-4">
+          <Logo className="mb-2" />
           <p className="font-display text-step-lead leading-tight tracking-tight">Milano, prima del voto.</p>
           <p className="max-w-sm text-step-body leading-relaxed">
             Il comitato raccoglie le segnalazioni più sostenute nel documento programmatico e lo consegna a tutti i candidati
