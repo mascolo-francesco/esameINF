@@ -11,6 +11,45 @@ const PER_PAGINA = 50;
 
 const json = (v: unknown) => (v == null ? "" : typeof v === "string" ? v : JSON.stringify(v));
 
+type Valori = Record<string, unknown>;
+const oggetto = (v: unknown): Valori | null => {
+  const o = typeof v === "string" ? (() => { try { return JSON.parse(v); } catch { return null; } })() : v;
+  return o && typeof o === "object" && !Array.isArray(o) ? (o as Valori) : null;
+};
+// "PRESA_IN_CARICO" diventa "presa in carico"; i valori vuoti un trattino
+const leggibile = (v: unknown) =>
+  v == null || v === ""
+    ? "—"
+    : typeof v === "string"
+      ? /^[A-Z_]+$/.test(v)
+        ? v.replaceAll("_", " ").toLowerCase()
+        : v
+      : JSON.stringify(v);
+
+/** Prima e dopo come elenco dei soli campi cambiati, uno per riga: "stato: pubblicata → presa in carico". */
+function Modifiche({ prima, dopo }: { prima: unknown; dopo: unknown }) {
+  const p = oggetto(prima);
+  const d = oggetto(dopo);
+  if ((prima != null && !p) || (dopo != null && !d)) {
+    return <>{json(prima)} {prima != null && dopo != null && "→"} {json(dopo)}</>;
+  }
+  const campi = [...new Set([...Object.keys(p ?? {}), ...Object.keys(d ?? {})])].filter(
+    (k) => JSON.stringify(p?.[k] ?? null) !== JSON.stringify(d?.[k] ?? null),
+  );
+  if (campi.length === 0) return <>—</>;
+  return (
+    <ul className="grid gap-1">
+      {campi.map((k) => (
+        <li key={k}>
+          <span className="text-foreground">{k.replaceAll("_", " ")}</span>:{" "}
+          {p?.[k] != null && <>{leggibile(p[k])} → </>}
+          {d ? leggibile(d[k]) : "eliminato"}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 // RF-46: query registro_audit (in sola lettura: i trigger impediscono modifiche e cancellazioni)
 export default async function Audit({ searchParams }: PageProps<"/admin/audit">) {
   await richiediUtente(LIVELLO.amministratore, "/admin/audit");
@@ -57,11 +96,11 @@ export default async function Audit({ searchParams }: PageProps<"/admin/audit">)
                   {r.indirizzo_ip && <span className="block font-mono text-xs text-muted-foreground">{r.indirizzo_ip}</span>}
                 </td>
                 <td className="p-2">{r.azione.replaceAll("_", " ")}</td>
-                <td className="p-2 font-mono text-xs">
-                  {r.tipo_oggetto} {r.id_oggetto}
+                <td className="p-2 text-xs">
+                  {r.tipo_oggetto.replaceAll("_", " ")} {r.id_oggetto}
                 </td>
-                <td className="max-w-md p-2 font-mono text-xs break-all text-muted-foreground">
-                  {json(r.valori_prima)} {r.valori_prima != null && r.valori_dopo != null && "→"} {json(r.valori_dopo)}
+                <td className="max-w-md p-2 text-xs break-words text-muted-foreground">
+                  <Modifiche prima={r.valori_prima} dopo={r.valori_dopo} />
                 </td>
               </tr>
             ))}

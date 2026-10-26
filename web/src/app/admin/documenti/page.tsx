@@ -46,8 +46,9 @@ export default async function Documenti() {
                     <span className="flex-1 font-medium">
                       {d.titolo} <span className="text-muted-foreground">v{d.versione}</span>
                     </span>
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-xs">{STATI[d.stato]}</span>
-                    <span className="w-full text-xs text-muted-foreground sm:w-auto">
+                    <span className="flex-none rounded bg-muted px-1.5 py-0.5 text-xs">{STATI[d.stato]}</span>
+                    {/* sempre su una riga sua: accanto al titolo lo stringeva fino a tre righe */}
+                    <span className="w-full text-xs text-muted-foreground">
                       {d.n} segnalazioni · creato il {formattaData(d.data_creazione)}
                       {d.data_invio && ` · inviato il ${formattaData(d.data_invio)}`}
                     </span>

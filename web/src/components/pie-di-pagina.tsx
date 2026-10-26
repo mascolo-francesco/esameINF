@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "./logo";
+import { SceltaPie } from "./scelta-pie";
 
 const VOCI = [
   ["/nuova", "Fai una segnalazione"],
@@ -11,6 +12,23 @@ const VOCI = [
 
 /** Il retro della cartolina: un foglio con il bordo smerlato, appoggiato sulla lamiera del tabellone. */
 export function PieDiPagina() {
+  return <SceltaPie completo={<Cartolina />} essenziale={<PieEssenziale />} />;
+}
+
+function PieEssenziale() {
+  return (
+    <footer className="mt-auto border-t">
+      <p className="mx-auto max-w-6xl px-4 py-5 text-step-small text-muted-foreground">
+        La Nostra Città, Il Nostro Futuro · area del comitato ·{" "}
+        <Link href="/privacy" className="underline underline-offset-4 hover:text-foreground">
+          Informativa privacy
+        </Link>
+      </p>
+    </footer>
+  );
+}
+
+function Cartolina() {
   return (
     <footer className="mt-auto bg-lamiera px-4 pt-16 text-foreground sm:px-8 sm:pt-24">
       <div className="bordo-smerlato mx-auto grid max-w-5xl gap-10 bg-carta px-6 pt-14 pb-8 sm:grid-cols-2 sm:gap-12 sm:px-12 sm:pt-16">

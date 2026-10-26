@@ -72,7 +72,7 @@ export function NavStaff({ admin, inCoda }: { admin: boolean; inCoda: number }) 
     <nav
       ref={lista}
       aria-label="Area del comitato"
-      className="-mx-4 flex gap-1 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:content-start lg:gap-6 lg:overflow-visible lg:px-0"
+      className="-mx-4 flex gap-1 overflow-x-auto px-4 [scrollbar-width:none] lg:-mx-3 lg:grid lg:content-start lg:gap-6 lg:overflow-visible lg:px-0"
     >
       {gruppi.map(([nome, voci]) => (
         <div key={nome} className="contents lg:grid lg:gap-0.5">
@@ -86,10 +86,11 @@ export function NavStaff({ admin, inCoda }: { admin: boolean; inCoda: number }) 
                 aria-current={qui ? "page" : undefined}
                 className={cn(
                   "flex h-10 flex-none items-center gap-2.5 px-3 text-sm whitespace-nowrap transition-colors lg:h-8",
-                  qui ? "bg-tinta-50 font-semibold text-tinta-ink" : "text-muted-foreground hover:bg-sunken hover:text-foreground",
+                  // voce attiva in grigio neutro: il colore del sito resta sui dati e sulle azioni
+                  qui ? "bg-sunken font-semibold text-foreground" : "text-muted-foreground hover:bg-sunken hover:text-foreground",
                 )}
               >
-                <Icona className={cn("size-4 flex-none", qui && "text-primary")} weight={qui ? "bold" : "regular"} aria-hidden />
+                <Icona className="size-4 flex-none" weight={qui ? "bold" : "regular"} aria-hidden />
                 <span className="flex-1">{testo}</span>
                 {href === "/moderazione" && inCoda > 0 && (
                   <span className="text-xs font-semibold tabular-nums" aria-label={`${inCoda} da controllare`}>
