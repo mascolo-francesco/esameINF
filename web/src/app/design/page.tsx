@@ -138,13 +138,13 @@ export default function SistemaDesign() {
                 Fai una segnalazione
               </Button>
               <Button variant="outline">
-                <BellRingingIcon aria-hidden />
+                <BellRingingIcon weight="bold" aria-hidden />
                 Segui
               </Button>
               <Button variant="secondary">Secondario</Button>
               <Button variant="ghost">Annulla</Button>
               <Button variant="destructive">
-                <TrashIcon aria-hidden />
+                <TrashIcon weight="bold" aria-hidden />
                 Ritira
               </Button>
               <Button variant="link">Link</Button>
@@ -153,14 +153,14 @@ export default function SistemaDesign() {
           <Pannello titolo="Dimensioni e stati">
             <div className="flex flex-wrap items-center gap-2">
               <Button size="lg">
-                <HeartIcon weight="fill" aria-hidden />
+                <HeartIcon weight="bold" aria-hidden />
                 Sostieni · 48 px
               </Button>
               <Button>Normale · 40 px</Button>
               <Button size="sm">Compatto · 36 px</Button>
               <Button disabled>Non disponibile</Button>
               <Button size="icon" variant="outline" aria-label="Cerca">
-                <MagnifyingGlassIcon aria-hidden />
+                <MagnifyingGlassIcon weight="bold" aria-hidden />
               </Button>
             </div>
           </Pannello>
@@ -192,7 +192,7 @@ export default function SistemaDesign() {
               <Label htmlFor="d-email">Email</Label>
               <Input id="d-email" type="email" defaultValue="giulia@" aria-invalid aria-describedby="d-email-errore" />
               <p id="d-email-errore" className="flex items-center gap-1.5 text-sm text-destructive">
-                <WarningCircleIcon weight="fill" className="size-4" aria-hidden />
+                <WarningCircleIcon weight="bold" className="size-4" aria-hidden />
                 Scrivi un indirizzo email completo.
               </p>
             </div>
@@ -232,13 +232,13 @@ export default function SistemaDesign() {
       <Sezione id="elenchi" titolo="Elenchi e stati vuoti" descrizione="La scheda tiene il titolo intero su due righe anche a 360 px; i sostegni scendono nella riga dei badge sui telefoni.">
         <div className="grid gap-4 lg:grid-cols-2">
           <SchedaSegnalazione s={ESEMPIO} posizione={1} />
-          <StatoVuoto icona={<MegaphoneIcon weight="duotone" />} titolo="Ancora nessuna segnalazione">
+          <StatoVuoto icona={<MegaphoneIcon weight="regular" />} titolo="Ancora nessuna segnalazione">
             Le prime compariranno qui appena un moderatore le approva.
           </StatoVuoto>
         </div>
       </Sezione>
 
-      <Sezione id="icone" titolo="Icone" descrizione="Phosphor, licenza MIT. Regular per le azioni, duotone per illustrare, fill per la voce attiva della navigazione.">
+      <Sezione id="icone" titolo="Icone" descrizione="Phosphor, licenza MIT. Lo stesso tratto ovunque, circa 1,5 px: bold fino a 20 px, regular da 24 px in su. La voce attiva si riconosce dal colore e dal grassetto, non da un'icona diversa.">
         <ul className="grid grid-cols-3 gap-3 sm:grid-cols-6">
           {(
             [
@@ -251,17 +251,13 @@ export default function SistemaDesign() {
             ] as const
           ).map(([Icona, nome]) => (
             <li key={nome} className="grid justify-items-center gap-2 rounded-xl border bg-card p-4 text-xs text-muted-foreground shadow-card">
-              <span className="flex gap-2 text-foreground" aria-hidden>
-                <Icona className="size-6" />
-                <Icona weight="duotone" className="size-6 text-primary" />
-                <Icona weight="fill" className="size-6 text-primary" />
-              </span>
+              <Icona weight="regular" className="size-6 text-foreground" aria-hidden />
               {nome}
             </li>
           ))}
         </ul>
         <p className="flex items-center gap-2 text-sm text-muted-foreground">
-          <CheckCircleIcon weight="fill" className="size-4 text-primary" aria-hidden />
+          <CheckCircleIcon weight="bold" className="size-4 text-primary" aria-hidden />
           Le icone accanto a un testo sono decorative (aria-hidden); quelle da sole hanno un aria-label.
         </p>
       </Sezione>

@@ -71,18 +71,18 @@ export function AzioniSostegno({
           onClick={() => esegui(() => (sostiene ? ritiraSostegno(codice) : sostieni(codice)))}
         >
           {inCorso ? (
-            <SpinnerGapIcon className="animate-spin" aria-hidden />
+            <SpinnerGapIcon weight="bold" className="animate-spin" aria-hidden />
           ) : sostiene ? (
-            <HeartBreakIcon aria-hidden />
+            <HeartBreakIcon weight="bold" aria-hidden />
           ) : (
-            <HeartIcon weight="fill" aria-hidden />
+            <HeartIcon weight="bold" aria-hidden />
           )}
           {sostiene ? "Ritira il sostegno" : "Sostieni"}
         </Button>
       )}
       {autore && votabile && <p className="text-sm text-muted-foreground">Non puoi sostenere una tua segnalazione.</p>}
       <Button variant="outline" className="w-full" disabled={inCorso} aria-pressed={segue} onClick={() => esegui(() => seguiSegnalazione(codice, !segue))}>
-        {segue ? <BellSlashIcon aria-hidden /> : <BellRingingIcon aria-hidden />}
+        {segue ? <BellSlashIcon weight="bold" aria-hidden /> : <BellRingingIcon weight="bold" aria-hidden />}
         {segue ? "Smetti di seguire" : "Segui gli aggiornamenti"}
       </Button>
     </div>
@@ -104,7 +104,7 @@ export function Condividi({ titolo }: { titolo: string }) {
         }
       }}
     >
-      <ShareNetworkIcon aria-hidden />
+      <ShareNetworkIcon weight="bold" aria-hidden />
       Condividi
     </Button>
   );
@@ -148,7 +148,7 @@ export function SegnalaAbuso({
         }
         aria-label={piccolo ? "Segnala questo commento ai moderatori" : undefined}
       >
-        <FlagIcon className="size-4" aria-hidden />
+        <FlagIcon weight="bold" className="size-4" aria-hidden />
         {!piccolo && "Segnala un abuso"}
       </DialogTrigger>
       <DialogContent>
@@ -228,7 +228,7 @@ export function PulsanteRitira({ codice }: { codice: string }) {
   return (
     <Dialog>
       <DialogTrigger className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "w-full justify-start text-destructive hover:text-destructive")}>
-        <TrashIcon aria-hidden />
+        <TrashIcon weight="bold" aria-hidden />
         Ritira la segnalazione
       </DialogTrigger>
       <DialogContent>

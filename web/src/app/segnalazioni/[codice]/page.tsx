@@ -47,14 +47,14 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
     <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 pt-8 pb-12 sm:pt-10">
       {inviata && (
         <p role="status" className="flex items-start gap-3 bg-tinta-50 p-4 text-sm text-tinta-ink">
-          <CheckCircleIcon weight="fill" className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+          <CheckCircleIcon weight="bold" className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
           Segnalazione inviata con il codice {s.codice}. Un moderatore la controllerà a breve: riceverai una notifica
           quando sarà pubblicata.
         </p>
       )}
       {s.statoCodice === "UNITA" && s.codicePrincipale && (
         <p role="status" className="flex items-start gap-3 bg-sunken p-4 text-sm">
-          <InfoIcon weight="fill" className="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden />
+          <InfoIcon weight="bold" className="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden />
           <span>
           Questa segnalazione è stata unita a{" "}
           <Link href={`/segnalazioni/${s.codicePrincipale}`} className="font-medium text-primary underline-offset-4 hover:underline">
@@ -79,17 +79,17 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
             <h1 className="text-2xl leading-tight tracking-tight sm:text-[2rem]">{s.titolo}</h1>
             <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
               <li className="flex items-center gap-1.5">
-                <MapPinIcon className="size-4 shrink-0" aria-hidden />
+                <MapPinIcon weight="bold" className="size-4 shrink-0" aria-hidden />
                 {s.indirizzo ? `${s.indirizzo}, ` : ""}
                 {s.quartiere} · {s.municipio}
               </li>
               <li className="flex items-center gap-1.5">
-                <UserIcon className="size-4 shrink-0" aria-hidden />
+                <UserIcon weight="bold" className="size-4 shrink-0" aria-hidden />
                 {s.autore}
               </li>
               {(s.dataPubblicazione ?? s.dataInvio) && (
                 <li className="flex items-center gap-1.5">
-                  <CalendarBlankIcon className="size-4 shrink-0" aria-hidden />
+                  <CalendarBlankIcon weight="bold" className="size-4 shrink-0" aria-hidden />
                   {formattaData((s.dataPubblicazione ?? s.dataInvio)!)}
                 </li>
               )}
@@ -192,7 +192,7 @@ export default async function PaginaSegnalazione({ params, searchParams }: PageP
                 Commenti <span className="text-muted-foreground tabular-nums">({listaCommenti.length})</span>
               </h2>
               {listaCommenti.length === 0 && (
-                <StatoVuoto icona={<ChatCircleIcon weight="duotone" />} titolo="Ancora nessun commento" className="py-8">
+                <StatoVuoto icona={<ChatCircleIcon weight="regular" />} titolo="Ancora nessun commento" className="py-8">
                   Puoi aggiungere informazioni utili o proporre una soluzione.
                 </StatoVuoto>
               )}

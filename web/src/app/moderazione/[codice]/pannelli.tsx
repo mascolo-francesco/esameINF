@@ -134,7 +134,7 @@ export function PannelloDecisioni({
 
 function DecisioneIcona({ d }: { d: Decisione }) {
   const Icona = ICONE[d];
-  return <Icona weight={d === "pubblica" ? "fill" : "regular"} aria-hidden />;
+  return <Icona weight="bold" aria-hidden />;
 }
 
 export function FormCategorie({

@@ -255,17 +255,17 @@ export function Procedura({ categorie }: { categorie: Categoria[] }) {
       {/* sui telefoni i pulsanti restano attaccati sopra la barra in basso, sempre a portata di pollice */}
       <div className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] z-10 -mx-4 flex justify-between gap-2 border-t bg-background/95 px-4 py-3 backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-4 sm:pb-0 sm:backdrop-blur-none">
         <Button variant="outline" size="lg" onClick={() => vaiA(passo - 1)} disabled={passo === 0 || inCorso}>
-          <ArrowLeftIcon aria-hidden />
+          <ArrowLeftIcon weight="bold" aria-hidden />
           Indietro
         </Button>
         {passo < 3 ? (
           <Button size="lg" onClick={avanti}>
             Avanti
-            <ArrowRightIcon aria-hidden />
+            <ArrowRightIcon weight="bold" aria-hidden />
           </Button>
         ) : (
           <Button size="lg" onClick={invia} disabled={inCorso} aria-busy={inCorso}>
-            {inCorso ? <SpinnerGapIcon className="animate-spin" aria-hidden /> : <PaperPlaneTiltIcon aria-hidden />}
+            {inCorso ? <SpinnerGapIcon weight="bold" className="animate-spin" aria-hidden /> : <PaperPlaneTiltIcon weight="bold" aria-hidden />}
             Invia la segnalazione
           </Button>
         )}
@@ -319,7 +319,7 @@ function PassoFoto({
             <img src={f.anteprima} alt={`Foto ${i + 1}`} className="aspect-[4/3] w-full object-cover" />
             {f.exif.lat !== null && (
               <span className="absolute bottom-1.5 left-1.5 flex items-center gap-1 rounded-md bg-black/70 px-1.5 py-0.5 text-xs font-medium text-white">
-                <MapPinIcon weight="fill" className="size-3" aria-hidden /> GPS
+                <MapPinIcon weight="bold" className="size-3" aria-hidden /> GPS
               </span>
             )}
             <Button
@@ -332,14 +332,14 @@ function PassoFoto({
                 setFoto(foto.filter((x) => x.id !== f.id));
               }}
             >
-              <TrashIcon aria-hidden />
+              <TrashIcon weight="bold" aria-hidden />
             </Button>
           </li>
         ))}
         {foto.length < MAX_FOTO && (
           <li>
             <label className="flex aspect-[4/3] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-input bg-sunken/60 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:bg-tinta-50 hover:text-tinta-ink has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50">
-              {inCorso ? <SpinnerGapIcon className="size-7 animate-spin" aria-hidden /> : <CameraPlusIcon weight="duotone" className="size-7" aria-hidden />}
+              {inCorso ? <SpinnerGapIcon weight="regular" className="size-7 animate-spin" aria-hidden /> : <CameraPlusIcon weight="regular" className="size-7" aria-hidden />}
               {inCorso ? "Preparazione delle foto in corso…" : "Aggiungi foto"}
               <input
                 ref={input}
@@ -355,7 +355,7 @@ function PassoFoto({
         )}
       </ul>
       <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        <CameraIcon className="size-4" aria-hidden /> Dal telefono puoi scattare la foto direttamente.
+        <CameraIcon weight="bold" className="size-4" aria-hidden /> Dal telefono puoi scattare la foto direttamente.
       </p>
     </div>
   );
@@ -425,11 +425,11 @@ function PassoPosizione({
               mappa.current?.flyTo({ center: [p.lon, p.lat], zoom: 17 });
             }}
           >
-            <ImageIcon aria-hidden /> Usa la posizione della foto
+            <ImageIcon weight="bold" aria-hidden /> Usa la posizione della foto
           </Button>
         )}
         <Button variant="outline" onClick={usaGps} disabled={cercoGps}>
-          {cercoGps ? <SpinnerGapIcon className="animate-spin" aria-hidden /> : <CrosshairIcon aria-hidden />}
+          {cercoGps ? <SpinnerGapIcon weight="bold" className="animate-spin" aria-hidden /> : <CrosshairIcon weight="bold" aria-hidden />}
           Usa la mia posizione
         </Button>
       </div>
@@ -453,7 +453,7 @@ function PassoPosizione({
         {posizione && info === null && "Ricerca del quartiere in corso…"}
         {posizione && info === "fuori" && (
           <span className="flex items-center gap-1.5 text-destructive">
-            <WarningIcon weight="fill" className="size-4" aria-hidden /> Il punto è fuori dal Comune di Milano.
+            <WarningIcon weight="bold" className="size-4" aria-hidden /> Il punto è fuori dal Comune di Milano.
           </span>
         )}
         {posizione && info && info !== "fuori" && (
@@ -490,7 +490,7 @@ function Riepilogo({
       {simili && simili.length > 0 && (
         <div className="grid gap-3 border border-avviso-bordo bg-avviso p-4 text-avviso-ink">
           <p className="flex items-center gap-2 font-semibold">
-            <WarningIcon weight="fill" className="size-5" aria-hidden /> Qualcuno potrebbe averlo già segnalato
+            <WarningIcon weight="bold" className="size-5" aria-hidden /> Qualcuno potrebbe averlo già segnalato
           </p>
           <p className="text-sm">
             Ci sono segnalazioni simili nelle vicinanze. Se descrivono lo stesso problema, sostieni quella esistente: una

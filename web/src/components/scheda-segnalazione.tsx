@@ -41,7 +41,7 @@ export function SchedaSegnalazione({ s, posizione, className }: { s: DatiScheda;
           // eslint-disable-next-line @next/next/no-img-element -- miniatura da 400 px già ottimizzata
           <img src={s.miniatura} alt="" loading="lazy" className="size-full object-cover" />
         ) : (
-          <ImageIcon className="absolute inset-0 m-auto size-6 text-muted-foreground" aria-hidden />
+          <ImageIcon weight="regular" className="absolute inset-0 m-auto size-6 text-muted-foreground" aria-hidden />
         )}
       </div>
       <div className="grid min-w-0 content-center gap-1">

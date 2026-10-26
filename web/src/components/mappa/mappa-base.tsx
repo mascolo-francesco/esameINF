@@ -76,12 +76,12 @@ export function MappaBase({ className, etichetta, opzioni, onPronta }: Props) {
       >
         {stato === "errore" ? (
           <p role="alert" className="flex max-w-xs flex-col items-center gap-2 px-4 text-center text-sm text-muted-foreground">
-            <WarningCircleIcon className="size-6" aria-hidden />
+            <WarningCircleIcon weight="regular" className="size-6" aria-hidden />
             Non riesco a caricare la mappa. Controlla la connessione e ricarica la pagina.
           </p>
         ) : (
           <p role="status" className="flex flex-col items-center gap-2 text-sm text-muted-foreground">
-            <MapTrifoldIcon weight="duotone" className="size-7 motion-safe:animate-pulse" aria-hidden />
+            <MapTrifoldIcon weight="regular" className="size-7 motion-safe:animate-pulse" aria-hidden />
             {stato === "carica" ? "Caricamento della mappa…" : ""}
           </p>
         )}

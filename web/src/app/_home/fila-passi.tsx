@@ -52,7 +52,7 @@ export function FilaPassi({ passi }: { passi: Passo[] }) {
             aria-label="Momenti precedenti"
             disabled={avanzamento <= 0.01}
           >
-            <ArrowLeftIcon className="size-5" aria-hidden />
+            <ArrowLeftIcon weight="bold" className="size-5" aria-hidden />
           </button>
           <button
             type="button"
@@ -61,7 +61,7 @@ export function FilaPassi({ passi }: { passi: Passo[] }) {
             aria-label="Momenti successivi"
             disabled={avanzamento >= 0.99}
           >
-            <ArrowRightIcon className="size-5" aria-hidden />
+            <ArrowRightIcon weight="bold" className="size-5" aria-hidden />
           </button>
         </div>
       </div>

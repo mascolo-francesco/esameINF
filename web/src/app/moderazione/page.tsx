@@ -75,7 +75,7 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
             <Input name="codice" placeholder="MI-2026-000012" className="tabular-nums sm:w-52" required />
           </label>
           <Button type="submit" variant="outline">
-            <MagnifyingGlassIcon aria-hidden />
+            <MagnifyingGlassIcon weight="bold" aria-hidden />
             Apri
           </Button>
         </form>
@@ -87,7 +87,7 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
       )}
 
       {voci.length === 0 ? (
-        <StatoVuoto icona={<CheckCircleIcon weight="duotone" />} titolo="Coda vuota">
+        <StatoVuoto icona={<CheckCircleIcon weight="regular" />} titolo="Coda vuota">
           Quando arrivano nuove segnalazioni o qualcuno segnala un abuso, compaiono qui.
         </StatoVuoto>
       ) : (
@@ -102,7 +102,7 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
               >
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
                   <span className="flex items-center gap-1.5 font-medium capitalize">
-                    <Icona className="size-4 text-muted-foreground" aria-hidden />
+                    <Icona weight="bold" className="size-4 text-muted-foreground" aria-hidden />
                     {v.tipo_contenuto}
                   </span>
                   <span className="text-muted-foreground">{ETICHETTE[v.stato] ?? v.stato}</span>
@@ -113,7 +113,7 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
                 </div>
                 {v.abusi_aperti > 0 && (
                   <p className="flex w-fit items-center gap-1.5 bg-negativo px-2 py-1 text-sm font-medium text-negativo-ink">
-                    <FlagIcon weight="fill" className="size-4" aria-hidden />
+                    <FlagIcon weight="bold" className="size-4" aria-hidden />
                     {v.abusi_aperti} {v.abusi_aperti === 1 ? "segnalazione di abuso" : "segnalazioni di abuso"}
                     {motivi && `: ${motivi.replaceAll("_", " ")}`}
                   </p>
@@ -124,7 +124,7 @@ export default async function CodaModerazione({ searchParams }: PageProps<"/mode
                     className="flex items-center justify-between gap-3 text-[17px] leading-snug font-semibold text-foreground underline-offset-4 hover:text-primary hover:underline"
                   >
                     {v.anteprima}
-                    <ArrowRightIcon className="size-5 shrink-0 text-primary" aria-hidden />
+                    <ArrowRightIcon weight="bold" className="size-5 shrink-0 text-primary" aria-hidden />
                   </Link>
                 ) : (
                   <blockquote className="border-l-2 pl-3 text-sm whitespace-pre-line">{v.anteprima}</blockquote>

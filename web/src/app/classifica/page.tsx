@@ -89,8 +89,8 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
           <nav aria-label="Ordinamento" className="-mb-px flex gap-6">
             {(
               [
-                ["sostenute", "Più sostenute", <HeartIcon key="s" aria-hidden />],
-                ["tendenza", "Di tendenza", <TrendUpIcon key="t" aria-hidden />],
+                ["sostenute", "Più sostenute", <HeartIcon weight="bold" key="s" aria-hidden />],
+                ["tendenza", "Di tendenza", <TrendUpIcon weight="bold" key="t" aria-hidden />],
               ] as const
             ).map(([v, t, icona]) => (
               <Link
@@ -116,7 +116,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
 
         <details className="group bg-sunken" open={attivi.length > 0}>
           <summary className="flex h-12 cursor-pointer list-none items-center gap-2 px-4 text-sm font-medium select-none [&::-webkit-details-marker]:hidden">
-            <FunnelSimpleIcon className="size-4 text-muted-foreground" aria-hidden />
+            <FunnelSimpleIcon weight="bold" className="size-4 text-muted-foreground" aria-hidden />
             Filtri
             {attivi.length > 0 && (
               <span className="bg-tinta-100 px-2 py-0.5 text-xs font-semibold text-tinta-ink tabular-nums">
@@ -124,7 +124,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
                 <span className="sr-only"> attivi</span>
               </span>
             )}
-            <CaretDownIcon className="ml-auto size-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" aria-hidden />
+            <CaretDownIcon weight="bold" className="ml-auto size-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" aria-hidden />
           </summary>
           <form method="get" action="/classifica" className="grid grid-cols-2 gap-3 px-4 pb-4 sm:grid-cols-3 lg:grid-cols-6" aria-label="Filtri">
             {p.ordine !== "sostenute" && <input type="hidden" name="ordine" value={p.ordine} />}
@@ -158,7 +158,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
                 className="inline-flex h-8 items-center gap-1.5 bg-tinta-50 pr-2 pl-3 text-sm text-tinta-ink transition-colors hover:bg-negativo hover:text-negativo-ink"
               >
                 {f.testo}
-                <XIcon className="size-3.5" aria-hidden />
+                <XIcon weight="bold" className="size-3.5" aria-hidden />
                 <span className="sr-only">: togli il filtro</span>
               </Link>
             ))}
@@ -173,7 +173,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
 
         <h2 className="sr-only">Risultati</h2>
         {voci.length === 0 ? (
-          <StatoVuoto icona={<MagnifyingGlassIcon weight="duotone" />} titolo="Nessuna segnalazione con questi filtri">
+          <StatoVuoto icona={<MagnifyingGlassIcon weight="regular" />} titolo="Nessuna segnalazione con questi filtri">
             Prova a togliere un filtro o a scegliere un periodo più lungo.
           </StatoVuoto>
         ) : (
@@ -190,7 +190,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
           <nav aria-label="Pagine" className="flex items-center justify-between gap-3">
             {p.pagina > 1 ? (
               <Link href={url({ pagina: p.pagina - 1 })} className={buttonVariants({ variant: "outline" })}>
-                <ArrowLeftIcon aria-hidden />
+                <ArrowLeftIcon weight="bold" aria-hidden />
                 Precedenti
               </Link>
             ) : (
@@ -200,7 +200,7 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
             {altre ? (
               <Link href={url({ pagina: p.pagina + 1 })} className={buttonVariants({ variant: "outline" })}>
                 Successive
-                <ArrowRightIcon aria-hidden />
+                <ArrowRightIcon weight="bold" aria-hidden />
               </Link>
             ) : (
               <span />

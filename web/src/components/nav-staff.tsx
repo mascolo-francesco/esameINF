@@ -90,7 +90,7 @@ export function NavStaff({ admin, inCoda }: { admin: boolean; inCoda: number }) 
                   qui ? "bg-sunken font-semibold text-foreground" : "text-muted-foreground hover:bg-sunken hover:text-foreground",
                 )}
               >
-                <Icona className="size-4 flex-none" weight={qui ? "bold" : "regular"} aria-hidden />
+                <Icona weight="bold" className="size-4 flex-none" aria-hidden />
                 <span className="flex-1">{testo}</span>
                 {href === "/moderazione" && inCoda > 0 && (
                   <span className="text-xs font-semibold tabular-nums" aria-label={`${inCoda} da controllare`}>

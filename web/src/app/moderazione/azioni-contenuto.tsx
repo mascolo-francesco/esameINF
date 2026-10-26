@@ -17,11 +17,11 @@ export function AzioniContenuto({ tipo, id, visibile }: { tipo: "commento" | "ag
   return (
     <div className="flex flex-wrap gap-2">
       <Button size="sm" variant="outline" disabled={inCorso} onClick={() => esegui("visibile")}>
-        <CheckIcon aria-hidden />
+        <CheckIcon weight="bold" aria-hidden />
         {visibile ? "Va bene, lascia visibile" : "Rendi visibile"}
       </Button>
       <Button size="sm" variant="destructive" disabled={inCorso} onClick={() => esegui("nascosto")}>
-        <EyeSlashIcon aria-hidden />
+        <EyeSlashIcon weight="bold" aria-hidden />
         Nascondi
       </Button>
     </div>

@@ -30,7 +30,7 @@ export default async function PaginaNotifiche() {
       className="max-w-3xl"
     >
       {righe.length === 0 ? (
-        <StatoVuoto icona={<BellIcon weight="duotone" />} titolo="Nessuna notifica">
+        <StatoVuoto icona={<BellIcon weight="regular" />} titolo="Nessuna notifica">
           Qui troverai i cambi di stato delle tue segnalazioni e di quelle che sostieni o segui.
         </StatoVuoto>
       ) : (

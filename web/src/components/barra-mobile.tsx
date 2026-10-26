@@ -33,8 +33,7 @@ export function BarraMobile() {
                   attiva ? "font-semibold text-primary" : "text-muted-foreground",
                 )}
               >
-                {/* l'icona piena segnala la pagina corrente insieme al colore e al grassetto */}
-                <Icona weight={attiva ? "fill" : "regular"} className="size-6" aria-hidden />
+                <Icona weight="regular" className="size-6" aria-hidden />
                 {testo}
               </Link>
             </li>

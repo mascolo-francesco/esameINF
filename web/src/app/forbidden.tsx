@@ -11,7 +11,7 @@ export default function Vietato() {
   return (
     <Pagina className="max-w-xl">
       <StatoVuoto
-        icona={<LockSimpleIcon weight="duotone" />}
+        icona={<LockSimpleIcon weight="regular" />}
         titolo="Pagina riservata"
         principale
         azione={

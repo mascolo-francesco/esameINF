@@ -11,7 +11,7 @@ export default function NonTrovata() {
   return (
     <Pagina className="max-w-xl">
       <StatoVuoto
-        icona={<MapPinSimpleIcon weight="duotone" />}
+        icona={<MapPinSimpleIcon weight="regular" />}
         titolo="Pagina non trovata"
         principale
         azione={

@@ -244,14 +244,14 @@ export function MessaggioEsito({ esito }: { esito: EsitoForm }) {
   if (!esito.ok && esito.errore)
     return (
       <p role="alert" className="flex items-start gap-2 bg-negativo p-3 text-sm text-negativo-ink">
-        <WarningCircleIcon weight="fill" className="mt-0.5 size-4 shrink-0" aria-hidden />
+        <WarningCircleIcon weight="bold" className="mt-0.5 size-4 shrink-0" aria-hidden />
         {esito.errore}
       </p>
     );
   if (esito.ok && esito.messaggio)
     return (
       <p role="status" className="flex items-start gap-2 bg-tinta-50 p-3 text-sm text-tinta-ink">
-        <CheckCircleIcon weight="fill" className="mt-0.5 size-4 shrink-0" aria-hidden />
+        <CheckCircleIcon weight="bold" className="mt-0.5 size-4 shrink-0" aria-hidden />
         {esito.messaggio}
       </p>
     );
@@ -287,7 +287,7 @@ export function PulsanteInvio({
 }: ComponentProps<typeof Button> & { inAttesa?: boolean }) {
   return (
     <Button type="submit" disabled={pending} aria-busy={pending} className={className} {...props}>
-      {pending && <SpinnerGapIcon className="size-4 animate-spin" aria-hidden />}
+      {pending && <SpinnerGapIcon weight="bold" className="size-4 animate-spin" aria-hidden />}
       {children}
     </Button>
   );

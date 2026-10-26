@@ -59,7 +59,7 @@ export default async function RevisioneSegnalazione({ params }: PageProps<"/mode
   return (
     <div className="grid gap-6">
       <Link href="/moderazione" className="flex w-fit items-center gap-1.5 text-sm font-medium text-primary underline-offset-4 hover:underline">
-        <ArrowLeftIcon className="size-4" aria-hidden />
+        <ArrowLeftIcon weight="bold" className="size-4" aria-hidden />
         Torna alla coda
       </Link>
       <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">

@@ -21,7 +21,7 @@ export function MenuUtente({ nome, livello, daLeggere }: { nome: string; livello
         className={`${buttonVariants({ variant: "outline", size: "sm" })} relative`}
         aria-label={`Menu di ${nome}${daLeggere ? `, ${daLeggere} notifiche da leggere` : ""}`}
       >
-        <UserCircleIcon weight="duotone" className="size-5" aria-hidden />
+        <UserCircleIcon weight="bold" className="size-5" aria-hidden />
         {daLeggere > 0 && <span className="absolute -top-1 -right-1 size-2.5 rounded-full bg-destructive ring-2 ring-background" aria-hidden />}
         <span className="hidden max-w-32 truncate sm:inline">{nome}</span>
       </DropdownMenuTrigger>
@@ -31,15 +31,15 @@ export function MenuUtente({ nome, livello, daLeggere }: { nome: string; livello
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem render={<Link href="/profilo" />}>
-          <UserIcon aria-hidden />
+          <UserIcon weight="bold" aria-hidden />
           Profilo
         </DropdownMenuItem>
         <DropdownMenuItem render={<Link href="/profilo/segnalazioni" />}>
-          <ClipboardTextIcon aria-hidden />
+          <ClipboardTextIcon weight="bold" aria-hidden />
           Le mie segnalazioni
         </DropdownMenuItem>
         <DropdownMenuItem render={<Link href="/notifiche" />}>
-          <BellIcon aria-hidden />
+          <BellIcon weight="bold" aria-hidden />
           Notifiche
           {daLeggere > 0 && <span className="ml-auto rounded-full bg-destructive px-1.5 text-xs font-semibold text-white tabular-nums">{daLeggere}</span>}
         </DropdownMenuItem>
@@ -47,20 +47,20 @@ export function MenuUtente({ nome, livello, daLeggere }: { nome: string; livello
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem render={<Link href="/moderazione" />}>
-              <ShieldCheckIcon aria-hidden />
+              <ShieldCheckIcon weight="bold" aria-hidden />
               Moderazione
             </DropdownMenuItem>
           </>
         )}
         {livello >= 3 && (
           <DropdownMenuItem render={<Link href="/admin" />}>
-            <GaugeIcon aria-hidden />
+            <GaugeIcon weight="bold" aria-hidden />
             Amministrazione
           </DropdownMenuItem>
         )}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => esci()}>
-          <SignOutIcon aria-hidden />
+          <SignOutIcon weight="bold" aria-hidden />
           Esci
         </DropdownMenuItem>
       </DropdownMenuContent>

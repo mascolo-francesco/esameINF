@@ -67,7 +67,7 @@ export default async function Documento({ params }: PageProps<"/admin/documenti/
         <div className="flex flex-wrap gap-2">
           {incluse.length > 0 && (
             <a href={`/api/documenti/${d.id}/csv`} className={buttonVariants({ variant: "outline" })}>
-              <DownloadSimpleIcon className="size-4" aria-hidden /> Esporta CSV
+              <DownloadSimpleIcon weight="bold" className="size-4" aria-hidden /> Esporta CSV
             </a>
           )}
           {d.stato === "bozza" && (

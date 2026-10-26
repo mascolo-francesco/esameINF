@@ -106,7 +106,7 @@ export function ListaSostenute({ voci }: { voci: VoceLista[] }) {
         </ol>
         <p className="flex flex-wrap gap-x-8 gap-y-3 text-step-body">
           <Link href="/classifica" className="inline-flex items-center gap-2 font-medium text-primary underline-offset-4 hover:underline">
-            Tutta la classifica <ArrowRightIcon className="size-4" aria-hidden />
+            Tutta la classifica <ArrowRightIcon weight="bold" className="size-4" aria-hidden />
           </Link>
           <Link href="/classifica?ordine=tendenza" className="underline-offset-4 hover:underline">
             Le segnalazioni in tendenza

@@ -41,7 +41,7 @@ export default async function MieSegnalazioni() {
     >
       {righe.length === 0 ? (
         <StatoVuoto
-          icona={<MegaphoneIcon weight="duotone" />}
+          icona={<MegaphoneIcon weight="regular" />}
           titolo="Non hai ancora inviato segnalazioni"
           azione={
             <Link href="/nuova" className={buttonVariants()}>

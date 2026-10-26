@@ -152,7 +152,7 @@ export default async function Dashboard() {
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
         <p className="max-w-[60ch] text-base">{fatto}</p>
         <Link href="/admin/documenti" className={cn(buttonVariants(), "w-full sm:w-auto")}>
-          <FileTextIcon aria-hidden />
+          <FileTextIcon weight="bold" aria-hidden />
           Prepara il documento programmatico
         </Link>
       </div>
