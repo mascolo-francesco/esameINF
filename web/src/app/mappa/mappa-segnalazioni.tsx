@@ -88,7 +88,7 @@ export function MappaSegnalazioni() {
         .setHTML(
           `<a href="/segnalazioni/${escape(p.codice)}" style="display:grid;gap:2px;text-decoration:none;color:inherit">
              <strong style="font-size:14px">${escape(p.titolo)}</strong>
-             <span style="font-size:12px;color:#555">${escape(p.stato)} · ${p.sostegni} sostegni</span>
+             <span style="font-size:12px;color:#555">${escape(p.stato)} · ${p.sostegni} ${p.sostegni === 1 ? "sostegno" : "sostegni"}</span>
              <span style="font-size:12px;color:#1f6f5c;font-weight:600">Apri la segnalazione →</span>
            </a>`,
         )

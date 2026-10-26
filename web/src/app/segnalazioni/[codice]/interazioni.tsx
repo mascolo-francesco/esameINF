@@ -100,7 +100,7 @@ export function Condividi({ titolo }: { titolo: string }) {
           await navigator.share({ title: titolo, url }).catch(() => {});
         } else {
           await navigator.clipboard.writeText(url);
-          toast.success("Link copiato");
+          toast.success("Link copiato.");
         }
       }}
     >
@@ -134,7 +134,7 @@ export function SegnalaAbuso({
   const [aperto, setAperto] = useState(false);
   const { esito, onSubmit, inAttesa } = useFormAzione(segnalaAbuso, (r) => {
     if (r.ok) {
-      toast.success(r.messaggio ?? "Segnalazione inviata");
+      toast.success(r.messaggio ?? "Grazie, un moderatore controllerà il contenuto.");
       setAperto(false);
     }
   });
@@ -234,11 +234,11 @@ export function PulsanteRitira({ codice }: { codice: string }) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Ritirare la segnalazione?</DialogTitle>
-          <DialogDescription>Non sarà più visibile né votabile. L&apos;operazione non si può annullare.</DialogDescription>
+          <DialogDescription>Sparirà da mappa e classifica e nessuno potrà più sostenerla. Non potrai annullare l&apos;operazione.</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="destructive" disabled={inCorso} onClick={() => esegui(() => ritiraSegnalazione(codice))}>
-            Sì, ritirala
+            Ritira la segnalazione
           </Button>
         </DialogFooter>
       </DialogContent>

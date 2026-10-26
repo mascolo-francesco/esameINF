@@ -49,8 +49,8 @@ const SEZIONI: { id: string; titolo: string; testo: ReactNode }[] = [
       <p>
         Il comitato tratta i dati per consentirti l&apos;accesso, pubblicare le segnalazioni dopo la moderazione, calcolare i
         sostegni e proteggere il servizio da abusi. Il quartiere serve perché il sostegno di chi risiede nello stesso Municipio
-        della segnalazione ha un peso maggiore. Le notifiche e l&apos;uso anonimo delle segnalazioni per i modelli di
-        classificazione sono facoltativi: puoi sceglierli alla registrazione e modificarli dal profilo.
+        della segnalazione ha un peso maggiore. Le notifiche e l&apos;uso anonimo delle segnalazioni per migliorare la
+        classificazione automatica sono facoltativi: puoi sceglierli alla registrazione e modificarli dal profilo.
       </p>
     ),
   },

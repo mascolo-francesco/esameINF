@@ -87,7 +87,7 @@ const schemaAbuso = z.object({
   nota: z
     .string()
     .trim()
-    .max(500, "Al massimo 500 caratteri")
+    .max(500, "Puoi inserire al massimo 500 caratteri.")
     .optional()
     .transform((s) => s || null),
 });
@@ -113,7 +113,7 @@ export async function segnalaAbuso(_: Esito | null, fd: FormData): Promise<Esito
       throw e;
     }
     aggiorna(codice);
-  }, "Segnalazione inviata ai moderatori.");
+  }, "Grazie, un moderatore controllerà il contenuto.");
 }
 
 // RF-19: dopo la pubblicazione l'autore può solo aggiungere aggiornamenti

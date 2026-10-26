@@ -309,8 +309,8 @@ function PassoFoto({
   return (
     <div className="grid gap-4">
       <p className="text-sm text-muted-foreground">
-        Da 1 a 5 foto (JPEG, PNG, WebP o HEIC). Se la foto contiene la posizione GPS, al passo successivo puoi usarla per indicare il punto. In
-        pubblico compare una copia senza metadati.
+        Da 1 a 5 foto (JPEG, PNG, WebP o HEIC). Se la foto contiene la posizione GPS, al passo successivo puoi usarla per indicare il punto. Pubblichiamo
+        una copia della foto senza posizione GPS né dati del telefono.
       </p>
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Foto scelte">
         {foto.map((f, i) => (
@@ -395,7 +395,7 @@ function PassoPosizione({
   }, [posizione, setPosizione]);
 
   function usaGps() {
-    if (!navigator.geolocation) return setErrore("Il browser non permette di leggere la posizione.");
+    if (!navigator.geolocation) return setErrore("Questo browser non condivide la posizione: tocca la mappa nel punto giusto.");
     setCercoGps(true);
     navigator.geolocation.getCurrentPosition(
       (p) => {
@@ -406,7 +406,7 @@ function PassoPosizione({
       },
       () => {
         setCercoGps(false);
-        setErrore("Non riesco a leggere la posizione: controlla i permessi oppure tocca la mappa.");
+        setErrore("Posizione non disponibile: controlla i permessi del browser oppure tocca la mappa.");
       },
       { enableHighAccuracy: true, timeout: 10_000 },
     );
@@ -507,7 +507,7 @@ function Riepilogo({
                   <span className="grid">
                     <span className="font-medium">{s.titolo}</span>
                     <span className="text-xs">
-                      a {s.distanza} m · {s.sostegni} sostegni · si apre in una nuova scheda
+                      a {s.distanza} m · {s.sostegni} {s.sostegni === 1 ? "sostegno" : "sostegni"} · si apre in una nuova scheda
                     </span>
                   </span>
                 </Link>

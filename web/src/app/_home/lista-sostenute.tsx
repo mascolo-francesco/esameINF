@@ -97,8 +97,8 @@ export function ListaSostenute({ voci }: { voci: VoceLista[] }) {
                 )}
               >
                 <p className="max-w-[40ch] overflow-hidden pt-2 text-step-body leading-snug">
-                  {v.luogo}. {v.stato}
-                  {v.categorie ? `, ${v.categorie.toLowerCase()}` : ""}.
+                  {v.luogo} · {v.stato}
+                  {v.categorie ? ` · ${v.categorie}` : ""}
                 </p>
               </div>
             </li>

@@ -4,7 +4,9 @@ export function nomeQuartiere(nome: string): string {
     .toLowerCase()
     .replace(/(^|[\s\-'(./])(\p{L})/gu, (_, sep: string, l: string) => sep + l.toUpperCase())
     .replace(/\bQ\.Re\b/g, "Q.re")
-    .replace(/\bP\.Ta\b/g, "P.ta");
+    .replace(/\bP\.Ta\b/g, "P.ta")
+    // nei dati del Comune l'accento finale è un apostrofo: "Citta' Studi" -> "Città Studi"
+    .replace(/([aeiou])'(?=$|[\s\-),.])/g, (_, v: string) => ({ a: "à", e: "è", i: "ì", o: "ò", u: "ù" })[v]!);
 }
 
 const dataOra = new Intl.DateTimeFormat("it-IT", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Rome" });

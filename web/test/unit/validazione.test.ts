@@ -69,6 +69,7 @@ describe("nomeQuartiere", () => {
   it("rende leggibili i nomi ufficiali dei NIL", () => {
     expect(nomeQuartiere("LORETO - CASORETTO - NOLO")).toBe("Loreto - Casoretto - Nolo");
     expect(nomeQuartiere("GRATOSOGLIO - Q.RE MISSAGLIA - Q.RE TERRAZZE")).toBe("Gratosoglio - Q.re Missaglia - Q.re Terrazze");
-    expect(nomeQuartiere("CITTA' STUDI")).toBe("Citta' Studi");
+    expect(nomeQuartiere("CITTA' STUDI")).toBe("Città Studi");
+    expect(nomeQuartiere("SANT'AMBROGIO")).toBe("Sant'Ambrogio");
   });
 });

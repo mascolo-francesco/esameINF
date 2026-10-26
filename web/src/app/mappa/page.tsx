@@ -14,7 +14,7 @@ export default async function PaginaMappa() {
   return (
     <Pagina
       titolo="Mappa delle segnalazioni"
-      descrizione="Tocca un gruppo per avvicinarti, un punto per aprire la segnalazione."
+      descrizione="Apri un gruppo per ingrandire la zona e un punto per vedere la segnalazione."
     >
       <div className="grid gap-4">
         <MappaSegnalazioni />

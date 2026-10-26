@@ -3,6 +3,7 @@ import Link from "next/link";
 import { db } from "@/lib/server/db";
 import { classifica } from "@/lib/server/consultazione";
 import { elencoMunicipi, elencoQuartieri } from "@/lib/server/catalogo";
+import { utenteCorrente } from "@/lib/server/auth/sessione";
 import { buttonVariants } from "@/components/ui/button";
 import { formattaNumero } from "@/lib/formato";
 import { cn } from "@/lib/utils";
@@ -56,7 +57,8 @@ const PASSI: Passo[] = [
 
 export default async function Home({ searchParams }: PageProps<"/">) {
   const { account, municipio } = await searchParams;
-  const [numeri, sostenute, municipi, quartieri, perMunicipio] = await Promise.all([
+  const [utente, numeri, sostenute, municipi, quartieri, perMunicipio] = await Promise.all([
+    utenteCorrente(),
     db.riga<{ pubblicate: number; sostegni: number; cittadini: number }>(
       `SELECT (SELECT COUNT(*) FROM segnalazione s JOIN stato st ON st.codice = s.stato_corrente WHERE st.in_classifica) AS pubblicate,
               (SELECT COUNT(*) FROM sostegno) AS sostegni,
@@ -189,9 +191,15 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           </p>
         </article>
         <div className="bordo-smerlato-sotto mx-auto grid max-w-[40rem] gap-4 border-t-6 border-dotted border-sunken bg-carta px-6 pt-6 pb-12 sm:flex sm:items-center sm:justify-between sm:px-14">
-          <p className="text-step-body">Per sostenere e commentare serve un account.</p>
-          <Link href="/registrati" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "premibile w-full sm:w-auto")}>
-            Registrati
+          {/* chi ha già un account non deve vedere l'invito a registrarsi */}
+          <p className="text-step-body">
+            {utente ? "Le segnalazioni aspettano il tuo sostegno." : "Per sostenere e commentare serve un account."}
+          </p>
+          <Link
+            href={utente ? "/classifica" : "/registrati"}
+            className={cn(buttonVariants({ variant: "outline", size: "lg" }), "premibile w-full sm:w-auto")}
+          >
+            {utente ? "Vai alla classifica" : "Registrati"}
           </Link>
         </div>
       </section>
@@ -200,7 +208,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
       <section aria-labelledby="invito" className="overflow-hidden bg-primary px-4 pt-24 text-primary-foreground sm:px-8 sm:pt-32">
         <div className="mx-auto grid max-w-6xl gap-12 sm:min-h-[60svh] sm:grid-cols-12 sm:items-end">
           <p data-rivela className="max-w-[24ch] text-step-lead leading-snug sm:col-span-4 sm:mb-16">
-            Ogni segnalazione la legge una persona prima di essere pubblicata. Bastano una foto e due righe.
+            Una persona legge ogni segnalazione prima di pubblicarla. Bastano una foto e due righe.
           </p>
           <div
             data-rivela
@@ -210,7 +218,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <h2 id="invito" className="text-step-head leading-[0.95] tracking-tight">
               Hai visto qualcosa?
             </h2>
-            <p className="text-step-body">Fotografala, segna il punto sulla mappa, scrivi che cosa succede.</p>
+            <p className="text-step-body">Fotografalo, segna il punto sulla mappa e scrivi che cosa succede.</p>
             <Link
               href="/nuova"
               className="premibile mt-2 flex h-14 w-full items-center justify-center bg-foreground text-step-body text-background transition-[background-color,scale] duration-150 hover:bg-primary"

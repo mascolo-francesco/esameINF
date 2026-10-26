@@ -42,7 +42,7 @@ export function SceltaMunicipio({ municipi, iniziale }: { municipi: DatiMunicipi
       <div className="grid content-between gap-10 sm:self-stretch sm:py-6">
         <div className="grid gap-6">
           <h2 id="municipio" data-rivela className="text-step-head leading-[0.95] tracking-tight">
-            Il tuo municipio
+            Scegli il tuo municipio
           </h2>
           <nav aria-label="Scegli il municipio" className="flex flex-wrap gap-x-1 gap-y-1">
             {municipi.map((x) => (
@@ -92,7 +92,7 @@ export function SceltaMunicipio({ municipi, iniziale }: { municipi: DatiMunicipi
             href="/nuova"
             className="premibile flex min-h-16 items-center justify-center bg-sunken px-4 py-3 text-center text-step-body transition-[background-color,scale] duration-150 hover:bg-border"
           >
-            Segnala qui
+            Fai una segnalazione
           </Link>
         </div>
       </div>

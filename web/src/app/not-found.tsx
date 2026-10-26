@@ -25,7 +25,7 @@ export default function NonTrovata() {
           </div>
         }
       >
-        Il link potrebbe essere sbagliato, oppure la segnalazione non è più pubblica.
+        Controlla l&apos;indirizzo. Se cercavi una segnalazione, potrebbe essere stata ritirata o non essere ancora pubblica.
       </StatoVuoto>
     </Pagina>
   );

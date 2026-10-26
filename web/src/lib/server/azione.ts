@@ -8,7 +8,7 @@ export type Esito<T = unknown> =
   | { ok: true; dati?: T; messaggio?: string }
   | { ok: false; errore: string; campi?: Record<string, string> };
 
-export const ERRORE_GENERICO = "Si è verificato un errore imprevisto. Riprova tra poco.";
+export const ERRORE_GENERICO = "Non siamo riusciti a completare l'operazione. Riprova tra qualche minuto.";
 
 /**
  * Esegue il corpo di una Server Action e traduce gli errori:

@@ -9,7 +9,7 @@ import { datiForm, eseguiAzione, type Esito } from "@/lib/server/azione";
 import { contestoRichiesta, LIVELLO, richiediUtente } from "@/lib/server/auth/sessione";
 import { cambiaStato } from "@/lib/server/segnalazioni";
 
-const schemaCodice = z.string().regex(/^MI-\d{4}-\d{6}$/, "Codice non valido (es. MI-2026-000012)");
+const schemaCodice = z.string().regex(/^MI-\d{4}-\d{6}$/, "Inserisci un codice nel formato MI-2026-000012.");
 
 /** Moderatore o amministratore, con l'attore giusto per sp_cambia_stato e l'audit. */
 async function staff() {
@@ -49,7 +49,7 @@ const schemaDecisione = z.object({
   motivazione: z
     .string()
     .trim()
-    .max(1000, "Al massimo 1000 caratteri")
+    .max(1000, "Puoi inserire al massimo 1000 caratteri.")
     .optional()
     .transform((s) => s || null),
 });
@@ -102,8 +102,8 @@ export async function correggiCategorie(_: Esito | null, fd: FormData): Promise<
     const codice = schemaCodice.parse(fd.get("codice"));
     const scelte = z
       .array(z.coerce.number().int().positive())
-      .min(1, "Scegli almeno una categoria")
-      .max(3, "Al massimo tre categorie")
+      .min(1, "Scegli almeno una categoria.")
+      .max(3, "Puoi scegliere al massimo tre categorie.")
       .parse(fd.getAll("categorie"));
     await inTransazione(attore, async (tx) => {
       const id = await idDaCodice(tx, codice);
@@ -189,7 +189,7 @@ const schemaSanzione = z
   .object({
     idUtente: z.coerce.number().int().positive(),
     tipo: z.enum(["sospensione", "ban"], { error: "Scegli il tipo di provvedimento." }),
-    giorni: z.coerce.number().int().min(1, "Almeno 1 giorno").max(365, "Al massimo 365 giorni").optional(),
+    giorni: z.coerce.number().int().min(1, "La sospensione dura almeno 1 giorno.").max(365, "La sospensione dura al massimo 365 giorni.").optional(),
     motivazione: z.string().trim().min(5, "Motivazione: almeno 5 caratteri").max(1000),
   })
   .refine((d) => d.tipo === "ban" || d.giorni, { message: "Indica la durata della sospensione.", path: ["giorni"] });

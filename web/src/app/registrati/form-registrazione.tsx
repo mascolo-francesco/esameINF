@@ -40,7 +40,7 @@ export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { 
         required
         defaultValue=""
         esito={esito}
-        aiuto="Serve per dare più peso ai sostegni dei residenti del Municipio."
+        aiuto="I tuoi sostegni pesano di più sulle segnalazioni del tuo municipio."
         segnaposto="Scegli il quartiere…"
         opzioni={quartieri.map((q) => [q.id, q.nome] as const)}
       />
@@ -54,9 +54,9 @@ export function FormRegistrazione({ da, quartieri }: { da: string; quartieri: { 
           </Link>{" "}
           e accetto il trattamento dei dati per usare il servizio (obbligatorio).
         </Casella>
-        <Casella nome="consensoNotifiche">Ricevi notifiche sulle segnalazioni che segui.</Casella>
+        <Casella nome="consensoNotifiche">Voglio ricevere notifiche sulle segnalazioni che seguo.</Casella>
         <Casella nome="consensoIa">
-          Consenti l&apos;uso anonimo delle tue segnalazioni per migliorare i modelli di classificazione.
+          Acconsento all&apos;uso anonimo delle mie segnalazioni per migliorare la classificazione automatica.
         </Casella>
       </fieldset>
       <PulsanteInvio inAttesa={inAttesa}>Crea l&apos;account</PulsanteInvio>

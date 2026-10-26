@@ -20,7 +20,7 @@ export function FormProfilo({ quartieri, valori }: { quartieri: { id: number; no
       <MessaggioEsito esito={esito} />
       <Campo nome="nomeVisualizzato" etichetta="Nome visualizzato" defaultValue={valori.nomeVisualizzato} required esito={esito} />
       <Casella nome="mostraNomeReale" defaultChecked={valori.mostraNomeReale}>
-        Mostra nome e cognome al posto del nome visualizzato
+        Mostra il mio nome e cognome al posto del nome visualizzato
       </Casella>
       <CampoSelect
         nome="idQuartiere"
@@ -31,13 +31,13 @@ export function FormProfilo({ quartieri, valori }: { quartieri: { id: number; no
         opzioni={quartieri.map((q) => [q.id, q.nome] as const)}
       />
       <Casella nome="consensoNotifiche" defaultChecked={valori.consensoNotifiche}>
-        Ricevi notifiche sulle segnalazioni che segui
+        Voglio ricevere notifiche sulle segnalazioni che seguo
       </Casella>
       <Casella nome="consensoIa" defaultChecked={valori.consensoIa}>
-        Consenti l&apos;uso anonimo delle tue segnalazioni per migliorare i modelli di classificazione
+        Acconsento all&apos;uso anonimo delle mie segnalazioni per migliorare la classificazione automatica
       </Casella>
       <PulsanteInvio inAttesa={inAttesa} className="justify-self-start">
-        Salva
+        Salva le modifiche
       </PulsanteInvio>
     </form>
   );
@@ -58,7 +58,7 @@ export function SezioneTotp({ attiva, staff }: { attiva: boolean; staff: boolean
         <p className="text-sm">La verifica in due passaggi è attiva.</p>
         <Campo nome="password" etichetta="Password attuale" type="password" autoComplete="current-password" className="max-w-xs" />
         <PulsanteInvio inAttesa={disattiva.inAttesa} variant="outline" className="justify-self-start">
-          Disattiva
+          Disattiva la verifica
         </PulsanteInvio>
       </form>
     );

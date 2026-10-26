@@ -36,7 +36,7 @@ const schemaCategoria = z.object({
   id: id.optional(),
   nome: z.string().trim().min(2, "Nome: almeno 2 caratteri").max(50),
   descrizione: z.string().trim().min(5, "Descrizione: almeno 5 caratteri").max(255),
-  colore: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Colore non valido"),
+  colore: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Scegli un colore nel formato #RRGGBB."),
   ordine: z.coerce.number().int().min(0).max(255),
   attiva: casella,
 });
@@ -191,10 +191,10 @@ export async function salvaCandidato(_: Esito | null, fd: FormData): Promise<Esi
     const { attore } = await amministratore();
     const d = z
       .object({
-        nome: z.string().trim().min(1, "Nome obbligatorio").max(50),
-        cognome: z.string().trim().min(1, "Cognome obbligatorio").max(50),
-        lista: z.string().trim().min(2, "Lista o coalizione obbligatoria").max(150),
-        email: z.string().trim().toLowerCase().email("Email non valida").max(254),
+        nome: z.string().trim().min(1, "Inserisci il nome.").max(50),
+        cognome: z.string().trim().min(1, "Inserisci il cognome.").max(50),
+        lista: z.string().trim().min(2, "Inserisci la lista o la coalizione.").max(150),
+        email: z.string().trim().toLowerCase().email("Inserisci un indirizzo email valido.").max(254),
       })
       .parse(datiForm(fd));
     try {

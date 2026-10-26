@@ -5,7 +5,7 @@ const testo = (min: number, max: number, nome: string) =>
   z
     .string()
     .trim()
-    .min(min, `${nome}: inserisci almeno ${min} caratteri.`)
+    .min(min, min === 1 ? `${nome}: compila questo campo.` : `${nome}: inserisci almeno ${min} caratteri.`)
     .max(max, `${nome}: puoi inserire al massimo ${max} caratteri.`);
 
 const casella = z.preprocess((v) => v === "on" || v === "true" || v === true, z.boolean());

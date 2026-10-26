@@ -76,7 +76,14 @@ export default async function PaginaClassifica({ searchParams }: PageProps<"/cla
   ].filter((f): f is { chiave: string; testo: string } => Boolean(f));
 
   return (
-    <Pagina titolo="Classifica" descrizione="Le segnalazioni pubblicate, ordinate per sostegno dei cittadini.">
+    <Pagina
+      titolo="Classifica"
+      descrizione={
+        p.ordine === "tendenza"
+          ? "Le segnalazioni che stanno raccogliendo più sostegni in questi giorni."
+          : "Le segnalazioni pubblicate, ordinate per numero di sostegni."
+      }
+    >
       <div className="grid grid-cols-1 gap-5">
         <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-b">
           <nav aria-label="Ordinamento" className="-mb-px flex gap-6">

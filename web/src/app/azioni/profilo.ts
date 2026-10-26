@@ -61,9 +61,9 @@ export async function confermaTotp(_: Esito | null, fd: FormData): Promise<Esito
     try {
       segreto = decifraSegreto(Buffer.from(String(fd.get("segretoCifrato") ?? ""), "base64"));
     } catch {
-      throw new ErroreApp("Configurazione scaduta: ricomincia dall'inizio.");
+      throw new ErroreApp("La configurazione è scaduta: premi di nuovo \"Attiva la verifica in due passaggi\".");
     }
-    if (!(await verificaCodiceTotp(segreto, codice))) throw new ErroreApp("Codice non valido. Riprova.");
+    if (!(await verificaCodiceTotp(segreto, codice))) throw new ErroreApp("Codice non valido. Controlla l'ora del telefono e riprova.");
     await db.esegui("UPDATE utente SET totp_attivo = TRUE, totp_segreto = ? WHERE id = ?", [cifraSegreto(segreto), u.id]);
     revalidatePath("/profilo");
   }, "Verifica in due passaggi attivata.");

@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Nuova segnalazione" };
 export default async function PaginaNuova() {
   const u = await richiediUtente(1, "/nuova");
   return (
-    <Pagina titolo="Nuova segnalazione" descrizione="Quattro passaggi: foto, posizione, descrizione e conferma." className="max-w-3xl">
+    <Pagina titolo="Nuova segnalazione" descrizione="Bastano un paio di minuti. Un moderatore del comitato legge ogni segnalazione prima di pubblicarla." className="max-w-3xl">
       {u.puoScrivere ? (
         <Procedura categorie={await elencoCategorie()} />
       ) : (

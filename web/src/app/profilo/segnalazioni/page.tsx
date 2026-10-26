@@ -34,7 +34,7 @@ export default async function MieSegnalazioni() {
       azioni={
         <Link href="/nuova" className={buttonVariants()}>
           <PlusIcon weight="bold" aria-hidden />
-          Nuova segnalazione
+          Fai una segnalazione
         </Link>
       }
       className="max-w-3xl"
@@ -46,7 +46,7 @@ export default async function MieSegnalazioni() {
           azione={
             <Link href="/nuova" className={buttonVariants()}>
               <PlusIcon weight="bold" aria-hidden />
-              Crea una segnalazione
+              Fai una segnalazione
             </Link>
           }
         >
@@ -60,7 +60,7 @@ export default async function MieSegnalazioni() {
                 <span className="min-w-0 flex-1 font-semibold">{r.titolo}</span>
                 <BadgeStato codice={r.stato_corrente} nome={r.stato} />
                 <span className="w-full text-sm text-muted-foreground sm:w-auto">
-                  <span className="font-mono text-xs">{r.codice_pubblico}</span> · {formattaData(r.data_creazione)} · {r.num_sostegni} sostegni
+                  <span className="font-mono text-xs">{r.codice_pubblico}</span> · {formattaData(r.data_creazione)} · {r.num_sostegni} {r.num_sostegni === 1 ? "sostegno" : "sostegni"}
                 </span>
               </Link>
             </li>

@@ -22,9 +22,15 @@ beforeAll(() => {
 
 describe("traduciErroreDb (RNF-27)", () => {
   it("toglie il codice del requisito dai messaggi dei trigger", () => {
-    const e = traduciErroreDb({ sqlState: "45000", sqlMessage: "RD-06: l'autore non può sostenere la propria segnalazione" });
+    const e = traduciErroreDb({ sqlState: "45000", sqlMessage: "RD-12: una segnalazione non può essere unita a sé stessa" });
     expect(e).toBeInstanceOf(ErroreApp);
-    expect((e as ErroreApp).message).toBe("L'autore non può sostenere la propria segnalazione.");
+    expect((e as ErroreApp).message).toBe("Una segnalazione non può essere unita a sé stessa.");
+    expect((e as ErroreApp).codice).toBe("RD-12");
+  });
+
+  it("riscrive con le parole del sito i messaggi che vede un cittadino", () => {
+    const e = traduciErroreDb({ sqlState: "45000", sqlMessage: "RD-06: l'autore non può sostenere la propria segnalazione" });
+    expect((e as ErroreApp).message).toBe("Non puoi sostenere una tua segnalazione.");
     expect((e as ErroreApp).codice).toBe("RD-06");
   });
 
