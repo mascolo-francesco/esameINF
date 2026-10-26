@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPinSimpleIcon } from "@phosphor-icons/react/ssr";
 import { Pagina } from "@/components/pagina";
 import { StatoVuoto } from "@/components/stato-vuoto";
 import { buttonVariants } from "@/components/ui/button";
+
+export const metadata: Metadata = { title: "Pagina non trovata" };
 
 export default function NonTrovata() {
   return (

@@ -155,9 +155,14 @@ export function FormCategorie({
         <legend className="sr-only">Categorie confermate</legend>
         {categorie.map((k) => (
           <label key={k.id} className="-mx-2 flex min-h-9 cursor-pointer items-center gap-2.5 px-2 text-sm hover:bg-sunken">
-            <Checkbox name="categorie" value={String(k.id)} defaultChecked={scelte.includes(k.id)} />
+            <Checkbox
+              name="categorie"
+              value={String(k.id)}
+              defaultChecked={scelte.includes(k.id)}
+              aria-labelledby={`categoria-${k.id}`}
+            />
             <span className="size-2.5 rounded-full" style={{ background: k.colore }} aria-hidden />
-            {k.nome}
+            <span id={`categoria-${k.id}`}>{k.nome}</span>
           </label>
         ))}
       </fieldset>

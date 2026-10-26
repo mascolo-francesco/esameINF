@@ -7,13 +7,11 @@ import { datiForm, eseguiAzione, type Esito } from "@/lib/server/azione";
 import { hashPassword } from "@/lib/server/auth/cripto";
 import { accedi, verifica2fa } from "@/lib/server/auth/accesso";
 import { apriSessione, chiudiSessione } from "@/lib/server/auth/sessione";
+import { percorsoInterno } from "@/lib/server/richiesta";
 import { schemaAccesso, schemaCodiceTotp, schemaRegistrazione } from "@/lib/validazione";
 
 /** Dopo il login torno alla pagina di partenza, ma solo se è un percorso interno. */
-function destinazione(fd: FormData): string {
-  const da = String(fd.get("da") ?? "");
-  return da.startsWith("/") && !da.startsWith("//") ? da : "/";
-}
+const destinazione = (fd: FormData) => percorsoInterno(fd.get("da"));
 
 export async function registrati(_: Esito | null, fd: FormData): Promise<Esito> {
   const esito = await eseguiAzione(async () => {

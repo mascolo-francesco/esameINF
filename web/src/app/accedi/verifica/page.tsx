@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { utenteIn2fa } from "@/lib/server/auth/sessione";
+import { percorsoInterno } from "@/lib/server/richiesta";
 import { Pagina } from "@/components/pagina";
 import { FormVerifica } from "./form-verifica";
 
@@ -16,7 +17,7 @@ export default async function PaginaVerifica({ searchParams }: PageProps<"/acced
       stretta
     >
       <div className="rounded-2xl border bg-card p-6 shadow-card">
-        <FormVerifica da={typeof da === "string" ? da : "/"} />
+        <FormVerifica da={percorsoInterno(da)} />
       </div>
     </Pagina>
   );

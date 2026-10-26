@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { utenteCorrente } from "@/lib/server/auth/sessione";
+import { percorsoInterno } from "@/lib/server/richiesta";
 import { elencoQuartieri } from "@/lib/server/catalogo";
 import { Pagina } from "@/components/pagina";
 import { FormRegistrazione } from "./form-registrazione";
@@ -10,7 +11,7 @@ export const metadata: Metadata = { title: "Registrati" };
 
 export default async function PaginaRegistrati({ searchParams }: PageProps<"/registrati">) {
   const { da } = await searchParams;
-  const destinazione = typeof da === "string" ? da : "/";
+  const destinazione = percorsoInterno(da);
   if (await utenteCorrente()) redirect(destinazione);
   return (
     <Pagina

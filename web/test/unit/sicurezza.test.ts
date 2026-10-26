@@ -12,6 +12,8 @@ import {
   verificaPassword,
 } from "@/lib/server/auth/cripto";
 import { firmaJwt, leggiJwt } from "@/lib/server/auth/token";
+import { cellaCsv } from "@/lib/server/csv";
+import { percorsoInterno } from "@/lib/server/richiesta";
 
 beforeAll(() => {
   process.env.TOTP_CHIAVE = "a".repeat(64);
@@ -75,5 +77,31 @@ describe("TOTP (RF-10)", () => {
     expect(await verificaCodiceTotp(s, await generate({ secret: s }))).toBe(true);
     expect(await verificaCodiceTotp(s, "000000")).toBe(false);
     expect(await verificaCodiceTotp(s, "12ab56")).toBe(false);
+  });
+});
+
+describe("percorsoInterno (open redirect)", () => {
+  it("accetta i percorsi del sito", () => {
+    expect(percorsoInterno("/segnalazioni/MI-2026-000012")).toBe("/segnalazioni/MI-2026-000012");
+    expect(percorsoInterno("/classifica?ordine=recenti")).toBe("/classifica?ordine=recenti");
+  });
+
+  it("rifiuta indirizzi esterni e valori strani", () => {
+    for (const v of ["https://esempio.com", "//esempio.com", "/\\esempio.com", "/\t/esempio.com", "", undefined, ["/"]])
+      expect(percorsoInterno(v)).toBe("/");
+  });
+});
+
+describe("cellaCsv (CSV injection)", () => {
+  it("neutralizza i testi che Excel leggerebbe come formule", () => {
+    expect(cellaCsv("=HYPERLINK(\"http://x\")")).toBe(`"'=HYPERLINK(""http://x"")"`);
+    expect(cellaCsv("+39 buca")).toBe("'+39 buca");
+    expect(cellaCsv("@SUM(A1)")).toBe("'@SUM(A1)");
+  });
+
+  it("lascia numeri, testi normali e valori vuoti come sono", () => {
+    expect(cellaCsv(-12.5)).toBe("-12.5");
+    expect(cellaCsv("Buca in via Roma; pericolosa")).toBe('"Buca in via Roma; pericolosa"');
+    expect(cellaCsv(null)).toBe("");
   });
 });

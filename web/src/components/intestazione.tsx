@@ -16,8 +16,9 @@ export async function Intestazione() {
   return (
     <header className="sticky top-0 z-40 bg-carta">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4">
-        <Link href="/" className="mr-3 flex-none" aria-label="La Nostra Città, Milano: pagina iniziale">
+        <Link href="/" className="mr-3 flex-none">
           <Logo />
+          <span className="sr-only">, pagina iniziale</span>
         </Link>
         <NavPrincipale />
         <div className="ml-auto flex items-center gap-2">

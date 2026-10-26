@@ -6,6 +6,7 @@ import {
   DURATA_REFRESH_S,
   leggiJwt,
   opzioniCookie,
+  refreshAppenaRuotato,
   ruotaRefresh,
 } from "@/lib/server/auth/token";
 import { ipRichiesta } from "@/lib/server/richiesta";
@@ -20,12 +21,16 @@ export async function proxy(request: NextRequest) {
   const refresh = request.cookies.get(COOKIE_REFRESH)?.value;
   if (!refresh || (await leggiJwt(accesso, "accesso")) !== null) return NextResponse.next();
 
-  const coppia = await ruotaRefresh(refresh, ipRichiesta(request.headers), request.headers.get("user-agent")).catch(
-    (e) => {
-      console.error("Rinnovo sessione non riuscito", e);
-      return null;
-    },
-  );
+  let coppia: Awaited<ReturnType<typeof ruotaRefresh>>;
+  try {
+    coppia = await ruotaRefresh(refresh, ipRichiesta(request.headers), request.headers.get("user-agent"));
+    // un'altra richiesta parallela l'ha appena ruotato: il browser riceve i cookie nuovi da quella
+    if (!coppia && (await refreshAppenaRuotato(refresh))) return NextResponse.next();
+  } catch (e) {
+    // database irraggiungibile: la richiesta prosegue da ospite, ma la sessione non si butta via
+    console.error("Rinnovo sessione non riuscito", e);
+    return NextResponse.next();
+  }
 
   if (!coppia) {
     // refresh non valido (scaduto, revocato o già usato): tolgo i cookie e proseguo da ospite

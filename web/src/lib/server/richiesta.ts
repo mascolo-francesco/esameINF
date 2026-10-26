@@ -1,3 +1,12 @@
+/**
+ * Destinazione dopo login e registrazione: solo percorsi di questo sito. Scarto "//host" e
+ * "/\host", che i browser trattano come indirizzi esterni (open redirect).
+ */
+export function percorsoInterno(da: unknown): string {
+  if (typeof da !== "string" || !da.startsWith("/") || /^\/[/\\]/.test(da) || /[\0-\x1f]/.test(da)) return "/";
+  return da;
+}
+
 /** IP del client: su Vercel arriva come primo valore di x-forwarded-for. */
 export function ipRichiesta(h: Headers): string | null {
   const xff = h.get("x-forwarded-for");

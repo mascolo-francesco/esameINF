@@ -7,6 +7,10 @@ import type { Db } from "./db";
 export const MAX_BYTE_FOTO = 10 * 1024 * 1024; // RF-21
 const LATO_PUBBLICA = 1600;
 const LATO_MINIATURA = 400;
+// Contro le "bombe di decompressione": un file piccolo che dichiara dimensioni enormi.
+// 50 megapixel bastano per le foto dei telefoni (48 MP), il browser comunque le riduce prima.
+const MAX_PIXEL = 50_000_000;
+const apri = (b: Buffer) => sharp(b, { limitInputPixels: MAX_PIXEL });
 
 export type MimeFoto = "image/jpeg" | "image/png" | "image/webp";
 
@@ -68,7 +72,7 @@ export async function leggiExif(b: Buffer): Promise<ExifFoto> {
 
 /** dHash a 64 bit: due foto quasi uguali hanno lo stesso valore (RIA-15). */
 async function dHash(b: Buffer): Promise<string> {
-  const px = await sharp(b).rotate().grayscale().resize(9, 8, { fit: "fill" }).raw().toBuffer();
+  const px = await apri(b).rotate().grayscale().resize(9, 8, { fit: "fill" }).raw().toBuffer();
   let bits = "";
   for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) bits += px[y * 9 + x] > px[y * 9 + x + 1] ? "1" : "0";
   return BigInt("0b" + bits).toString(16).padStart(16, "0");
@@ -87,14 +91,15 @@ export async function elaboraFoto(b: Buffer): Promise<FotoElaborata> {
 
   let meta: Metadata;
   try {
-    meta = await sharp(b).metadata();
+    meta = await apri(b).metadata();
   } catch {
     throw new ErroreApp("Il file non è un'immagine leggibile.");
   }
+  if ((meta.width ?? 0) * (meta.height ?? 0) > MAX_PIXEL) throw new ErroreApp("La foto è troppo grande: usa un'immagine sotto i 50 megapixel.");
   const ruotata = (meta.orientation ?? 1) >= 5; // orientamenti EXIF 5-8 scambiano i lati
   const [pubblica, miniatura, exif, hashPercettivo] = await Promise.all([
-    sharp(b).rotate().resize(LATO_PUBBLICA, LATO_PUBBLICA, { fit: "inside", withoutEnlargement: true }).webp({ quality: 80 }).toBuffer(),
-    sharp(b).rotate().resize(LATO_MINIATURA, LATO_MINIATURA, { fit: "cover" }).webp({ quality: 70 }).toBuffer(),
+    apri(b).rotate().resize(LATO_PUBBLICA, LATO_PUBBLICA, { fit: "inside", withoutEnlargement: true }).webp({ quality: 80 }).toBuffer(),
+    apri(b).rotate().resize(LATO_MINIATURA, LATO_MINIATURA, { fit: "cover" }).webp({ quality: 70 }).toBuffer(),
     leggiExif(b),
     dHash(b),
   ]);

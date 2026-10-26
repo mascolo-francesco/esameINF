@@ -133,7 +133,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             Fotografa un problema del tuo quartiere o proponi un&apos;idea. Le segnalazioni più sostenute arrivano a tutti i candidati
             sindaco.
           </p>
-          <div className="grid items-center gap-4 lg:grid-cols-3">
+          <div className="grid items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
             <p className="order-3 text-step-small text-muted-foreground lg:order-1">Comitato civico La Nostra Città</p>
             <Link href="/nuova" className={cn(buttonVariants({ size: "lg" }), "premibile order-1 h-14 w-full px-6 text-step-body lg:order-2")}>
               Fai una segnalazione

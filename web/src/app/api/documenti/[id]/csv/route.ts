@@ -1,16 +1,13 @@
 import { db } from "@/lib/server/db";
 import { utenteCorrente, LIVELLO } from "@/lib/server/auth/sessione";
-
-const cella = (v: unknown) => {
-  const s = v == null ? "" : String(v);
-  return /[";\n\r]/.test(s) ? `"${s.replaceAll('"', '""')}"` : s;
-};
+import { cellaCsv } from "@/lib/server/csv";
 
 // RF-48: query esporta_documento_csv. Separatore ";" e BOM, così Excel in italiano lo apre bene.
 export async function GET(_: Request, ctx: RouteContext<"/api/documenti/[id]/csv">) {
   const u = await utenteCorrente();
   if (!u || u.livello < LIVELLO.amministratore) return new Response(null, { status: 404 });
   const id = Number((await ctx.params).id);
+  if (!Number.isInteger(id) || id <= 0) return new Response(null, { status: 404 });
   const doc = await db.riga<{ titolo: string; versione: number }>("SELECT titolo, versione FROM documento_programmatico WHERE id = ?", [id]);
   if (!doc) return new Response(null, { status: 404 });
 
@@ -29,7 +26,7 @@ export async function GET(_: Request, ctx: RouteContext<"/api/documenti/[id]/csv
     "posizione", "codice", "titolo", "descrizione", "tipo", "categorie", "quartiere", "municipio",
     "latitudine", "longitudine", "sostegni", "punteggio", "nota_comitato",
   ];
-  const csv = [intestazione.join(";"), ...righe.map((r) => Object.values(r).map(cella).join(";"))].join("\r\n");
+  const csv = [intestazione.join(";"), ...righe.map((r) => Object.values(r).map(cellaCsv).join(";"))].join("\r\n");
   const nome = `${doc.titolo.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-v${doc.versione}.csv`;
   return new Response("﻿" + csv, {
     headers: {

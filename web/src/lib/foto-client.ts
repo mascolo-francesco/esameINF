@@ -16,9 +16,14 @@ export interface FotoPronta {
   exif: ExifClient;
 }
 
-// Su Vercel una richiesta non può superare 4,5 MB: sopra questa soglia ridimensiono nel browser.
-const SOGLIA_BYTE = 1.5 * 1024 * 1024;
-const LATO_MAX = 2048;
+// Su Vercel una richiesta non può superare 4,5 MB: con 5 foto al massimo, ognuna deve restare
+// sotto gli 800 KB. Sopra la soglia ridimensiono nel browser, sempre più piccola finché ci sta.
+const SOGLIA_BYTE = 800 * 1024;
+const PASSI: [lato: number, qualita: number][] = [
+  [2048, 0.85],
+  [1600, 0.8],
+  [1280, 0.75],
+];
 const TIPI_OK = ["image/jpeg", "image/png", "image/webp"];
 
 function isHeic(f: File) {
@@ -41,13 +46,23 @@ async function leggiExif(f: Blob): Promise<ExifClient> {
 
 async function ridimensiona(b: Blob): Promise<Blob> {
   const img = await createImageBitmap(b, { imageOrientation: "from-image" });
-  const scala = Math.min(1, LATO_MAX / Math.max(img.width, img.height));
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.round(img.width * scala);
-  canvas.height = Math.round(img.height * scala);
-  canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
-  img.close();
-  return new Promise((ok, ko) => canvas.toBlob((r) => (r ? ok(r) : ko(new Error("conversione"))), "image/jpeg", 0.85));
+  try {
+    let ultimo: Blob | null = null;
+    for (const [lato, qualita] of PASSI) {
+      const scala = Math.min(1, lato / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scala);
+      canvas.height = Math.round(img.height * scala);
+      canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ultimo = await new Promise<Blob>((ok, ko) =>
+        canvas.toBlob((r) => (r ? ok(r) : ko(new Error("conversione"))), "image/jpeg", qualita),
+      );
+      if (ultimo.size <= SOGLIA_BYTE) break;
+    }
+    return ultimo!;
+  } finally {
+    img.close();
+  }
 }
 
 /**

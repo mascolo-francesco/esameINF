@@ -220,10 +220,13 @@ export function Casella({
           defaultChecked={defaultChecked}
           required={required}
           className="mt-0.5"
+          // Base UI sposta l'id sull'input nascosto: senza questo il controllo che riceve il
+          // focus resterebbe senza nome per i lettori di schermo
+          aria-labelledby={`${id}-etichetta`}
           aria-invalid={errore ? true : undefined}
           aria-describedby={errore ? `${id}-errore` : undefined}
         />
-        <label htmlFor={id} className="text-sm leading-snug [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4">
+        <label id={`${id}-etichetta`} htmlFor={id} className="text-sm leading-snug [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4">
           {children}
         </label>
       </div>
