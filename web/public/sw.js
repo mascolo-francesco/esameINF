@@ -1,6 +1,6 @@
 // Service worker minimo: rende l'app installabile e mostra una pagina di cortesia senza rete.
 // Non mette in cache le pagine dinamiche, che dipendono dall'utente e dai dati del momento.
-const CACHE = "lnc-v1";
+const CACHE = "lnc-v2";
 const OFFLINE = "/offline.html";
 
 self.addEventListener("install", (e) => {

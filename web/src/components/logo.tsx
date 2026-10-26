@@ -3,22 +3,22 @@ import { cn } from "@/lib/utils";
 /**
  * Il marchio: un tabellone delle affissioni elettorali sulle sue due gambe, con quattro spazi.
  * Uno è il nostro: un foglio verde acqua appena incollato, con l'angolo ancora piegato.
- * Disegnato su una griglia di 32: si legge anche a 16 px (favicon).
+ * Disegnato su una griglia di 32 con sole coordinate pari: a 16 px (favicon) ogni bordo cade su un pixel intero.
  */
 export function Marchio({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={cn("size-8 flex-none", className)} aria-hidden focusable="false">
       {/* lamiera e gambe */}
-      <rect x="0" y="0" width="32" height="24" fill="var(--lamiera, #1f3038)" />
-      <rect x="5" y="24" width="3" height="8" fill="var(--lamiera, #1f3038)" />
-      <rect x="24" y="24" width="3" height="8" fill="var(--lamiera, #1f3038)" />
+      <rect x="0" y="0" width="32" height="28" fill="var(--lamiera, #1f3038)" />
+      <rect x="6" y="28" width="4" height="4" fill="var(--lamiera, #1f3038)" />
+      <rect x="22" y="28" width="4" height="4" fill="var(--lamiera, #1f3038)" />
       {/* gli spazi degli altri: carta bianca */}
-      <rect x="17" y="3" width="12" height="8" fill="#ffffff" />
-      <rect x="3" y="13" width="12" height="8" fill="#ffffff" />
-      <rect x="17" y="13" width="12" height="8" fill="#ffffff" />
+      <rect x="18" y="2" width="12" height="10" fill="#ffffff" />
+      <rect x="2" y="16" width="12" height="10" fill="#ffffff" />
+      <rect x="18" y="16" width="12" height="10" fill="#ffffff" />
       {/* il nostro foglio, con l'angolo piegato */}
-      <path d="M3 3h8l4 4v4H3z" fill="var(--primary, #0d7480)" />
-      <path d="M11 3v4h4z" fill="var(--tinta-200, #a7d3d9)" />
+      <path d="M2 2h8l4 4v6H2z" fill="var(--primary, #0d7480)" />
+      <path d="M10 2v4h4z" fill="var(--tinta-200, #a7d3d9)" />
     </svg>
   );
 }
